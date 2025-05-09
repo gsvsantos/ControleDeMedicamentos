@@ -3,35 +3,35 @@ using ControleDeMedicamentos.ConsoleApp.Compartilhado;
 
 namespace ControleDeMedicamentos.ConsoleApp.ModuloFornecedor;
 
-internal class WebAppFornecedor
+public class WebAppFornecedor
 {
     public void Carregar(WebApplication app)
     {
-        EndpointRouteBuilderExtensions.MapGet((IEndpointRouteBuilder)app, (string)"/fornecedor", (RequestDelegate)MenuFornecedor);
-        EndpointRouteBuilderExtensions.MapGet((IEndpointRouteBuilder)app, (string)"/fornecedor/cadastrar", (RequestDelegate)FormularioCadastrarFornecedor);
-        EndpointRouteBuilderExtensions.MapPost((IEndpointRouteBuilder)app, (string)"/fornecedor/cadastrar", (RequestDelegate)CadastrarFornecedor);
-        EndpointRouteBuilderExtensions.MapGet((IEndpointRouteBuilder)app, (string)"/fornecedor/editar/{id:int}", (RequestDelegate)FormularioEditarFornecedor);
-        EndpointRouteBuilderExtensions.MapPost((IEndpointRouteBuilder)app, (string)"/fornecedor/editar/{id:int}", (RequestDelegate)EditarFornecedor);
-        EndpointRouteBuilderExtensions.MapGet((IEndpointRouteBuilder)app, (string)"/fornecedor/excluir/{id:int}", (RequestDelegate)FormularioExcluirFornecedor);
-        EndpointRouteBuilderExtensions.MapPost((IEndpointRouteBuilder)app, (string)"/fornecedor/excluir/{id:int}", (RequestDelegate)ExcluirFornecedor);
-        EndpointRouteBuilderExtensions.MapGet((IEndpointRouteBuilder)app, (string)"/fornecedor/visualizar", (RequestDelegate)VisualizarFornecedores);
+        app.MapGet("/fornecedor", Menu);
+        app.MapGet("/fornecedor/cadastrar", FormularioCadastrar);
+        app.MapPost("/fornecedor/cadastrar", Cadastrar);
+        app.MapGet("/fornecedor/editar/{id:int}", FormularioEditar);
+        app.MapPost("/fornecedor/editar/{id:int}", Editar);
+        app.MapGet("/fornecedor/excluir/{id:int}", FormularioExcluir);
+        app.MapPost("/fornecedor/excluir/{id:int}", Excluir);
+        app.MapGet("/fornecedor/visualizar", VisualizarCadastros);
     }
 
-    private Task MenuFornecedor(HttpContext context)
+    private Task Menu(HttpContext context)
     {
         string temp = File.ReadAllText("ModuloFornecedor/Html/Menu.html");
         
         return context.Response.WriteAsync(temp);
     }
 
-    private Task FormularioCadastrarFornecedor(HttpContext context)
+    private Task FormularioCadastrar(HttpContext context)
     {
         string temp = File.ReadAllText("ModuloFornecedor/Html/Cadastrar.html");
 
         return context.Response.WriteAsync(temp);
     }
 
-    private Task CadastrarFornecedor(HttpContext context)
+    private Task Cadastrar(HttpContext context)
     {
         ContextoDados contexto = new ContextoDados(true);
         IRepositorioFornecedor repositorioFornecedor = new RepositorioFornecedorEmArquivo(contexto);
@@ -56,7 +56,7 @@ internal class WebAppFornecedor
         return context.Response.WriteAsync(conteudoString);
     }
 
-    private Task VisualizarFornecedores(HttpContext context)
+    private Task VisualizarCadastros(HttpContext context)
     {
         ContextoDados contexto = new ContextoDados(true);
         IRepositorioFornecedor repositorioFornecedor = new RepositorioFornecedorEmArquivo(contexto);
@@ -82,7 +82,7 @@ internal class WebAppFornecedor
         return context.Response.WriteAsync(conteudoString);
     }
 
-    private Task FormularioEditarFornecedor(HttpContext context)
+    private Task FormularioEditar(HttpContext context)
     {
         ContextoDados contexto = new ContextoDados(true);
         IRepositorioFornecedor repositorioFornecedor = new RepositorioFornecedorEmArquivo(contexto);
@@ -105,7 +105,7 @@ internal class WebAppFornecedor
         return context.Response.WriteAsync(conteudoString);
     }
 
-    private Task EditarFornecedor(HttpContext context)
+    private Task Editar(HttpContext context)
     {
         ContextoDados contexto = new ContextoDados(true);
         IRepositorioFornecedor repositorioFornecedor = new RepositorioFornecedorEmArquivo(contexto);
@@ -132,7 +132,7 @@ internal class WebAppFornecedor
         return context.Response.WriteAsync(conteudoString);
     }
 
-    private Task FormularioExcluirFornecedor(HttpContext context)
+    private Task FormularioExcluir(HttpContext context)
     {
         ContextoDados contexto = new ContextoDados(true);
         IRepositorioFornecedor repositorioFornecedor = new RepositorioFornecedorEmArquivo(contexto);
@@ -153,7 +153,7 @@ internal class WebAppFornecedor
         return context.Response.WriteAsync(conteudoString);
     }
 
-    private Task ExcluirFornecedor(HttpContext context)
+    private Task Excluir(HttpContext context)
     {
         ContextoDados contexto = new ContextoDados(true);
         IRepositorioFornecedor repositorioFornecedor = new RepositorioFornecedorEmArquivo(contexto);
