@@ -1,6 +1,7 @@
 ﻿using System.Text;
 using ControleDeMedicamentos.ConsoleApp.Compartilhado;
 using ControleDeMedicamentos.ConsoleApp.ModuloFornecedor;
+using ControleDeMedicamentos.ConsoleApp.ModuloFuncionario;
 
 namespace ControleDeMedicamentos.ConsoleApp;
 
@@ -13,13 +14,15 @@ internal class Program
         WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
         WebApplication app = builder.Build();
         
-        WebAppFornecedor webAppFornecedor = new WebAppFornecedor(); 
+        WebAppFornecedor webAppFornecedor = new WebAppFornecedor();
+        WebAppFuncionario webAppFuncionario = new WebAppFuncionario(); 
 
         ContextoDados contexto = new ContextoDados(true);
         IRepositorioFornecedor repositorioFornecedor = new RepositorioFornecedorEmArquivo(contexto);
 
         app.MapGet("/", PaginaInicial);
         webAppFornecedor.Carregar(app);
+        webAppFuncionario.Carregar(app);
 
         app.Run();
     }

@@ -54,4 +54,9 @@ public class Funcionario : EntidadeBase<Funcionario>
 
         return erros;
     }
+
+    public override string ToString()
+    {
+        return $"ID: {Id}, Nome: {Nome}, Telefone: {Telefone}, CPF: {CPF}";
+    }
 }
