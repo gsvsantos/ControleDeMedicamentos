@@ -9,24 +9,24 @@ public class Paciente : EntidadeBase<Paciente>
 {
     public string? Nome { get; set; }
     public string? Telefone { get; set; }
-    public string? CartaoSUS { get; set; }
+    public string? CartaoSus { get; set; }
     public List<PrescricaoMedica> Prescricoes { get; set; } = [];
     public List<RequisicaoSaida> RequisicoesSaida { get; set; } = [];
 
     public Paciente() { }
 
-    public Paciente(string nome, string tel, string cartaoSus)
+    public Paciente(string nome, string telefone, string cartaoSus)
     {
         Nome = nome;
-        Telefone = tel;
-        CartaoSUS = cartaoSus;
+        Telefone = telefone;
+        CartaoSus = cartaoSus;
     }
 
     public override void AtualizarRegistro(Paciente pacienteEditado)
     {
         Nome = pacienteEditado.Nome;
         Telefone = pacienteEditado.Telefone;
-        CartaoSUS = pacienteEditado.CartaoSUS;
+        CartaoSus = pacienteEditado.CartaoSus;
     }
 
     public override string Validar()
@@ -57,13 +57,13 @@ public class Paciente : EntidadeBase<Paciente>
             }
         }
 
-        if (string.IsNullOrWhiteSpace(CartaoSUS))
+        if (string.IsNullOrWhiteSpace(CartaoSus))
         {
             erros += "O campo CartaoSUS eh obrigatorio.\n";
         }
         else
         {
-            if (CartaoSUS.Length != 15)
+            if (CartaoSus.Length != 15)
             {
                 erros += "O campo CartaoSUS deve conter 15 caracteres.\n";
             }
@@ -90,5 +90,10 @@ public class Paciente : EntidadeBase<Paciente>
     public List<RequisicaoSaida> PegarRequisicoesSaida()
     {
         return RequisicoesSaida;
+    }
+
+    public override string ToString()
+    {
+        return $"ID: {Id}, Nome: {Nome}, Telefone: {Telefone}, CartaoSUS: {CartaoSus}";
     }
 }

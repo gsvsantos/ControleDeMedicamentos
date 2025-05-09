@@ -16,7 +16,7 @@ public class RepositorioPacienteEmArquivo : RepositorioBaseEmArquivo<Paciente>, 
 
     public bool VerificarCartaoSUSInserirRegistro(Paciente paciente)
     {
-        return registros.Any(p => p != null && p.CartaoSUS == paciente.CartaoSUS);
+        return registros.Any(p => p != null && p.CartaoSus == paciente.CartaoSus);
     }
     
     public bool VerificarCartaoSUSEditarRegistro(Paciente pacienteExistente, Paciente pacienteEditado)
@@ -26,7 +26,7 @@ public class RepositorioPacienteEmArquivo : RepositorioBaseEmArquivo<Paciente>, 
             if (paciente == null)
                 continue;
 
-            if (pacienteEditado.CartaoSUS == paciente.CartaoSUS && pacienteExistente.Id != pacienteEditado.Id)
+            if (pacienteEditado.CartaoSus == paciente.CartaoSus && pacienteExistente.Id != pacienteEditado.Id)
                 return true;
         }
         return false;

@@ -82,7 +82,7 @@ public class TelaPaciente : TelaBase<Paciente>, ITelaCrud
         Console.WriteLine
         (
             "{0, -10} | {1, -20} | {2, -15} | {3, -18}",
-            p.Id, p.Nome, p.Telefone, p.CartaoSUS
+            p.Id, p.Nome, p.Telefone, p.CartaoSus
         );
     }
 }
