@@ -69,7 +69,7 @@ public class WebAppFuncionario
         StringBuilder sb = new StringBuilder(conteudo);
 
         if (funcionarios.Count == 0)
-            sb.Replace("#funcionario#", $"Nenhum funcionário cadastrado.");
+            sb.Replace("#funcionario#", "Nenhum funcionário cadastrado.");
         
         foreach (Funcionario f in funcionarios)
         {
