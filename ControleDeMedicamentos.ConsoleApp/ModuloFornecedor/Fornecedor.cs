@@ -89,6 +89,6 @@ public class Fornecedor : EntidadeBase<Fornecedor>
 
     public override string ToString()
     {
-        return $"Id: {Id}, Nome: {Nome}, Telefone: {Telefone}, CPNJ: {CNPJ}";
+        return $"ID: {Id}, Nome: {Nome}, Telefone: {Telefone}, CPNJ: {CNPJ}";
     }
 }

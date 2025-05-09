@@ -49,6 +49,7 @@ public class WebAppFornecedor
         StringBuilder sb = new StringBuilder(conteudo);
 
         sb.Replace("#contexto#", "Fornecedores");
+        sb.Replace("#tipo#", "fornecedor");
         sb.Replace("#mensagem#", $"O registro \"{fornecedor.Nome}\" foi cadastrado com sucesso!");
 
         string conteudoString = sb.ToString();
@@ -125,6 +126,7 @@ public class WebAppFornecedor
         StringBuilder sb = new StringBuilder(conteudo);
 
         sb.Replace("#contexto#", "Fornecedores");
+        sb.Replace("#tipo#", "fornecedor");
         sb.Replace("#mensagem#", $"O registro #{id} - \"{fornecedorAtualizado.Nome}\" foi editado com sucesso!");
 
         string conteudoString = sb.ToString();
@@ -146,7 +148,7 @@ public class WebAppFornecedor
         StringBuilder sb = new StringBuilder(form);
 
         sb.Replace("#id#", id.ToString());
-        sb.Replace("#fabricante#", fornecedorSelecionado.Nome);
+        sb.Replace("#fornecedor#", fornecedorSelecionado.Nome);
         
         string conteudoString = sb.ToString();
         
@@ -167,6 +169,7 @@ public class WebAppFornecedor
         StringBuilder sb = new StringBuilder(conteudo);
 
         sb.Replace("#contexto#", "Fornecedores");
+        sb.Replace("#tipo#", "fornecedor");
         sb.Replace("#mensagem#", $"O registro foi excluído com sucesso!");
 
         string conteudoString = sb.ToString();
