@@ -68,6 +68,9 @@ public class WebAppFornecedor
 
         StringBuilder sb = new StringBuilder(conteudo);
 
+        if (fornecedores.Count == 0)
+            sb.Replace("#fornecedor#", $"Nenhum fornecedor cadastrado.");
+        
         foreach (Fornecedor f in fornecedores)
         {
             string itemLista =
