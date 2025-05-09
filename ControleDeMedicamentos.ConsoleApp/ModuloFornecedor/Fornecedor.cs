@@ -10,15 +10,15 @@ public class Fornecedor : EntidadeBase<Fornecedor>
     public string? Telefone { get; set; }
     public string? CNPJ { get; set; }
     public List<Medicamento> Medicamentos { get; set; } = [];
+
     public int QtdMedicamentos
     {
-        get
-        {
-            return Medicamentos.Count;
-        }
+        get { return Medicamentos.Count; }
     }
 
-    public Fornecedor() { }
+    public Fornecedor()
+    {
+    }
 
     public Fornecedor(string nome, string telefone, string cnpj)
     {
@@ -85,5 +85,10 @@ public class Fornecedor : EntidadeBase<Fornecedor>
     public List<Medicamento> ObterMedicamentos()
     {
         return Medicamentos;
+    }
+
+    public override string ToString()
+    {
+        return $"Id: {Id}, Nome: {Nome}, Telefone: {Telefone}, CPNJ: {CNPJ}";
     }
 }

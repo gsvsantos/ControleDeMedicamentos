@@ -39,7 +39,7 @@ public class TelaPrescricaoMedica : TelaBase<PrescricaoMedica>, ITelaCrud
 
         Console.WriteLine();
 
-        Console.Write("Escolha uma das opções: ");
+        Console.Write("Escolha uma das opï¿½ï¿½es: ");
         string opcao = Console.ReadLine()!;
 
         if (opcao == null)
@@ -68,7 +68,7 @@ public class TelaPrescricaoMedica : TelaBase<PrescricaoMedica>, ITelaCrud
 
             if (!qtdEstoque)
             {
-                Notificador.ExibirMensagem("\nID inválido, selecione novamente.\n", ConsoleColor.Red);
+                Notificador.ExibirMensagem("\nID invï¿½lido, selecione novamente.\n", ConsoleColor.Red);
 
                 continue;
             }
@@ -93,7 +93,7 @@ public class TelaPrescricaoMedica : TelaBase<PrescricaoMedica>, ITelaCrud
 
                 if (!idValido)
                 {
-                    Console.WriteLine("\nID inválido, selecione novamente.\n");
+                    Console.WriteLine("\nID invï¿½lido, selecione novamente.\n");
 
                     continue;
                 }
@@ -118,7 +118,7 @@ public class TelaPrescricaoMedica : TelaBase<PrescricaoMedica>, ITelaCrud
 
                 if (!idValido)
                 {
-                    Console.WriteLine("\nQuantidade inválida, tente novamente.\n");
+                    Console.WriteLine("\nQuantidade invï¿½lida, tente novamente.\n");
 
                     continue;
                 }
@@ -173,7 +173,7 @@ public class TelaPrescricaoMedica : TelaBase<PrescricaoMedica>, ITelaCrud
 
                 if (!idValido)
                 {
-                    Notificador.ExibirMensagem("\nID inválido, selecione novamente.\n", ConsoleColor.Red);
+                    Notificador.ExibirMensagem("\nID invï¿½lido, selecione novamente.\n", ConsoleColor.Red);
 
                     continue;
                 }
