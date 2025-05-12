@@ -62,7 +62,7 @@ public class ControladorFornecedor : Controller
 
     [HttpPost("editar/{id:int}")]
     public IActionResult Editar(
-        [FromRoute] int id,  // exemplo com [FromRoute], nao precisa pois refere ao id da rota "{excluir/id:int}"
+        [FromRoute] int id, // exemplo com [FromRoute], nao precisa pois refere ao id da rota "{excluir/id:int}"
         [FromForm] string nome,
         [FromForm] string telefone,
         [FromForm] string cnpj)
