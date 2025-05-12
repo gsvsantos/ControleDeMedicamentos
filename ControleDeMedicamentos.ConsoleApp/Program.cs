@@ -1,5 +1,4 @@
-﻿using ControleDeMedicamentos.ConsoleApp.ModuloFuncionario;
-using ControleDeMedicamentos.ConsoleApp.ModuloPaciente;
+﻿using ControleDeMedicamentos.ConsoleApp.ModuloPaciente;
 
 namespace ControleDeMedicamentos.ConsoleApp;
 
@@ -15,9 +14,7 @@ internal class Program
 
         WebApplication app = builder.Build();
 
-        WebAppFuncionario webAppFuncionario = new WebAppFuncionario();
         WebAppPaciente webAppPaciente = new WebAppPaciente();
-        webAppFuncionario.Carregar(app);
         webAppPaciente.Carregar(app);
 
         app.UseRouting();
