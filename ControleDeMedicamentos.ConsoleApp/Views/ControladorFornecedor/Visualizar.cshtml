@@ -16,7 +16,7 @@
 <hr/>
 
 <a href="/fornecedor">Voltar</a> /
-<a href="/fornecedor/cadastrar">Cadastrar Novo Fornecedor</a> /
+<a href="/fornecedor/cadastrar">Cadastrar Novo Fornecedor</a>
 
 <hr/>
 
@@ -30,8 +30,8 @@
 
 	@foreach (Fornecedor f in fornecedores)
 	{
-		<li>@f <a href="/fornecedor/editar/@f.Id">Editar</a> /
-			<a href="/fornecedor/excluir/@f.Id">Excluir</a> </li>
+	<li>@f <a href="/fornecedor/editar/@f.Id">Editar</a> /
+		<a href="/fornecedor/excluir/@f.Id">Excluir</a> </li>
 	}
 </ul>
 </body>
