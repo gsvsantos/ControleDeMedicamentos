@@ -1,5 +1,4 @@
-﻿using ControleDeMedicamentos.ConsoleApp.ModuloFornecedor;
-using ControleDeMedicamentos.ConsoleApp.ModuloFuncionario;
+﻿using ControleDeMedicamentos.ConsoleApp.ModuloFuncionario;
 using ControleDeMedicamentos.ConsoleApp.ModuloPaciente;
 
 namespace ControleDeMedicamentos.ConsoleApp;
@@ -12,20 +11,16 @@ internal class Program
 
         WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
-        builder.Services.AddControllers();
+        builder.Services.AddControllersWithViews();
 
         WebApplication app = builder.Build();
 
-        WebAppFornecedor webAppFornecedor = new WebAppFornecedor();
         WebAppFuncionario webAppFuncionario = new WebAppFuncionario();
         WebAppPaciente webAppPaciente = new WebAppPaciente();
-
-        webAppFornecedor.Carregar(app);
-
         webAppFuncionario.Carregar(app);
-
         webAppPaciente.Carregar(app);
 
+        app.UseRouting();
         app.MapControllers();
 
         app.Run();
