@@ -1,4 +1,10 @@
-<!DOCTYPE html>/
+@using ControleDeMedicamentos.ConsoleApp.ModuloPaciente
+
+@{
+    Paciente p = ViewBag.Paciente;
+}
+
+<!DOCTYPE html>
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
@@ -14,22 +20,22 @@
 
 <hr/>
 
-<form action="/paciente/editar/#id#" method="post">
+<form action="/paciente/editar/@p.Id" method="post">
     <label for="nome">Nome do Paciente</label>
     <br/>
-    <input type="text" id="nome" name="nome" value="#nome#">
+    <input type="text" id="nome" name="nome" value="@p.Nome">
 
     <br/>
 
     <label for="telefone">Telefone do Paciente</label>
     <br/>
-    <input type="text" id="telefone" name="telefone" value="#telefone#">
+    <input type="text" id="telefone" name="telefone" value="@p.Telefone">
 
     <br/>
 
     <label for="cartaoSus">CartãoSUS do Paciente</label>
     <br/>
-    <input type="text" id="cartaoSus" name="cartaoSus" value="#cartaoSus#">
+    <input type="text" id="cartaoSus" name="cartaoSus" value="@p.CartaoSus">
 
     <hr/>
 

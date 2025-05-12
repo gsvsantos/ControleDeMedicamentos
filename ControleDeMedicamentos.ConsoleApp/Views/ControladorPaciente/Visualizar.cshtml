@@ -1,0 +1,38 @@
+@using ControleDeMedicamentos.ConsoleApp.ModuloPaciente
+
+@{
+    List<Paciente> pacientes = ViewBag.Pacientes;
+}
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Visualização de Pacientes - Controle de Medicamento</title>
+</head>
+<body>
+<h1>Gestão de Pacientes</h1>
+
+<hr/>
+
+<a href="/paciente">Voltar</a>
+<a href="/paciente/cadastrar">Cadastrar Novo Paciente</a>
+
+<hr/>
+
+<h3>Visualização de Pacientes</h3>
+
+<ul>
+    @if (pacientes.Count == 0)
+    {
+    <li>Nenhum paciente cadastrado.");</li>
+    }
+
+    @foreach(Paciente p in pacientes)
+    {
+    <li>@p <a href="/paciente/editar/@p.Id">Editar</a> /
+            <a href="/paciente/excluir/@p.Id">Excluir</a> </li>
+    }
+</ul>
+</body>
+</html>
