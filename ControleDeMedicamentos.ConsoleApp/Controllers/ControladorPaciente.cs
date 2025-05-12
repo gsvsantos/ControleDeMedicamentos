@@ -30,9 +30,7 @@ public class ControladorPaciente : Controller
 
         repositorioPaciente.CadastrarRegistro(paciente);
 
-        ViewBag.Contexto = "Pacientes";
-        ViewBag.Tipo = "paciente";
-        ViewBag.Mensagem = $"O registro \"{paciente.Nome}\" foi cadastrado com sucesso!";
+        ViewBagHelper.DefinirDados(ViewBag, "Pacientes", "paciente", "cadastrado", paciente.Nome);
 
         return View("Notificacao");
     }
@@ -73,9 +71,7 @@ public class ControladorPaciente : Controller
 
         repositorioPaciente.EditarRegistro(id, pacienteAtualizado);
 
-        ViewBag.Contexto = "Pacientes";
-        ViewBag.Tipo = "paciente";
-        ViewBag.Mensagem = $"O registro \"{pacienteAtualizado.Nome}\" foi editado com sucesso!";
+        ViewBagHelper.DefinirDados(ViewBag, "Pacientes", "paciente", "editado", pacienteAtualizado.Nome);
 
         return View("Notificacao");
     }
@@ -99,9 +95,7 @@ public class ControladorPaciente : Controller
 
         repositorioPaciente.ExcluirRegistro(id);
 
-        ViewBag.Contexto = "Pacientes";
-        ViewBag.Tipo = "paciente";
-        ViewBag.Mensagem = $"Registro excluído com sucesso!";
+        ViewBagHelper.DefinirDados(ViewBag, "Pacientes", "paciente", "excluído");
 
         return View("Notificacao");
     }

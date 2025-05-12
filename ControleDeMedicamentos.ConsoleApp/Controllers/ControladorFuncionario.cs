@@ -31,9 +31,7 @@ public class ControladorFuncionario : Controller
 
         repositorioFuncionario.CadastrarRegistro(funcionario);
 
-        ViewBag.Contexto = "Funcionários";
-        ViewBag.Tipo = "funcionario";
-        ViewBag.Mensagem = $"O registro \"{funcionario.Nome}\" foi cadastrado com sucesso!";
+        ViewBagHelper.DefinirDados(ViewBag, "Funcionários", "funcionario", "cadastrado", funcionario.Nome);
 
         return View("Notificacao");
     }
@@ -74,9 +72,7 @@ public class ControladorFuncionario : Controller
 
         repositorioFuncionario.EditarRegistro(id, funcionarioAtualizado);
 
-        ViewBag.Contexto = "Funcionários";
-        ViewBag.Tipo = "funcionario";
-        ViewBag.Mensagem = $"O registro \"{funcionarioAtualizado.Nome}\" foi editado com sucesso!";
+        ViewBagHelper.DefinirDados(ViewBag, "Funcionários", "funcionario", "editado", funcionarioAtualizado.Nome);
 
         return View("Notificacao");
     }
@@ -102,9 +98,7 @@ public class ControladorFuncionario : Controller
 
         repositorioFuncionario.ExcluirRegistro(id);
 
-        ViewBag.Contexto = "Funcionários";
-        ViewBag.Tipo = "funcionario";
-        ViewBag.Mensagem = $"Registro excluído com sucesso!";
+        ViewBagHelper.DefinirDados(ViewBag, "Funcionários", "funcionario", "excluído");
 
         return View("Notificacao");
     }

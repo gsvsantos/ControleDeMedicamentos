@@ -31,9 +31,7 @@ public class ControladorFornecedor : Controller
 
         repositorioFornecedor.CadastrarRegistro(fornecedor);
 
-        ViewBag.Contexto = "Fornecedores";
-        ViewBag.Tipo = "fornecedor";
-        ViewBag.Mensagem = $"O registro \"{fornecedor.Nome}\" foi cadastrado com sucesso!";
+        ViewBagHelper.DefinirDados(ViewBag, "Fornecedores", "fornecedor", "cadastrado", fornecedor.Nome);
 
         return View("Notificacao");
     }
@@ -74,9 +72,7 @@ public class ControladorFornecedor : Controller
 
         repositorioFornecedor.EditarRegistro(id, fornecedorAtualizado);
 
-        ViewBag.Contexto = "Fornecedores";
-        ViewBag.Tipo = "fornecedor";
-        ViewBag.Mensagem = $"O registro \"{fornecedorAtualizado.Nome}\" foi editado com sucesso!";
+        ViewBagHelper.DefinirDados(ViewBag, "Fornecedores", "fornecedor", "editado", fornecedorAtualizado.Nome);
 
         return View("Notificacao");
     }
@@ -100,9 +96,7 @@ public class ControladorFornecedor : Controller
 
         repositorioFornecedor.ExcluirRegistro(id);
 
-        ViewBag.Contexto = "Fornecedores";
-        ViewBag.Tipo = "fornecedor";
-        ViewBag.Mensagem = $"Registro excluído com sucesso!";
+        ViewBagHelper.DefinirDados(ViewBag, "Fornecedores", "fornecedor", "excluído");
 
         return View("Notificacao");
     }
