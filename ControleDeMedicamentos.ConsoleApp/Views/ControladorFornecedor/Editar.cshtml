@@ -1,0 +1,47 @@
+@using ControleDeMedicamentos.ConsoleApp.ModuloFornecedor
+
+@{
+	Fornecedor f = ViewBag.Fornecedor;
+}
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+	<meta charset="UTF-8"/>
+	<title>Edição de Fornecedor - Controle de Medicamentos</title>
+</head>
+<body>
+<h1>Gestão de Fornecedores</h1>
+
+<hr/>
+
+<a href="/fornecedor">Voltar</a> /
+<a href="/fornecedor/visualizar">Visualizar Fornecedores</a>
+
+<hr/>
+
+<h3>Edição de Fornecedor</h3>
+
+<form action="/fornecedor/editar/@f.Id" method="post">
+	<label for="nome">Nome do Fornecedor</label>
+	<br/>
+	<input type="text" id="nome" name="nome" value="@f.Nome"/>
+
+	<br/>
+
+	<label for="telefone">Telefone do Fornecedor</label>
+	<br/>
+	<input type="text" id="telefone" name="telefone" value="@f.Telefone"/>
+
+	<br/>
+
+	<label for="cnpj">CNPJ do Fornecedor</label>
+	<br/>
+	<input type="text" id="cnpj" name="cnpj" value="@f.CNPJ"/>
+
+	<hr/>
+
+	<button type="submit">Editar</button>
+</form>
+</body>
+</html>

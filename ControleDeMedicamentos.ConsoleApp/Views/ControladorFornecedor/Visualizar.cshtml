@@ -1,0 +1,38 @@
+@using ControleDeMedicamentos.ConsoleApp.ModuloFornecedor
+
+@{
+	List<Fornecedor> fornecedores = ViewBag.Fornecedores;
+}
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+	<meta charset="UTF-8"/>
+	<title>Visualização de Fornecedores - Controle de Medicamentos</title>
+</head>
+<body>
+<h1>Gestão de Fornecedores</h1>
+
+<hr/>
+
+<a href="/fornecedor">Voltar</a> /
+<a href="/fornecedor/cadastrar">Cadastrar Novo Fornecedor</a> /
+
+<hr/>
+
+<h3>Visualização de Fornecedores</h3>
+
+<ul>
+	@if (fornecedores.Count == 0)
+	{
+		<li>Nenhum fornecedor cadastrado.</li>
+	}
+
+	@foreach (Fornecedor f in fornecedores)
+	{
+		<li>@f <a href="/fornecedor/editar/@f.Id">Editar</a> /
+			<a href="/fornecedor/excluir/@f.Id">Excluir</a> </li>
+	}
+</ul>
+</body>
+</html>
