@@ -1,8 +1,6 @@
-@using ControleDeMedicamentos.ConsoleApp.ModuloFornecedor
+@using ControleDeMedicamentos.ConsoleApp.Models
 
-@{
-	List<Fornecedor> fornecedores = ViewBag.Fornecedores;
-}
+@model VisualizarFornecedorViewModel;
 
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -23,14 +21,14 @@
 <h3>Visualização de Fornecedores</h3>
 
 <ul>
-	@if (fornecedores.Count == 0)
+	@if (Model.Registros.Count == 0)
 	{
 		<li>Nenhum fornecedor cadastrado.</li>
 	}
 
-	@foreach (Fornecedor f in fornecedores)
+	@foreach (DataFornecedorViewModel f in Model.Registros)
 	{
-	<li>@f <a href="/fornecedor/editar/@f.Id">Editar</a> /
+	<li>@f / <a href="/fornecedor/editar/@f.Id">Editar</a> /
 		<a href="/fornecedor/excluir/@f.Id">Excluir</a> </li>
 	}
 </ul>

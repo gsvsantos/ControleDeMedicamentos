@@ -86,9 +86,4 @@ public class Fornecedor : EntidadeBase<Fornecedor>
     {
         return Medicamentos;
     }
-
-    public override string ToString()
-    {
-        return $"ID: {Id}, Nome: {Nome}, Telefone: {Telefone}, CPNJ: {CNPJ}";
-    }
 }

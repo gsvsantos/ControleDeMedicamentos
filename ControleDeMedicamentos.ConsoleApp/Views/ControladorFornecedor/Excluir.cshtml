@@ -1,8 +1,6 @@
-@using ControleDeMedicamentos.ConsoleApp.ModuloFornecedor
+@using ControleDeMedicamentos.ConsoleApp.Models
 
-@{
-    Fornecedor f = ViewBag.Fornecedor;
-}
+@model ExcluirFornecedorViewModel;
 
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -15,9 +13,9 @@
 
 <h3>Exclusão de Fornecedor</h3>
 
-<p>Você realmente deseja excluir o registro #'@f.Id' - '@f.Nome'?</p>
+<p>Você realmente deseja excluir o registro #'@Model.Id' - '@Model.Nome'?</p>
 
-<form action="/fornecedor/excluir/@f.Id" method="post">
+<form action="/fornecedor/excluir/@Model.Id" method="post">
     <button type="submit">Confirmar</button>
     <a type="button" href="/fornecedor/visualizar">Cancelar</a>
 </form>

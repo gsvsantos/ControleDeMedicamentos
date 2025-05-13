@@ -1,8 +1,6 @@
-@using ControleDeMedicamentos.ConsoleApp.ModuloFornecedor
+@using ControleDeMedicamentos.ConsoleApp.Models
 
-@{
-	Fornecedor f = ViewBag.Fornecedor;
-}
+@model EditarFornecedorViewModel;
 
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -22,22 +20,22 @@
 
 <h3>Edição de Fornecedor</h3>
 
-<form action="/fornecedor/editar/@f.Id" method="post">
+<form action="/fornecedor/editar/@Model.Id" method="post">
 	<label for="nome">Nome do Fornecedor</label>
 	<br/>
-	<input type="text" id="nome" name="nome" value="@f.Nome"/>
+	<input type="text" id="nome" name="nome" value="@Model.Nome"/>
 
 	<br/>
 
 	<label for="telefone">Telefone do Fornecedor</label>
 	<br/>
-	<input type="text" id="telefone" name="telefone" value="@f.Telefone"/>
+	<input type="text" id="telefone" name="telefone" value="@Model.Telefone"/>
 
 	<br/>
 
 	<label for="cnpj">CNPJ do Fornecedor</label>
 	<br/>
-	<input type="text" id="cnpj" name="cnpj" value="@f.CNPJ"/>
+	<input type="text" id="cnpj" name="cnpj" value="@Model.CNPJ"/>
 
 	<hr/>
 
