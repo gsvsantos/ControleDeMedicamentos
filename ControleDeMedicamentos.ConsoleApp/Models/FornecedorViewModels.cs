@@ -1,4 +1,5 @@
-﻿using ControleDeMedicamentos.ConsoleApp.ModuloFornecedor;
+﻿using ControleDeMedicamentos.ConsoleApp.Extensions;
+using ControleDeMedicamentos.ConsoleApp.ModuloFornecedor;
 
 namespace ControleDeMedicamentos.ConsoleApp.Models;
 
@@ -29,8 +30,7 @@ public class VisualizarFornecedorViewModel
     {
         foreach (Fornecedor f in fornecedores)
         {
-            DataFornecedorViewModel dataVM = new(
-                f.Id, f.Nome, f.Telefone, f.CNPJ);
+            DataFornecedorViewModel dataVM = f.ParaDetalhesVM();
 
             Registros.Add(dataVM);
         }

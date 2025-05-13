@@ -1,4 +1,5 @@
 ﻿using ControleDeMedicamentos.ConsoleApp.Compartilhado;
+using ControleDeMedicamentos.ConsoleApp.Extensions;
 using ControleDeMedicamentos.ConsoleApp.Models;
 using ControleDeMedicamentos.ConsoleApp.ModuloFornecedor;
 using Microsoft.AspNetCore.Mvc;
@@ -27,7 +28,7 @@ public class ControladorFornecedor : Controller
         ContextoDados contexto = new ContextoDados(true);
         IRepositorioFornecedor repositorioFornecedor = new RepositorioFornecedorEmArquivo(contexto);
 
-        Fornecedor novoFornecedor = new(cadastrarVM.Nome!, cadastrarVM.Telefone!, cadastrarVM.CNPJ!);
+        Fornecedor novoFornecedor = cadastrarVM.ParaEntidade();
 
         repositorioFornecedor.CadastrarRegistro(novoFornecedor);
 
@@ -65,12 +66,12 @@ public class ControladorFornecedor : Controller
     }
 
     [HttpPost("editar/{id:int}")]
-    public IActionResult Editar([FromRoute] int id, Fornecedor editarVM) // exemplo com [FromRoute], nao precisa pois refere ao id da rota "{excluir/id:int}"
+    public IActionResult Editar([FromRoute] int id, EditarFornecedorViewModel editarVM) // exemplo com [FromRoute], nao precisa pois refere ao id da rota "{excluir/id:int}"
     {
         ContextoDados contexto = new ContextoDados(true);
         IRepositorioFornecedor repositorioFornecedor = new RepositorioFornecedorEmArquivo(contexto);
 
-        Fornecedor fornecedorAtualizado = new Fornecedor(editarVM.Nome!, editarVM.Telefone!, editarVM.CNPJ!);
+        Fornecedor fornecedorAtualizado = editarVM.ParaEntidade();
 
         repositorioFornecedor.EditarRegistro(id, fornecedorAtualizado);
 
