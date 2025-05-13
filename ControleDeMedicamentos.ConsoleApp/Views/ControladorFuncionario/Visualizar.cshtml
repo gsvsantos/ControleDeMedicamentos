@@ -1,8 +1,6 @@
-@using ControleDeMedicamentos.ConsoleApp.ModuloFuncionario
+@using ControleDeMedicamentos.ConsoleApp.Models
 
-@{
-    List<Funcionario> funcionarios = ViewBag.Funcionarios;
-}
+@model VisualizarFuncionarioViewModel;
 
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -23,12 +21,12 @@
 <h3>Visualização de Funcionários</h3>
 
 <ul>
-    @if (funcionarios.Count == 0)
+    @if (Model.Registros.Count == 0)
     {
         <li>Nenhum fornecedor cadastrado.</li>
     }
 
-    @foreach (Funcionario f in funcionarios)
+        @foreach (DataFuncionarioViewModel f in Model.Registros)
     {
     <li>@f <a href="/funcionario/editar/@f.Id">Editar</a> /
             <a href="/funcionario/excluir/@f.Id">Excluir</a> </li>

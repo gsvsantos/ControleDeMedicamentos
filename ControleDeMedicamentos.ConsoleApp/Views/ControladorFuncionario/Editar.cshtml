@@ -1,8 +1,6 @@
-@using ControleDeMedicamentos.ConsoleApp.ModuloFuncionario
+@using ControleDeMedicamentos.ConsoleApp.Models
 
-@{
-    Funcionario f = ViewBag.Funcionario;
-}
+@model EditarFuncionarioViewModel;
 
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -22,22 +20,22 @@
 
 <h3>Edição de Funcionário</h3>
 
-<form action="/funcionario/editar/@f.Id" method="post">
+<form action="/funcionario/editar/@Model.Id" method="post">
     <label for="nome">Nome do Funcionário</label>
     <br/>
-    <input type="text" id="nome" name="nome" value="@f.Nome"/>
+    <input type="text" id="nome" name="nome" value="@Model.Nome"/>
     
     <br/>
 
     <label for="telefone">Telefone do Funcionário</label>
     <br/>
-    <input type="text" id="telefone" name="telefone" value="@f.Telefone"/>
+    <input type="text" id="telefone" name="telefone" value="@Model.Telefone"/>
 
     <br/>
         
     <label for="cpf">CPF do Funcionário</label>
     <br/>
-    <input type="text" id="cpf" name="cpf" value="@f.CPF"/>
+    <input type="text" id="cpf" name="cpf" value="@Model.CPF"/>
 
     <hr/>
     

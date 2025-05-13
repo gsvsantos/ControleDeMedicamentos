@@ -1,4 +1,6 @@
 ﻿using ControleDeMedicamentos.ConsoleApp.Compartilhado;
+using ControleDeMedicamentos.ConsoleApp.Extensions;
+using ControleDeMedicamentos.ConsoleApp.Models;
 using ControleDeMedicamentos.ConsoleApp.ModuloFuncionario;
 using Microsoft.AspNetCore.Mvc;
 
@@ -15,19 +17,18 @@ public class ControladorFuncionario : Controller
     [HttpGet("cadastrar")]
     public IActionResult FormularioCadastrar()
     {
+        CadastrarFuncionarioViewModel cadastarVM = new();
+
         return View("Cadastrar");
     }
 
     [HttpPost("cadastrar")]
-    public IActionResult Cadastrar(
-        [FromForm] string nome,
-        [FromForm] string telefone,
-        [FromForm] string cpf)
+    public IActionResult Cadastrar(CadastrarFuncionarioViewModel cadastrarVM)
     {
         ContextoDados contextodados = new ContextoDados(true);
         IRepositorioFuncionario repositorioFuncionario = new RepositorioFuncionarioEmArquivo(contextodados);
 
-        Funcionario funcionario = new Funcionario(nome, telefone, cpf);
+        Funcionario funcionario = cadastrarVM.ParaEntidade();
 
         repositorioFuncionario.CadastrarRegistro(funcionario);
 
@@ -42,9 +43,11 @@ public class ControladorFuncionario : Controller
         ContextoDados contextodados = new ContextoDados(true);
         IRepositorioFuncionario repositorioFuncionario = new RepositorioFuncionarioEmArquivo(contextodados);
 
-        ViewBag.Funcionarios = repositorioFuncionario.SelecionarRegistros();
+        List<Funcionario> funcionarios = repositorioFuncionario.SelecionarRegistros();
 
-        return View("Visualizar");
+        VisualizarFuncionarioViewModel visualizarVM = new(funcionarios);
+
+        return View("Visualizar", visualizarVM);
     }
 
     [HttpGet("editar/{id:int}")]
@@ -53,22 +56,22 @@ public class ControladorFuncionario : Controller
         ContextoDados contextodados = new ContextoDados(true);
         IRepositorioFuncionario repositorioFuncionario = new RepositorioFuncionarioEmArquivo(contextodados);
 
-        ViewBag.Funcionario = repositorioFuncionario.SelecionarRegistroPorId(id);
+        Funcionario funcionarioSelecionado = repositorioFuncionario.SelecionarRegistroPorId(id);
 
-        return View("Editar");
+        EditarFuncionarioViewModel editarVM = new EditarFuncionarioViewModel(
+            id, funcionarioSelecionado.Nome!, funcionarioSelecionado.Telefone!,
+            funcionarioSelecionado.CPF!);
+
+        return View("Editar", editarVM);
     }
 
     [HttpPost("editar/{id:int}")]
-    public IActionResult Editar(
-        int id,
-        [FromForm] string nome,
-        [FromForm] string telefone,
-        [FromForm] string cpf)
+    public IActionResult Editar(int id, EditarFuncionarioViewModel editarVM)
     {
         ContextoDados contextodados = new ContextoDados(true);
         IRepositorioFuncionario repositorioFuncionario = new RepositorioFuncionarioEmArquivo(contextodados);
 
-        Funcionario funcionarioAtualizado = new Funcionario(nome, telefone, cpf);
+        Funcionario funcionarioAtualizado = editarVM.ParaEntidade();
 
         repositorioFuncionario.EditarRegistro(id, funcionarioAtualizado);
 
@@ -83,9 +86,11 @@ public class ControladorFuncionario : Controller
         ContextoDados contextodados = new ContextoDados(true);
         IRepositorioFuncionario repositorio = new RepositorioFuncionarioEmArquivo(contextodados);
 
-        ViewBag.Funcionario = repositorio.SelecionarRegistroPorId(id);
+        Funcionario funcionarioSelecionado = repositorio.SelecionarRegistroPorId(id);
 
-        return View("Excluir");
+        ExcluirFuncionarioViewModel excluirVM = new(id, funcionarioSelecionado.Nome!);
+
+        return View("Excluir", excluirVM);
     }
 
     [HttpPost("excluir/{id:int}")]
@@ -93,8 +98,6 @@ public class ControladorFuncionario : Controller
     {
         ContextoDados contextodados = new ContextoDados(true);
         IRepositorioFuncionario repositorioFuncionario = new RepositorioFuncionarioEmArquivo(contextodados);
-
-        Funcionario funcionarioSelecionado = repositorioFuncionario.SelecionarRegistroPorId(id);
 
         repositorioFuncionario.ExcluirRegistro(id);
 
