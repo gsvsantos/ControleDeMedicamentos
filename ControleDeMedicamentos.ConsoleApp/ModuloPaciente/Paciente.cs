@@ -91,9 +91,4 @@ public class Paciente : EntidadeBase<Paciente>
     {
         return RequisicoesSaida;
     }
-
-    public override string ToString()
-    {
-        return $"ID: {Id}, Nome: {Nome}, Telefone: {Telefone}, CartaoSUS: {CartaoSus}";
-    }
 }

@@ -1,8 +1,6 @@
-@using ControleDeMedicamentos.ConsoleApp.ModuloPaciente
+@using ControleDeMedicamentos.ConsoleApp.Models
 
-@{
-    Paciente p = ViewBag.Paciente;
-}
+@model ExcluirPacienteViewModel;
 
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -15,9 +13,9 @@
 
 <h1>Exclusão de Pacientes</h1>
 
-<p>Você realmente deseja excluir o registro #'@p.Id' - '@p.Nome'?</p>
+<p>Você realmente deseja excluir o registro #'@Model.Id' - '@Model.Nome'?</p>
 
-<form action="/paciente/excluir/@p.Id" method="post">
+<form action="/paciente/excluir/@Model.Id" method="post">
     <button type="submit">Confirmar</button>
     <a type="button" href="/paciente/visualizar">Cancelar</a>
 </form>

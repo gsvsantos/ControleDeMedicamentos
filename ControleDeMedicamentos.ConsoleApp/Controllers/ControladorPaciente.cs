@@ -1,4 +1,6 @@
 ﻿using ControleDeMedicamentos.ConsoleApp.Compartilhado;
+using ControleDeMedicamentos.ConsoleApp.Extensions;
+using ControleDeMedicamentos.ConsoleApp.Models;
 using ControleDeMedicamentos.ConsoleApp.ModuloPaciente;
 using Microsoft.AspNetCore.Mvc;
 
@@ -15,22 +17,22 @@ public class ControladorPaciente : Controller
     [HttpGet("cadastrar")]
     public IActionResult FormularioCadastrar()
     {
+        CadastrarPacienteViewModel cadastrarVM = new CadastrarPacienteViewModel();
+
         return View("Cadastrar");
     }
 
     [HttpPost("cadastrar")]
-    public IActionResult Cadastrar(
-        [FromForm] string nome,
-        [FromForm] string telefone,
-        [FromForm] string cartaoSus)
+    public IActionResult Cadastrar(CadastrarPacienteViewModel cadastrarVM)
     {
         ContextoDados contexto = new ContextoDados(true);
         IRepositorioPaciente repositorioPaciente = new RepositorioPacienteEmArquivo(contexto);
-        Paciente paciente = new Paciente(nome, telefone, cartaoSus);
 
-        repositorioPaciente.CadastrarRegistro(paciente);
+        Paciente novoPaciente = cadastrarVM.ParaEntidade();
 
-        ViewBagHelper.DefinirDados(ViewBag, "Pacientes", "paciente", "cadastrado", paciente.Nome);
+        repositorioPaciente.CadastrarRegistro(novoPaciente);
+
+        ViewBagHelper.DefinirDados(ViewBag, "Pacientes", "paciente", "cadastrado", novoPaciente.Nome);
 
         return View("Notificacao");
     }
@@ -41,9 +43,11 @@ public class ControladorPaciente : Controller
         ContextoDados contexto = new ContextoDados(true);
         IRepositorioPaciente repositorioPaciente = new RepositorioPacienteEmArquivo(contexto);
 
-        ViewBag.Pacientes = repositorioPaciente.SelecionarRegistros();
+        List<Paciente> pacientes = repositorioPaciente.SelecionarRegistros();
 
-        return View("Visualizar");
+        VisualizarPacienteViewModel visualizarVM = new(pacientes);
+
+        return View("Visualizar", visualizarVM);
     }
 
     [HttpGet("editar/{id:int}")]
@@ -52,22 +56,22 @@ public class ControladorPaciente : Controller
         ContextoDados contexto = new ContextoDados(true);
         IRepositorioPaciente repositorioPaciente = new RepositorioPacienteEmArquivo(contexto);
 
-        ViewBag.Paciente = repositorioPaciente.SelecionarRegistroPorId(id);
+        Paciente pacienteSelecionado = repositorioPaciente.SelecionarRegistroPorId(id);
 
-        return View("Editar");
+        EditarPacienteViewModel editarVM = new(
+            id, pacienteSelecionado.Nome!, pacienteSelecionado.Telefone!,
+            pacienteSelecionado.CartaoSus!);
+
+        return View("Editar", editarVM);
     }
 
     [HttpPost("editar/{id:int}")]
-    public IActionResult Editar(
-        int id,
-        [FromForm] string nome,
-        [FromForm] string telefone,
-        [FromForm] string cartaoSus)
+    public IActionResult Editar(int id, EditarPacienteViewModel editarVM)
     {
         ContextoDados contexto = new ContextoDados(true);
         IRepositorioPaciente repositorioPaciente = new RepositorioPacienteEmArquivo(contexto);
 
-        Paciente pacienteAtualizado = new Paciente(nome, telefone, cartaoSus);
+        Paciente pacienteAtualizado = editarVM.ParaEntidade();
 
         repositorioPaciente.EditarRegistro(id, pacienteAtualizado);
 
@@ -82,9 +86,12 @@ public class ControladorPaciente : Controller
         ContextoDados contexto = new ContextoDados(true);
         IRepositorioPaciente repositorioPaciente = new RepositorioPacienteEmArquivo(contexto);
 
-        ViewBag.Paciente = repositorioPaciente.SelecionarRegistroPorId(id);
+        Paciente pacienteSelecionado = repositorioPaciente.SelecionarRegistroPorId(id);
 
-        return View("Excluir");
+        ExcluirPacienteViewModel excluirVM = new(
+            id, pacienteSelecionado.Nome!);
+
+        return View("Excluir", excluirVM);
     }
 
     [HttpPost("excluir/{id:int}")]
