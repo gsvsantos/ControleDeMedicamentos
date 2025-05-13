@@ -1,21 +1,25 @@
+@using ControleDeMedicamentos.ConsoleApp.Models
+
+@model NotificacaoViewModel
+
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8"/>
-    <title>Gestão de @ViewBag.Contexto - Controle de Medicamentos</title>
+    <title>@Model.Titulo - Controle de Medicamentos</title>
 </head>
 <body>
-<h1>Gestão de @ViewBag.Contexto</h1>
+<h1>@Model.Titulo</h1>
 
 <hr/>
 
-<a href="/@ViewBag.Tipo">Continuar</a>
+<a href="/@Model.Caminho">Continuar</a>
 
 <hr/>
 
 <h3>Notificação</h3>
 
-<p>@ViewBag.Mensagem</p>
+<p>@Model.Mensagem</p>
 
 </body>
 </html>

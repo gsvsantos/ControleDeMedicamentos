@@ -17,7 +17,7 @@ public class ControladorFuncionario : Controller
     [HttpGet("cadastrar")]
     public IActionResult FormularioCadastrar()
     {
-        CadastrarFuncionarioViewModel cadastarVM = new();
+        CadastrarFuncionarioViewModel cadastrarVM = new CadastrarFuncionarioViewModel();
 
         return View("Cadastrar");
     }
@@ -25,27 +25,28 @@ public class ControladorFuncionario : Controller
     [HttpPost("cadastrar")]
     public IActionResult Cadastrar(CadastrarFuncionarioViewModel cadastrarVM)
     {
-        ContextoDados contextodados = new ContextoDados(true);
-        IRepositorioFuncionario repositorioFuncionario = new RepositorioFuncionarioEmArquivo(contextodados);
+        ContextoDados contextoDados = new ContextoDados(true);
+        IRepositorioFuncionario repositorioFuncionario = new RepositorioFuncionarioEmArquivo(contextoDados);
 
-        Funcionario funcionario = cadastrarVM.ParaEntidade();
+        Funcionario novoFuncionario = cadastrarVM.ParaEntidade();
 
-        repositorioFuncionario.CadastrarRegistro(funcionario);
+        repositorioFuncionario.CadastrarRegistro(novoFuncionario);
 
-        ViewBagHelper.DefinirDados(ViewBag, "Funcionários", "funcionario", "cadastrado", funcionario.Nome);
+        NotificacaoViewModel notificacaoVM = new NotificacaoViewModel("Gestão de Funcionários", "funcionario",
+            $"O registro \"{novoFuncionario.Nome}\" foi cadastrado com sucesso!");
 
-        return View("Notificacao");
+        return View("Notificacao", notificacaoVM);
     }
 
     [HttpGet("visualizar")]
     public IActionResult VisualizarCadastros()
     {
-        ContextoDados contextodados = new ContextoDados(true);
-        IRepositorioFuncionario repositorioFuncionario = new RepositorioFuncionarioEmArquivo(contextodados);
+        ContextoDados contextoDados = new ContextoDados(true);
+        IRepositorioFuncionario repositorioFuncionario = new RepositorioFuncionarioEmArquivo(contextoDados);
 
         List<Funcionario> funcionarios = repositorioFuncionario.SelecionarRegistros();
 
-        VisualizarFuncionarioViewModel visualizarVM = new(funcionarios);
+        VisualizarFuncionarioViewModel visualizarVM = new VisualizarFuncionarioViewModel(funcionarios);
 
         return View("Visualizar", visualizarVM);
     }
@@ -53,8 +54,8 @@ public class ControladorFuncionario : Controller
     [HttpGet("editar/{id:int}")]
     public IActionResult FormularioEditar(int id)
     {
-        ContextoDados contextodados = new ContextoDados(true);
-        IRepositorioFuncionario repositorioFuncionario = new RepositorioFuncionarioEmArquivo(contextodados);
+        ContextoDados contextoDados = new ContextoDados(true);
+        IRepositorioFuncionario repositorioFuncionario = new RepositorioFuncionarioEmArquivo(contextoDados);
 
         Funcionario funcionarioSelecionado = repositorioFuncionario.SelecionarRegistroPorId(id);
 
@@ -68,27 +69,29 @@ public class ControladorFuncionario : Controller
     [HttpPost("editar/{id:int}")]
     public IActionResult Editar(int id, EditarFuncionarioViewModel editarVM)
     {
-        ContextoDados contextodados = new ContextoDados(true);
-        IRepositorioFuncionario repositorioFuncionario = new RepositorioFuncionarioEmArquivo(contextodados);
+        ContextoDados contextoDados = new ContextoDados(true);
+        IRepositorioFuncionario repositorioFuncionario = new RepositorioFuncionarioEmArquivo(contextoDados);
 
         Funcionario funcionarioAtualizado = editarVM.ParaEntidade();
 
         repositorioFuncionario.EditarRegistro(id, funcionarioAtualizado);
 
-        ViewBagHelper.DefinirDados(ViewBag, "Funcionários", "funcionario", "editado", funcionarioAtualizado.Nome);
+        NotificacaoViewModel notificacaoVM = new NotificacaoViewModel("Gestão de Funcionários", "funcionario",
+            $"O registro \"{funcionarioAtualizado.Nome}\" foi editado com sucesso!");
 
-        return View("Notificacao");
+        return View("Notificacao", notificacaoVM);
     }
 
     [HttpGet("excluir/{id:int}")]
     public IActionResult FormularioExcluir(int id)
     {
-        ContextoDados contextodados = new ContextoDados(true);
-        IRepositorioFuncionario repositorio = new RepositorioFuncionarioEmArquivo(contextodados);
+        ContextoDados contextoDados = new ContextoDados(true);
+        IRepositorioFuncionario repositorioFuncionario = new RepositorioFuncionarioEmArquivo(contextoDados);
 
-        Funcionario funcionarioSelecionado = repositorio.SelecionarRegistroPorId(id);
+        Funcionario funcionarioSelecionado = repositorioFuncionario.SelecionarRegistroPorId(id);
 
-        ExcluirFuncionarioViewModel excluirVM = new(id, funcionarioSelecionado.Nome!);
+        ExcluirFuncionarioViewModel excluirVM = new ExcluirFuncionarioViewModel(
+            id, funcionarioSelecionado.Nome!);
 
         return View("Excluir", excluirVM);
     }
@@ -96,13 +99,14 @@ public class ControladorFuncionario : Controller
     [HttpPost("excluir/{id:int}")]
     public IActionResult Excluir(int id)
     {
-        ContextoDados contextodados = new ContextoDados(true);
-        IRepositorioFuncionario repositorioFuncionario = new RepositorioFuncionarioEmArquivo(contextodados);
+        ContextoDados contextoDados = new ContextoDados(true);
+        IRepositorioFuncionario repositorioFuncionario = new RepositorioFuncionarioEmArquivo(contextoDados);
 
         repositorioFuncionario.ExcluirRegistro(id);
 
-        ViewBagHelper.DefinirDados(ViewBag, "Funcionários", "funcionario", "excluído");
+        NotificacaoViewModel notificacaoVM = new NotificacaoViewModel("Gestão de Funcionários", "funcionario",
+            $"Registro excluído com sucesso!");
 
-        return View("Notificacao");
+        return View("Notificacao", notificacaoVM);
     }
 }

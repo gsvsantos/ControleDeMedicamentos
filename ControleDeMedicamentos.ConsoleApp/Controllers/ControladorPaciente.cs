@@ -25,27 +25,28 @@ public class ControladorPaciente : Controller
     [HttpPost("cadastrar")]
     public IActionResult Cadastrar(CadastrarPacienteViewModel cadastrarVM)
     {
-        ContextoDados contexto = new ContextoDados(true);
-        IRepositorioPaciente repositorioPaciente = new RepositorioPacienteEmArquivo(contexto);
+        ContextoDados contextoDados = new ContextoDados(true);
+        IRepositorioPaciente repositorioPaciente = new RepositorioPacienteEmArquivo(contextoDados);
 
         Paciente novoPaciente = cadastrarVM.ParaEntidade();
 
         repositorioPaciente.CadastrarRegistro(novoPaciente);
 
-        ViewBagHelper.DefinirDados(ViewBag, "Pacientes", "paciente", "cadastrado", novoPaciente.Nome);
+        NotificacaoViewModel notificacaoVM = new NotificacaoViewModel("Gestão de Pacientes", "paciente",
+            $"O registro \"{novoPaciente.Nome}\" foi cadastrado com sucesso!");
 
-        return View("Notificacao");
+        return View("Notificacao", notificacaoVM);
     }
 
     [HttpGet("visualizar")]
     public IActionResult VisualizarCadastros()
     {
-        ContextoDados contexto = new ContextoDados(true);
-        IRepositorioPaciente repositorioPaciente = new RepositorioPacienteEmArquivo(contexto);
+        ContextoDados contextoDados = new ContextoDados(true);
+        IRepositorioPaciente repositorioPaciente = new RepositorioPacienteEmArquivo(contextoDados);
 
         List<Paciente> pacientes = repositorioPaciente.SelecionarRegistros();
 
-        VisualizarPacienteViewModel visualizarVM = new(pacientes);
+        VisualizarPacienteViewModel visualizarVM = new VisualizarPacienteViewModel(pacientes);
 
         return View("Visualizar", visualizarVM);
     }
@@ -53,12 +54,12 @@ public class ControladorPaciente : Controller
     [HttpGet("editar/{id:int}")]
     public IActionResult FormularioEditar(int id)
     {
-        ContextoDados contexto = new ContextoDados(true);
-        IRepositorioPaciente repositorioPaciente = new RepositorioPacienteEmArquivo(contexto);
+        ContextoDados contextoDados = new ContextoDados(true);
+        IRepositorioPaciente repositorioPaciente = new RepositorioPacienteEmArquivo(contextoDados);
 
         Paciente pacienteSelecionado = repositorioPaciente.SelecionarRegistroPorId(id);
 
-        EditarPacienteViewModel editarVM = new(
+        EditarPacienteViewModel editarVM = new EditarPacienteViewModel(
             id, pacienteSelecionado.Nome!, pacienteSelecionado.Telefone!,
             pacienteSelecionado.CartaoSus!);
 
@@ -68,27 +69,28 @@ public class ControladorPaciente : Controller
     [HttpPost("editar/{id:int}")]
     public IActionResult Editar(int id, EditarPacienteViewModel editarVM)
     {
-        ContextoDados contexto = new ContextoDados(true);
-        IRepositorioPaciente repositorioPaciente = new RepositorioPacienteEmArquivo(contexto);
+        ContextoDados contextoDados = new ContextoDados(true);
+        IRepositorioPaciente repositorioPaciente = new RepositorioPacienteEmArquivo(contextoDados);
 
         Paciente pacienteAtualizado = editarVM.ParaEntidade();
 
         repositorioPaciente.EditarRegistro(id, pacienteAtualizado);
 
-        ViewBagHelper.DefinirDados(ViewBag, "Pacientes", "paciente", "editado", pacienteAtualizado.Nome);
+        NotificacaoViewModel notificacaoVM = new NotificacaoViewModel("Gestão de Pacientes", "paciente",
+            $"O registro \"{pacienteAtualizado.Nome}\" foi editado com sucesso!");
 
-        return View("Notificacao");
+        return View("Notificacao", notificacaoVM);
     }
 
     [HttpGet("excluir/{id:int}")]
     public IActionResult FormularioExcluir(int id)
     {
-        ContextoDados contexto = new ContextoDados(true);
-        IRepositorioPaciente repositorioPaciente = new RepositorioPacienteEmArquivo(contexto);
+        ContextoDados contextoDados = new ContextoDados(true);
+        IRepositorioPaciente repositorioPaciente = new RepositorioPacienteEmArquivo(contextoDados);
 
         Paciente pacienteSelecionado = repositorioPaciente.SelecionarRegistroPorId(id);
 
-        ExcluirPacienteViewModel excluirVM = new(
+        ExcluirPacienteViewModel excluirVM = new ExcluirPacienteViewModel(
             id, pacienteSelecionado.Nome!);
 
         return View("Excluir", excluirVM);
@@ -97,13 +99,14 @@ public class ControladorPaciente : Controller
     [HttpPost("excluir/{id:int}")]
     public IActionResult Excluir(int id)
     {
-        ContextoDados contexto = new ContextoDados(true);
-        IRepositorioPaciente repositorioPaciente = new RepositorioPacienteEmArquivo(contexto);
+        ContextoDados contextoDados = new ContextoDados(true);
+        IRepositorioPaciente repositorioPaciente = new RepositorioPacienteEmArquivo(contextoDados);
 
         repositorioPaciente.ExcluirRegistro(id);
 
-        ViewBagHelper.DefinirDados(ViewBag, "Pacientes", "paciente", "excluído");
+        NotificacaoViewModel notificacaoVM = new NotificacaoViewModel("Gestão de Pacientes", "paciente",
+            $"Registro excluído com sucesso!");
 
-        return View("Notificacao");
+        return View("Notificacao", notificacaoVM);
     }
 }

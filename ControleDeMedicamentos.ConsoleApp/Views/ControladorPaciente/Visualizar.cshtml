@@ -28,8 +28,8 @@
 
         @foreach (DataPacienteViewModel p in Model.Registros)
     {
-    <li>@p <a href="/paciente/editar/@p.Id">Editar</a> /
-            <a href="/paciente/excluir/@p.Id">Excluir</a> </li>
+    <li>@p / <a href="/paciente/editar/@p.Id">Editar</a> /
+        <a href="/paciente/excluir/@p.Id">Excluir</a> </li>
     }
 </ul>
 </body>

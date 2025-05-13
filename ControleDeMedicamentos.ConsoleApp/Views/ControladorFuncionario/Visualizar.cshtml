@@ -26,10 +26,10 @@
         <li>Nenhum fornecedor cadastrado.</li>
     }
 
-        @foreach (DataFuncionarioViewModel f in Model.Registros)
+    @foreach (DataFuncionarioViewModel f in Model.Registros)
     {
-    <li>@f <a href="/funcionario/editar/@f.Id">Editar</a> /
-            <a href="/funcionario/excluir/@f.Id">Excluir</a> </li>
+    <li>@f / <a href="/funcionario/editar/@f.Id">Editar</a> /
+        <a href="/funcionario/excluir/@f.Id">Excluir</a> </li>
     }
 </ul>
 </body>

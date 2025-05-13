@@ -14,7 +14,7 @@ public abstract class FormularioFornecedorViewModel
 public class CadastrarFornecedorViewModel : FormularioFornecedorViewModel
 {
     public CadastrarFornecedorViewModel() { }
-    public CadastrarFornecedorViewModel(string? nome, string? telefone, string? cNPJ) : this()
+    public CadastrarFornecedorViewModel(string nome, string telefone, string cNPJ) : this()
     {
         Nome = nome;
         Telefone = telefone;
@@ -39,7 +39,8 @@ public class VisualizarFornecedorViewModel
 
 public class EditarFornecedorViewModel : FormularioFornecedorViewModel
 {
-    public EditarFornecedorViewModel(int id, string? nome, string? telefone, string? cNPJ)
+    public EditarFornecedorViewModel() { }
+    public EditarFornecedorViewModel(int id, string nome, string telefone, string cNPJ) : this()
     {
         Id = id;
         Nome = nome;
@@ -60,7 +61,7 @@ public class ExcluirFornecedorViewModel : FormularioFornecedorViewModel
 public class DataFornecedorViewModel : FormularioFornecedorViewModel
 {
 
-    public DataFornecedorViewModel(int id, string? nome, string? telefone, string? cNPJ)
+    public DataFornecedorViewModel(int id, string nome, string telefone, string cNPJ)
     {
         Id = id;
         Nome = nome;
