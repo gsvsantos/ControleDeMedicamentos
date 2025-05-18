@@ -1,0 +1,55 @@
+﻿@using ControleDeMedicamentos.ConsoleApp.Models
+
+@model EditarMedicamentoViewModel;
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Edição de Medicamentos - Controle de Medicamentos</title>
+</head>
+<body>
+<h1>Gestão de Medicamentos</h1>
+
+<hr/>
+
+<a href="/medicamentos">Voltar</a> /
+<a href="/medicamentos/visualizar">Visualizar Medicamentos</a>
+
+<hr/>
+
+<h3>Edição de Medicamento</h3>
+
+<form action="/medicamentos/editar/@Model.Id" method="post">
+    <label for="nome">Nome do Medicamento:</label>
+    <br/>
+    <input type="text" name="nome" id="nome" value="@Model.Nome"/>
+
+    <br/>
+
+    <label for="qtdestoque">Quantidade em Estoque:</label>
+    <br/>
+    <input type="text" name="qtdestoque" id="qtdestoque" value="@Model.QtdEstoque"/>
+
+    <br/>
+
+    <label for="descricao">Descrição:</label>
+    <br/>
+    <input type="text" name="descricao" id="descricao" value="@Model.Descricao"/>
+
+    <br/>
+    <label for="fornecedorID">Fornecedor do Medicamento:</label>
+    <br/>
+    <select id="fornecedorID" name="fornecedorID">
+        @foreach(SelecionarFornecedorViewModel f in Model.FornecedoresDisponiveis)
+        {
+                <option value="@f.Id" @(f.Id == Model.FornecedorId ? "selected" : "")>@f.Nome</option>
+        }
+    </select>
+        
+    <hr/>
+
+    <button type="submit">Editar</button>
+</form>
+</body>
+</html>

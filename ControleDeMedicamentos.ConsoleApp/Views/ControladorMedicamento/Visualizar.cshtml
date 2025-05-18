@@ -1,0 +1,36 @@
+﻿@using ControleDeMedicamentos.ConsoleApp.Models;
+
+@model VisualizarMedicamentosViewModel;
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+	<meta charset="utf-8"/>
+	<title>Visualização de Medicamentos - Controle de Medicamentos</title>
+</head>
+<body>
+<h1>Gestão de Medicamentos</h1>
+
+<hr/>
+
+<a href="/medicamentos">Voltar</a> /
+<a href="/medicamentos/cadastrar">Cadastrar Novo Medicamento</a>
+
+<hr/>
+
+<h3>Visualização de Funcionários</h3>
+
+<ul>
+	@if (Model.Registros.Count == 0)
+	{
+	<li>Nenhum medicamento cadastrado.</li>
+	}
+
+	@foreach (DataMedicamentoViewModel m in Model.Registros)
+	{
+	<li>@m / <a href="/medicamentos/editar/@m.Id">Editar</a> /
+		<a href="/medicamentos/excluir/@m.Id">Excluir</a> </li>
+	}
+</ul>
+</body>
+</html>
