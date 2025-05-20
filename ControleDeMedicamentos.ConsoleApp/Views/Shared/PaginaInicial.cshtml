@@ -3,13 +3,114 @@
 <head>
     <meta charset="UTF-8"/>
     <title>Controle de Medicamentos</title>
+    <style>
+        body{
+            background-color: rgb(233, 244, 255);
+            font-family: cursive;
+            margin: 0px;
+        }
+
+        main{
+            display: grid;
+            gap: 30px;
+            padding: 25px 0px 0px 50px;
+            flex-wrap: wrap;
+        }
+
+        nav{
+            align-items: center;
+            background-color: rgb(191, 219, 247);
+            display: flex;
+        }
+
+        nav a{
+            color: rgb(255, 255, 255);
+            text-decoration: none;
+            text-shadow: 0 0 5px rgb(7, 43, 75);
+        }
+
+        nav a:hover{
+            color: rgb(2, 56, 104);
+            text-shadow: 0 0 5px rgba(255, 255, 255, 0.8);
+        }
+
+        nav h2{
+            margin: 0px;
+            padding: 0px 0px 0px 25px;
+        }
+
+        nav ul{
+            display: flex;
+            gap: 25px;
+            flex-wrap: wrap;
+            list-style: none;
+        }
+
+        .card{
+            align-items: center;
+            background-color: rgb(80, 134, 180);
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgb(148, 185, 218);
+            cursor: pointer;
+            display: flex;
+            height: 50px;
+            justify-content: center;
+            list-style: none;
+            transition: 0.2s;
+            width: 250px;
+        }
+
+        .card:hover{
+            background-color: rgb(127, 170, 207);
+            transform: scale(1.07);
+        }
+
+        .card a{
+            color: rgb(255, 255, 255);
+            text-decoration: none;
+            text-shadow: 0 0 5px rgba(5, 83, 151, 0.8);
+            transition: 0.3s;
+        }
+
+        .card:hover a {
+            color: rgb(2, 56, 104);
+            text-shadow: 0 0 5px rgba(255, 255, 255, 0.8);
+        }
+    </style>
 </head>
 <body>
-<h1>Controle de Medicamentos</h1>
-<ul>
-    <li><a href="/fornecedor">Gestão de Fornecedores</a></li>
-    <li><a href="/funcionario">Gestão de Funcionários</a></li>
-    <li><a href="/paciente">Gestão de Pacientes</a></li>
-</ul>
+    <nav>
+        <h2>Controle de Medicamentos</h2>
+        <ul>
+            <li><a href="/">Página Inicial</a></li>
+            <li><a href="/fornecedores/visualizar">Fornecedores</a></li>
+            <li><a href="/funcionarios/visualizar">Funcionários</a></li>
+            <li><a href="/medicamentos/visualizar">Medicamentos</a></li>
+            <li><a href="/pacientes/visualizar">Pacientes</a></li>
+            <li><a href="/prescricoes/visualizar">Prescrições Médicas</a></li>
+        </ul>
+    </nav>
+
+    <main>
+        <div class="card" onclick="location.href='/fornecedores'">
+            <li><a href="/fornecedores">Gestão de Fornecedores</a></li>
+        </div>
+
+        <div class="card" onclick="location.href='/funcionarios'">
+            <li><a href="/funcionarios">Gestão de Funcionários</a></li>
+        </div>
+
+        <div class="card" onclick="location.href='/medicamentos'">
+            <li><a href="/medicamentos">Gestão de Medicamentos</a></li>
+        </div>
+
+        <div class="card" onclick="location.href='/pacientes'">
+            <li><a href="/pacientes">Gestão de Pacientes</a></li>
+        </div>
+
+        <div class="card" onclick="location.href='/prescricoes'">
+            <li><a href="/prescricoes">Gestão de Prescrições Médicas</a></li>
+        </div>
+    </main>
 </body>
 </html>
