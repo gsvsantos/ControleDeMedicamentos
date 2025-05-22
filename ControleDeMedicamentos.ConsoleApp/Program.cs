@@ -11,6 +11,7 @@ internal class Program
         WebApplication app = builder.Build();
 
         app.UseRouting();
+        app.UseStaticFiles();
         app.MapControllers();
         app.Run();
     }
