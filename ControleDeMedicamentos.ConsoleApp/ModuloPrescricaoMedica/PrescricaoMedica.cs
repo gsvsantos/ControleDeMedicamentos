@@ -1,3 +1,4 @@
+using System.Diagnostics.CodeAnalysis;
 using ControleDeMedicamentos.ConsoleApp.Compartilhado;
 using ControleDeMedicamentos.ConsoleApp.ModuloPaciente;
 
@@ -11,12 +12,13 @@ public class PrescricaoMedica : EntidadeBase<PrescricaoMedica>
     public List<PrescricaoMedicamento> Medicamentos { get; set; } = [];
     public string? Status { get; set; } = "Disponivel";
 
+    [ExcludeFromCodeCoverage]
     public PrescricaoMedica() { }
 
-    public PrescricaoMedica(string cRMMedico, DateTime data, Paciente paciente, List<PrescricaoMedicamento> medicamentos)
+    public PrescricaoMedica(string cRMMedico, Paciente paciente, List<PrescricaoMedicamento> medicamentos)
     {
         CRMMedico = cRMMedico;
-        Data = data;
+        Data = DateTime.Now;
         Paciente = paciente;
         Medicamentos = medicamentos;
     }

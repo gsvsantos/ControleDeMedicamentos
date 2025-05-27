@@ -1,4 +1,5 @@
-﻿using System.Text.RegularExpressions;
+﻿using System.Diagnostics.CodeAnalysis;
+using System.Text.RegularExpressions;
 using ControleDeMedicamentos.ConsoleApp.Compartilhado;
 using ControleDeMedicamentos.ConsoleApp.ModuloMedicamento;
 
@@ -10,15 +11,13 @@ public class Fornecedor : EntidadeBase<Fornecedor>
     public string? Telefone { get; set; }
     public string? CNPJ { get; set; }
     public List<Medicamento> Medicamentos { get; set; } = [];
-
     public int QtdMedicamentos
     {
         get { return Medicamentos.Count; }
     }
 
-    public Fornecedor()
-    {
-    }
+    [ExcludeFromCodeCoverage]
+    public Fornecedor() { }
 
     public Fornecedor(string nome, string telefone, string cnpj)
     {

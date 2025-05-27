@@ -1,3 +1,4 @@
+using System.Diagnostics.CodeAnalysis;
 using ControleDeMedicamentos.ConsoleApp.Compartilhado;
 using ControleDeMedicamentos.ConsoleApp.ModuloMedicamento;
 
@@ -10,14 +11,15 @@ public class PrescricaoMedicamento : EntidadeBase<PrescricaoMedicamento>
     public Medicamento? Medicamento { get; set; }
     public int Quantidade { get; set; }
 
+    [ExcludeFromCodeCoverage]
     public PrescricaoMedicamento() { }
 
-    public PrescricaoMedicamento(string dos, string per, Medicamento med, int qtt)
+    public PrescricaoMedicamento(string dosagem, string periodo, Medicamento medicamento, int quantidade)
     {
-        Dosagem = dos;
-        Periodo = per;
-        Medicamento = med;
-        Quantidade = qtt;
+        Dosagem = dosagem;
+        Periodo = periodo;
+        Medicamento = medicamento;
+        Quantidade = quantidade;
     }
 
     public override void AtualizarRegistro(PrescricaoMedicamento PrescMedEditado)

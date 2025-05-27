@@ -1,3 +1,4 @@
+using System.Diagnostics.CodeAnalysis;
 using System.Text.RegularExpressions;
 using ControleDeMedicamentos.ConsoleApp.Compartilhado;
 using ControleDeMedicamentos.ConsoleApp.ModuloPrescricaoMedica;
@@ -13,6 +14,7 @@ public class Paciente : EntidadeBase<Paciente>
     public List<PrescricaoMedica> Prescricoes { get; set; } = [];
     public List<RequisicaoSaida> RequisicoesSaida { get; set; } = [];
 
+    [ExcludeFromCodeCoverage]
     public Paciente() { }
 
     public Paciente(string nome, string telefone, string cartaoSus)

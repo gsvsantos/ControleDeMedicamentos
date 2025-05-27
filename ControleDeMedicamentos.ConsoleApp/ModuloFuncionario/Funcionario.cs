@@ -1,4 +1,5 @@
-﻿using System.Text.RegularExpressions;
+﻿using System.Diagnostics.CodeAnalysis;
+using System.Text.RegularExpressions;
 using ControleDeMedicamentos.ConsoleApp.Compartilhado;
 
 namespace ControleDeMedicamentos.ConsoleApp.ModuloFuncionario;
@@ -9,6 +10,7 @@ public class Funcionario : EntidadeBase<Funcionario>
     public string? Telefone { get; set; }
     public string? CPF { get; set; }
 
+    [ExcludeFromCodeCoverage]
     public Funcionario() { }
 
     public Funcionario(string nome, string telefone, string cPF)
@@ -17,6 +19,7 @@ public class Funcionario : EntidadeBase<Funcionario>
         Telefone = telefone;
         CPF = cPF;
     }
+
     public override void AtualizarRegistro(Funcionario registroEditado)
     {
         Nome = registroEditado.Nome;

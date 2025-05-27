@@ -1,4 +1,5 @@
-﻿using System.Globalization;
+﻿using System.Diagnostics.CodeAnalysis;
+using System.Globalization;
 using ControleDeMedicamentos.ConsoleApp.Compartilhado;
 using ControleDeMedicamentos.ConsoleApp.ModuloFuncionario;
 using ControleDeMedicamentos.ConsoleApp.ModuloMedicamento;
@@ -12,6 +13,7 @@ public class RequisicaoEntrada : EntidadeBase<RequisicaoEntrada>
     public int QuantidadeMedicamento { get; set; }
     public Funcionario? Funcionario { get; set; }
 
+    [ExcludeFromCodeCoverage]
     public RequisicaoEntrada() { }
 
     public RequisicaoEntrada(string data, Medicamento medicamento, Funcionario funcionario, int quantidadeMedicamento)

@@ -1,4 +1,5 @@
-﻿using System.Globalization;
+﻿using System.Diagnostics.CodeAnalysis;
+using System.Globalization;
 using ControleDeMedicamentos.ConsoleApp.Compartilhado;
 using ControleDeMedicamentos.ConsoleApp.ModuloPaciente;
 using ControleDeMedicamentos.ConsoleApp.ModuloPrescricaoMedica;
@@ -7,12 +8,12 @@ namespace ControleDeMedicamentos.ConsoleApp.ModuloRequisicaoSaida;
 
 public class RequisicaoSaida : EntidadeBase<RequisicaoSaida>
 {
-
     public string? Data { get; set; }
     public Paciente? Paciente { get; set; }
     public PrescricaoMedica? PrescicaoMedica { get; set; }
     public List<PrescricaoMedicamento> MedicamentosRequisitados { get; set; } = [];
 
+    [ExcludeFromCodeCoverage]
     public RequisicaoSaida() { }
 
     public RequisicaoSaida(string data, Paciente paciente, PrescricaoMedica prescicaoMedica)

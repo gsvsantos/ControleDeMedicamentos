@@ -1,4 +1,5 @@
-﻿using ControleDeMedicamentos.ConsoleApp.Compartilhado;
+﻿using System.Diagnostics.CodeAnalysis;
+using ControleDeMedicamentos.ConsoleApp.Compartilhado;
 using ControleDeMedicamentos.ConsoleApp.ModuloFornecedor;
 
 namespace ControleDeMedicamentos.ConsoleApp.ModuloMedicamento;
@@ -11,6 +12,7 @@ public class Medicamento : EntidadeBase<Medicamento>
     public string? Status { get; set; }
     public Fornecedor? Fornecedor { get; set; }
 
+    [ExcludeFromCodeCoverage]
     public Medicamento() { }
 
     public Medicamento(string nome, int qtdEstoque, string descricao, Fornecedor fornecedor)
