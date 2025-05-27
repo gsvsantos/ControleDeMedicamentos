@@ -5,7 +5,7 @@ namespace ControleDeMedicamentos.ConsoleApp.Models;
 
 public abstract class FormularioPacienteViewModel
 {
-    public int Id { get; set; }
+    public Guid Id { get; set; }
     public string? Nome { get; set; }
     public string? Telefone { get; set; }
     public string? CartaoSus { get; set; }
@@ -38,7 +38,7 @@ public class VisualizarPacienteViewModel
 public class EditarPacienteViewModel : FormularioPacienteViewModel
 {
     public EditarPacienteViewModel() { }
-    public EditarPacienteViewModel(int id, string nome, string telefone, string cartaoSus)
+    public EditarPacienteViewModel(Guid id, string nome, string telefone, string cartaoSus)
     {
         Id = id;
         Nome = nome;
@@ -49,7 +49,7 @@ public class EditarPacienteViewModel : FormularioPacienteViewModel
 public class ExcluirPacienteViewModel : FormularioPacienteViewModel
 {
     public ExcluirPacienteViewModel() { }
-    public ExcluirPacienteViewModel(int id, string nome)
+    public ExcluirPacienteViewModel(Guid id, string nome)
     {
         Id = id;
         Nome = nome;
@@ -57,7 +57,7 @@ public class ExcluirPacienteViewModel : FormularioPacienteViewModel
 }
 public class DataPacienteViewModel : FormularioPacienteViewModel
 {
-    public DataPacienteViewModel(int id, string nome, string telefone, string cartaoSus)
+    public DataPacienteViewModel(Guid id, string nome, string telefone, string cartaoSus)
     {
         Id = id;
         Nome = nome;
@@ -67,6 +67,6 @@ public class DataPacienteViewModel : FormularioPacienteViewModel
 
     public override string ToString()
     {
-        return $"ID: {Id}, Nome: {Nome}, Telefone: {Telefone}, CartaoSUS: {CartaoSus}";
+        return $"Nome: {Nome}, Telefone: {Telefone}, CartaoSUS: {CartaoSus}";
     }
 }

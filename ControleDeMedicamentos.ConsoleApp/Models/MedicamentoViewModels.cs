@@ -6,22 +6,22 @@ namespace ControleDeMedicamentos.ConsoleApp.Models;
 
 public abstract class FormularioMedicamentoViewModel
 {
-    public int Id { get; set; }
+    public Guid Id { get; set; }
     public string? Nome { get; set; }
     public int QtdEstoque { get; set; }
     public string? Descricao { get; set; }
     public string? Status { get; set; }
     public string? NomeFornecedor { get; set; }
-    public int FornecedorId { get; set; }
+    public Guid FornecedorId { get; set; }
     public List<SelecionarFornecedorViewModel> FornecedoresDisponiveis { get; set; } = [];
 }
 
 public class SelecionarFornecedorViewModel
 {
-    public int Id { get; set; }
+    public Guid Id { get; set; }
     public string? Nome { get; set; }
 
-    public SelecionarFornecedorViewModel(int id, string nome)
+    public SelecionarFornecedorViewModel(Guid id, string nome)
     {
         Id = id;
         Nome = nome;
@@ -60,7 +60,7 @@ public class VisualizarMedicamentosViewModel
 public class EditarMedicamentoViewModel : FormularioMedicamentoViewModel
 {
     public EditarMedicamentoViewModel() { }
-    public EditarMedicamentoViewModel(int id, string nome, int qtdEstoque, string descricao, string status, List<Fornecedor> fornecedores)
+    public EditarMedicamentoViewModel(Guid id, string nome, int qtdEstoque, string descricao, string status, List<Fornecedor> fornecedores)
     {
         Id = id;
         Nome = nome;
@@ -80,7 +80,7 @@ public class EditarMedicamentoViewModel : FormularioMedicamentoViewModel
 public class ExcluirMedicamentoViewModel : FormularioMedicamentoViewModel
 {
     public ExcluirMedicamentoViewModel() { }
-    public ExcluirMedicamentoViewModel(int id, string nome)
+    public ExcluirMedicamentoViewModel(Guid id, string nome)
     {
         Id = id;
         Nome = nome;
@@ -89,8 +89,7 @@ public class ExcluirMedicamentoViewModel : FormularioMedicamentoViewModel
 
 public class DataMedicamentoViewModel : FormularioMedicamentoViewModel
 {
-
-    public DataMedicamentoViewModel(int id, string nome, int qtdEstoque, string descricao, string status, string nomeFornecedor)
+    public DataMedicamentoViewModel(Guid id, string nome, int qtdEstoque, string descricao, string status, string nomeFornecedor)
     {
         Id = id;
         Nome = nome;
@@ -102,6 +101,6 @@ public class DataMedicamentoViewModel : FormularioMedicamentoViewModel
 
     public override string ToString()
     {
-        return $"ID: {Id}, Fornecedor; {NomeFornecedor}, Nome: {Nome},  Quantidade em Estoque: {QtdEstoque}, Descrição: {Descricao}, Status: {Status}";
+        return $"Fornecedor; {NomeFornecedor}, Nome: {Nome},  Quantidade em Estoque: {QtdEstoque}, Descrição: {Descricao}, Status: {Status}";
     }
 }

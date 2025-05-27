@@ -5,7 +5,7 @@ namespace ControleDeMedicamentos.ConsoleApp.Models;
 
 public abstract class FormularioFuncionarioViewModel
 {
-    public int Id { get; set; }
+    public Guid Id { get; set; }
     public string? Nome { get; set; }
     public string? Telefone { get; set; }
     public string? CPF { get; set; }
@@ -40,7 +40,7 @@ public class VisualizarFuncionarioViewModel : FormularioFuncionarioViewModel
 public class EditarFuncionarioViewModel : FormularioFuncionarioViewModel
 {
     public EditarFuncionarioViewModel() { }
-    public EditarFuncionarioViewModel(int id, string nome, string telefone, string cPF) : this()
+    public EditarFuncionarioViewModel(Guid id, string nome, string telefone, string cPF) : this()
     {
         Id = id;
         Nome = nome;
@@ -51,7 +51,7 @@ public class EditarFuncionarioViewModel : FormularioFuncionarioViewModel
 
 public class ExcluirFuncionarioViewModel : FormularioFuncionarioViewModel
 {
-    public ExcluirFuncionarioViewModel(int id, string nome)
+    public ExcluirFuncionarioViewModel(Guid id, string nome)
     {
         Id = id;
         Nome = nome;
@@ -60,7 +60,7 @@ public class ExcluirFuncionarioViewModel : FormularioFuncionarioViewModel
 
 public class DataFuncionarioViewModel : FormularioFuncionarioViewModel
 {
-    public DataFuncionarioViewModel(int id, string nome, string telefone, string cPF)
+    public DataFuncionarioViewModel(Guid id, string nome, string telefone, string cPF)
     {
         Id = id;
         Nome = nome;
@@ -70,6 +70,6 @@ public class DataFuncionarioViewModel : FormularioFuncionarioViewModel
 
     public override string ToString()
     {
-        return $"ID: {Id}, Nome: {Nome}, Telefone: {Telefone}, CPF: {CPF}";
+        return $"Nome: {Nome}, Telefone: {Telefone}, CPF: {CPF}";
     }
 }

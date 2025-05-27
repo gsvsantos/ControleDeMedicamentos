@@ -5,7 +5,7 @@ namespace ControleDeMedicamentos.ConsoleApp.Models;
 
 public abstract class FormularioFornecedorViewModel
 {
-    public int Id { get; set; }
+    public Guid Id { get; set; }
     public string? Nome { get; set; }
     public string? Telefone { get; set; }
     public string? CNPJ { get; set; }
@@ -40,7 +40,7 @@ public class VisualizarFornecedorViewModel
 public class EditarFornecedorViewModel : FormularioFornecedorViewModel
 {
     public EditarFornecedorViewModel() { }
-    public EditarFornecedorViewModel(int id, string nome, string telefone, string cNPJ) : this()
+    public EditarFornecedorViewModel(Guid id, string nome, string telefone, string cNPJ) : this()
     {
         Id = id;
         Nome = nome;
@@ -51,7 +51,7 @@ public class EditarFornecedorViewModel : FormularioFornecedorViewModel
 
 public class ExcluirFornecedorViewModel : FormularioFornecedorViewModel
 {
-    public ExcluirFornecedorViewModel(int id, string nome)
+    public ExcluirFornecedorViewModel(Guid id, string nome)
     {
         Id = id;
         Nome = nome;
@@ -61,7 +61,7 @@ public class ExcluirFornecedorViewModel : FormularioFornecedorViewModel
 public class DataFornecedorViewModel : FormularioFornecedorViewModel
 {
 
-    public DataFornecedorViewModel(int id, string nome, string telefone, string cNPJ)
+    public DataFornecedorViewModel(Guid id, string nome, string telefone, string cNPJ)
     {
         Id = id;
         Nome = nome;
@@ -71,6 +71,6 @@ public class DataFornecedorViewModel : FormularioFornecedorViewModel
 
     public override string ToString()
     {
-        return $"ID: {Id}, Nome: {Nome}, Telefone: {Telefone}, CPNJ: {CNPJ}";
+        return $"Nome: {Nome}\nTelefone: {Telefone}\nCPNJ: {CNPJ}";
     }
 }
