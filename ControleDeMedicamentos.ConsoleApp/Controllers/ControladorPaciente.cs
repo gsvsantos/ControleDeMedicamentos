@@ -6,105 +6,97 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace ControleDeMedicamentos.ConsoleApp.Controllers;
 
-[Route("paciente")]
+[Route("pacientes")]
 public class ControladorPaciente : Controller
 {
-    public IActionResult Menu()
+    private readonly ContextoDados contextoDados;
+    private readonly IRepositorioPaciente repositorioPaciente;
+
+    public ControladorPaciente()
     {
-        return View("Menu");
+        contextoDados = new(true);
+        repositorioPaciente = new RepositorioPacienteEmArquivo(contextoDados);
     }
 
     [HttpGet("cadastrar")]
-    public IActionResult FormularioCadastrar()
+    public IActionResult Cadastrar()
     {
-        CadastrarPacienteViewModel cadastrarVM = new CadastrarPacienteViewModel();
+        CadastrarPacienteViewModel cadastrarVM = new();
 
-        return View("Cadastrar");
+        return View(cadastrarVM);
     }
 
     [HttpPost("cadastrar")]
     public IActionResult Cadastrar(CadastrarPacienteViewModel cadastrarVM)
     {
-        ContextoDados contextoDados = new ContextoDados(true);
-        IRepositorioPaciente repositorioPaciente = new RepositorioPacienteEmArquivo(contextoDados);
-
         Paciente novoPaciente = cadastrarVM.ParaEntidade();
 
         repositorioPaciente.CadastrarRegistro(novoPaciente);
 
-        NotificacaoViewModel notificacaoVM = new NotificacaoViewModel("Gestão de Pacientes", "paciente",
+        NotificacaoViewModel notificacaoVM = new(
+            "Gestão de Pacientes",
+            "pacientes",
             $"O registro \"{novoPaciente.Nome}\" foi cadastrado com sucesso!");
 
         return View("Notificacao", notificacaoVM);
     }
 
     [HttpGet("visualizar")]
-    public IActionResult VisualizarCadastros()
+    public IActionResult Visualizar()
     {
-        ContextoDados contextoDados = new ContextoDados(true);
-        IRepositorioPaciente repositorioPaciente = new RepositorioPacienteEmArquivo(contextoDados);
-
         List<Paciente> pacientes = repositorioPaciente.SelecionarRegistros();
 
-        VisualizarPacienteViewModel visualizarVM = new VisualizarPacienteViewModel(pacientes);
+        VisualizarPacienteViewModel visualizarVM = new(pacientes);
 
-        return View("Visualizar", visualizarVM);
+        return View(visualizarVM);
     }
 
-    [HttpGet("editar/{id:int}")]
-    public IActionResult FormularioEditar(int id)
+    [HttpGet("editar/{id:Guid}")]
+    public IActionResult Editar(Guid id)
     {
-        ContextoDados contextoDados = new ContextoDados(true);
-        IRepositorioPaciente repositorioPaciente = new RepositorioPacienteEmArquivo(contextoDados);
-
         Paciente pacienteSelecionado = repositorioPaciente.SelecionarRegistroPorId(id);
 
-        EditarPacienteViewModel editarVM = new EditarPacienteViewModel(
+        EditarPacienteViewModel editarVM = new(
             id, pacienteSelecionado.Nome!, pacienteSelecionado.Telefone!,
             pacienteSelecionado.CartaoSus!);
 
-        return View("Editar", editarVM);
+        return View(editarVM);
     }
 
-    [HttpPost("editar/{id:int}")]
-    public IActionResult Editar(int id, EditarPacienteViewModel editarVM)
+    [HttpPost("editar/{id:Guid}")]
+    public IActionResult Editar(Guid id, EditarPacienteViewModel editarVM)
     {
-        ContextoDados contextoDados = new ContextoDados(true);
-        IRepositorioPaciente repositorioPaciente = new RepositorioPacienteEmArquivo(contextoDados);
-
         Paciente pacienteAtualizado = editarVM.ParaEntidade();
 
         repositorioPaciente.EditarRegistro(id, pacienteAtualizado);
 
-        NotificacaoViewModel notificacaoVM = new NotificacaoViewModel("Gestão de Pacientes", "paciente",
+        NotificacaoViewModel notificacaoVM = new(
+            "Gestão de Pacientes",
+            "pacientes",
             $"O registro \"{pacienteAtualizado.Nome}\" foi editado com sucesso!");
 
         return View("Notificacao", notificacaoVM);
     }
 
-    [HttpGet("excluir/{id:int}")]
-    public IActionResult FormularioExcluir(int id)
+    [HttpGet("excluir/{id:Guid}")]
+    public IActionResult Excluir(Guid id)
     {
-        ContextoDados contextoDados = new ContextoDados(true);
-        IRepositorioPaciente repositorioPaciente = new RepositorioPacienteEmArquivo(contextoDados);
-
         Paciente pacienteSelecionado = repositorioPaciente.SelecionarRegistroPorId(id);
 
-        ExcluirPacienteViewModel excluirVM = new ExcluirPacienteViewModel(
+        ExcluirPacienteViewModel excluirVM = new(
             id, pacienteSelecionado.Nome!);
 
-        return View("Excluir", excluirVM);
+        return View(excluirVM);
     }
 
-    [HttpPost("excluir/{id:int}")]
-    public IActionResult Excluir(int id)
+    [HttpPost("excluir/{id:Guid}")]
+    public IActionResult ExcluirConfirmado(Guid id)
     {
-        ContextoDados contextoDados = new ContextoDados(true);
-        IRepositorioPaciente repositorioPaciente = new RepositorioPacienteEmArquivo(contextoDados);
-
         repositorioPaciente.ExcluirRegistro(id);
 
-        NotificacaoViewModel notificacaoVM = new NotificacaoViewModel("Gestão de Pacientes", "paciente",
+        NotificacaoViewModel notificacaoVM = new(
+            "Gestão de Pacientes",
+            "pacientes",
             $"Registro excluído com sucesso!");
 
         return View("Notificacao", notificacaoVM);

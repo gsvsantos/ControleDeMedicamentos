@@ -21,10 +21,6 @@ public class ControladorMedicamento : Controller
         repositorioMedicamento = new RepositorioMedicamentoEmArquivo(contextoDados);
         repositorioMedicamento.VerificarEstoque();
     }
-    public IActionResult Menu()
-    {
-        return View();
-    }
 
     [HttpGet("cadastrar")]
     public IActionResult Cadastrar()
@@ -63,8 +59,8 @@ public class ControladorMedicamento : Controller
         return View(visualizarVM);
     }
 
-    [HttpGet("editar/{id:int}")]
-    public IActionResult Editar(int id)
+    [HttpGet("editar/{id:Guid}")]
+    public IActionResult Editar(Guid id)
     {
         List<Fornecedor> fornecedores = repositorioFornecedor.SelecionarRegistros();
 
@@ -81,8 +77,8 @@ public class ControladorMedicamento : Controller
         return View(editarVM);
     }
 
-    [HttpPost("editar/{id:int}")]
-    public IActionResult Editar(int id, EditarMedicamentoViewModel editarVM)
+    [HttpPost("editar/{id:Guid}")]
+    public IActionResult Editar(Guid id, EditarMedicamentoViewModel editarVM)
     {
         List<Fornecedor> fornecedores = repositorioFornecedor.SelecionarRegistros();
 
@@ -108,8 +104,8 @@ public class ControladorMedicamento : Controller
         return View("Notificacao", notificacaoVM);
     }
 
-    [HttpGet("excluir/{id:int}")]
-    public IActionResult Excluir(int id)
+    [HttpGet("excluir/{id:Guid}")]
+    public IActionResult Excluir(Guid id)
     {
         Medicamento medicamentoSelecionado = repositorioMedicamento.SelecionarRegistroPorId(id);
 
@@ -118,11 +114,9 @@ public class ControladorMedicamento : Controller
         return View(excluirVM);
     }
 
-    [HttpPost("excluir/{id:int}")]
-    public IActionResult ExcluirConfirmado(int id)
+    [HttpPost("excluir/{id:Guid}")]
+    public IActionResult ExcluirConfirmado(Guid id)
     {
-        Medicamento medicamentoSelecionado = repositorioMedicamento.SelecionarRegistroPorId(id);
-
         repositorioMedicamento.ExcluirRegistro(id);
 
         NotificacaoViewModel notificacaoVM = new(
