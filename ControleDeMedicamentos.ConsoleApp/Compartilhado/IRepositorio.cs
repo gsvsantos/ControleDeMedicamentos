@@ -4,11 +4,11 @@ public interface IRepositorio<Tipo> where Tipo : EntidadeBase<Tipo>
 {
     public void CadastrarRegistro(Tipo novoRegistro);
 
-    public bool EditarRegistro(int idRegistro, Tipo registroEditado);
+    public bool EditarRegistro(Guid idRegistro, Tipo registroEditado);
 
-    public bool ExcluirRegistro(int idRegistro);
+    public bool ExcluirRegistro(Guid idRegistro);
 
     public List<Tipo> SelecionarRegistros();
 
-    public Tipo SelecionarRegistroPorId(int idRegistro);
+    public Tipo SelecionarRegistroPorId(Guid idRegistro);
 }

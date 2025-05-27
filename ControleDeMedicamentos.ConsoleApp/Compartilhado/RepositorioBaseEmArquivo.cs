@@ -3,8 +3,6 @@
 public abstract class RepositorioBaseEmArquivo<Tipo> where Tipo : EntidadeBase<Tipo>
 {
     protected List<Tipo> registros = new List<Tipo>();
-    private int contadorIds = 0;
-
     protected ContextoDados contexto;
 
     protected RepositorioBaseEmArquivo(ContextoDados contexto)
@@ -12,22 +10,11 @@ public abstract class RepositorioBaseEmArquivo<Tipo> where Tipo : EntidadeBase<T
         this.contexto = contexto;
 
         registros = ObterRegistros();
-
-        int maiorId = 0;
-
-        foreach (var registro in registros)
-        {
-            if (registro.Id > maiorId)
-                maiorId = registro.Id;
-        }
-
-        contadorIds = maiorId;
     }
 
     public virtual void CadastrarRegistro(Tipo novoRegistro)
     {
-        novoRegistro.Id = ++contadorIds;
-
+        novoRegistro.Id = Guid.NewGuid();
         registros.Add(novoRegistro);
 
         contexto.Salvar();
@@ -35,7 +22,7 @@ public abstract class RepositorioBaseEmArquivo<Tipo> where Tipo : EntidadeBase<T
 
     protected abstract List<Tipo> ObterRegistros();
 
-    public bool EditarRegistro(int idRegistro, Tipo registroEditado)
+    public bool EditarRegistro(Guid idRegistro, Tipo registroEditado)
     {
         foreach (Tipo item in registros)
         {
@@ -52,7 +39,7 @@ public abstract class RepositorioBaseEmArquivo<Tipo> where Tipo : EntidadeBase<T
         return false;
     }
 
-    public bool ExcluirRegistro(int idRegistro)
+    public bool ExcluirRegistro(Guid idRegistro)
     {
         Tipo registroSelecionado = SelecionarRegistroPorId(idRegistro);
 
@@ -73,7 +60,7 @@ public abstract class RepositorioBaseEmArquivo<Tipo> where Tipo : EntidadeBase<T
         return registros;
     }
 
-    public Tipo SelecionarRegistroPorId(int idRegistro)
+    public Tipo SelecionarRegistroPorId(Guid idRegistro)
     {
         foreach (Tipo item in registros)
         {
