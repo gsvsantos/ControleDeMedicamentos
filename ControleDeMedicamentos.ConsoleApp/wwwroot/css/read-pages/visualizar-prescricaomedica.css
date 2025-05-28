@@ -1,0 +1,14 @@
+.lista th.crmMedico,
+.lista td.crmMedico{
+    width: 200px;
+}
+
+.lista th.paciente,
+.lista td.paciente{
+    width: 200px;
+}
+
+.lista th.status,
+.lista td.status{
+    width: 200px;
+}

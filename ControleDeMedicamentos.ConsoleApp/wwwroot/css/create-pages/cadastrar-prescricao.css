@@ -1,0 +1,46 @@
+.body-prescricao{
+    gap: 20px;
+}
+
+.card-form{
+    padding-top: 8px;
+    gap: 8px;
+}
+
+.card-form span{
+    padding-top: 10px;
+    font-weight: bold;
+    font-size: 22px;
+}
+
+.card-medicamentos{
+    gap: 8px;
+}
+
+.card-medicamentos select{
+    padding: 5px 5px;
+    color: var(--cor-ui-texto-principal);
+    background-color: var(--cor-ui-fundo-pagina);
+    font-weight: bold;
+    font-size: 15px;
+}
+
+.card-medicamentos select option{
+    padding: 5px 5px;
+    color: var(--cor-ui-texto-principal);
+    background-color: var(--cor-ui-fundo-pagina);
+    font-weight: bold;
+}
+
+.card-medicamentos input::-webkit-inner-spin-button, input::-webkit-outer-spin-button{
+    appearance: none;
+}
+
+.card-medicamentos select:invalid{
+    padding-left: 5px;
+    color: rgb(80, 87, 103);
+}
+
+.card-medicamentos select option[disabled]{
+    cursor: not-allowed;
+}

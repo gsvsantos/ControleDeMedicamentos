@@ -1,0 +1,49 @@
+@using ControleDeMedicamentos.ConsoleApp.Models
+
+@{
+    ViewBag.Titulo ="Visualização de Prescrições Médicas";
+}
+
+@model VisualizarPrescricaoMedicaViewModel;
+<link rel="stylesheet" href="~/css/read.css">
+<link rel="stylesheet" href="~/css/read-pages/visualizar-prescricaomedica.css">
+
+<div class="card">
+	<div class="acao-cadastro psides-30 flex-dir-row">
+		<a href="/prescricoes/cadastrar" class="botaoCadastrar">Cadastrar Nova Prescrição Médica</a>
+	</div>
+
+    @if (Model.Registros.Count == 0)
+    {
+        <p class="flex-center">Nenhuma prescriçao médica cadastrada.</p>
+    }
+    else
+    {
+        <table class="lista">
+            <thead>
+                <tr>
+                    <th class="crmMedico">C.R.M. MÉDICO</th>
+                    <th class="paciente">PACIENTE</th>
+                    <th class="status">STATUS</th>
+                    <th class="data">DATA DE EMISSÃO</th>
+					<th class="acoes"></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (DataPrescricaoMedicaViewModel f in Model.Registros)
+                {
+                    <tr class="linha-prescricao">
+                        <td class="crmMedico text-nowrap">@f.CRMMedico</td>
+                        <td class="paciente text-nowrap">@f.NomePaciente</td>
+                        <td class="status text-nowrap">@f.Status</td>
+                        <td class="data text-nowrap">@f.Data.ToShortDateString()</td>
+        
+                        <td class="acoes flex-dir-column">
+                            <a href="/prescricoes/excluir/@f.Id" class="btn-action btn-excluir flex-center">Excluir</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+</div>
