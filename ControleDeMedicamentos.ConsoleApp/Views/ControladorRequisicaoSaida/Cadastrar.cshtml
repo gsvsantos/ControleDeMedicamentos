@@ -1,0 +1,81 @@
+﻿@using ControleDeMedicamentos.ConsoleApp.Models
+
+@{
+    ViewBag.Titulo = "Cadastro de Requisição de Saída";
+}
+@model CadastrarRequisicaoSaidaViewModel;
+<link rel="stylesheet" href="~/css/create.css">
+
+<form class="form-body flex-dir-column" action="/requisicoes-saida/cadastrar" method="post">
+    <div class="card">
+        <div class="cabecalho">
+            <span>INFORME OS DADOS</span>
+        </div>
+
+        <div class="card-form flex-dir-column">
+            <label class="form-label" for="pacienteID">Paciente:</label>
+            <select required onchange="this.form.submit()" class="text-nowrap" name="pacienteID" id="pacienteID">
+                @if (Model.PacientesDisponiveis.Count == 0)
+                {
+                    <option selected disabled value="">Nenhum paciente cadastrado</option>
+                }
+                else
+                {
+                    <option disabled value="" @(Model.PrescricaoMedicaId == Guid.Empty ? "selected" : "")>
+                        @if (Model.PacienteId == Guid.Empty)
+                        {
+                            @:Selecione um paciente primeiro =)
+                        }
+                        else @if (Model.PrescricaoMedicaId == Guid.Empty)
+                        {
+                            @:Selecione uma prescrição =)
+                        }
+                        else
+                        {
+                            @:Agora é só finalizar =)
+                        }
+                    </option>
+                    @foreach (SelecionarPacienteViewModel f in Model.PacientesDisponiveis)
+                    {
+                        <option value="@f.Id" @(f.Id == Model.PacienteId ? "selected" : "a")>@f.Nome</option>
+                    }
+                }
+            </select>
+
+            <input type="hidden" name="btnSubmit" value="selecionarPaciente"/>
+
+            <!-- <button class="btn" name="btnSubmit" value="carregarPrescricoes">Carregar Prescrições</button> opção sem JS-->
+
+            <label class="form-label" for="prescricaoMedicaId">Prescrição Requisitada</label>
+            <select required onchange="this.form.submit()" class="text-nowrap" name="prescricaoMedicaId" id="prescricaoMedicaId">
+
+                    <option disabled value="" @(Model.PrescricaoMedicaId == Guid.Empty ? "selected" : "")>
+                        @if (Model.PacienteId == Guid.Empty)
+                        {
+                            @:Selecione um paciente primeiro ^^
+                        }
+                        else if (Model.PrescricoesDisponiveis.Count == 0)
+                        {
+                            @:Nenhuma prescrição encontrada.
+                        }
+                        else @if (Model.PrescricaoMedicaId == Guid.Empty)
+                        {
+                            @:Selecione uma prescrição :)
+                        }
+                        else
+                        {
+                            @:Agora é só finalizar :)
+                        }
+                    </option>
+                    @foreach (SelecionarPrescricaoMedicaViewModel pM in Model.PrescricoesDisponiveis)
+                    {
+                        <option value="@pM.Id" @(pM.Id == Model.PrescricaoMedicaId ? "selected" : "")>@pM.Descricao</option>
+                    }
+            </select>
+
+            <input type="hidden" name="btnSubmit" value="selecionarPrescricao"/>
+
+            <button class="btn" name="btnSubmit" value="cadastrar">Cadastrar</button>
+        </div>
+	</div>
+</form>
