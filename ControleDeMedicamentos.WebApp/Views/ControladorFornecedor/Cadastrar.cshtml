@@ -16,15 +16,15 @@
         <div class="card-form flex-dir-column">
                 <label class="form-label" for="nome">Nome do Fornecedor</label>
                 <input required class="form-box" type="text" placeholder="Nome" id="nome" name="nome"/>
-                <span class="invalidInput text-break-word" id="nomeInvalido"></span>
+                <span class="invalidInput text-break-word" id="nomeInvalidInput"></span>
 
                 <label class="form-label" for="telefone">Telefone do Fornecedor</label>
                 <input required class="form-box" type="text" placeholder="Telefone" id="telefone" name="telefone"/>
-                <span class="invalidInput text-break-word" id="telefoneInvalido"></span>
+                <span class="invalidInput text-break-word" id="telefoneInvalidInput"></span>
 
                 <label class="form-label" for="cnpj">C.N.P.J. do Fornecedor</label>
                 <input required class="form-box" type="text" placeholder="C.N.P.J." id="cnpj" name="cnpj"/>
-                <span class="invalidInput text-break-word" id="cnpjInvalido"></span>
+                <span class="invalidInput text-break-word" id="cnpjInvalidInput"></span>
 
             <div class="btns-interact">
                 <a class="btn" href="/fornecedores/visualizar" value="voltar" formnovalidate>Voltar</a>
@@ -35,5 +35,5 @@
     </div>
 </form>
 @section Scripts {
-            <script src="~/js/fornecedor.js"></script>
+    <script src="~/js/fornecedor.js"></script>
 }
