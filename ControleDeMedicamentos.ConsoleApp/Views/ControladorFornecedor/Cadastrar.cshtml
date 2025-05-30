@@ -1,45 +1,39 @@
 @using ControleDeMedicamentos.ConsoleApp.Models
 
+@{
+    ViewBag.Titulo = "Cadastro de Fornecedor";
+}
+
 @model CadastrarFornecedorViewModel;
+<link rel="stylesheet" href="~/css/create.css">
 
-<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-    <meta charset="UTF-8"/>
-    <title>Cadastro de Fornecedor - Controle de Medicamentos</title>
-</head>
-<body>
-<h1>Gestão de Fornecedores</h1>
+<form id="form-fornecedor" class="form-body flex-dir-column" action="/fornecedores/cadastrar" method="post">
+    <div class="card">
+        <div class="cabecalho">
+            <span>INFORME OS DADOS</span>
+        </div>
 
-<hr/>
+        <div class="card-form flex-dir-column">
+                <label class="form-label" for="nome">Nome do Fornecedor</label>
+                <input required class="form-box" type="text" placeholder="Nome" id="nome" name="nome"/>
+                <span class="invalidInput text-break-word" id="nomeInvalido"></span>
 
-<a href="/fornecedor">Voltar</a> /
-<a href="/fornecedor/visualizar">Visualizar Fornecedores</a>
+                <label class="form-label" for="telefone">Telefone do Fornecedor</label>
+                <input required class="form-box" type="text" placeholder="Telefone" id="telefone" name="telefone"/>
+                <span class="invalidInput text-break-word" id="telefoneInvalido"></span>
 
-<hr/>
+                <label class="form-label" for="cnpj">C.N.P.J. do Fornecedor</label>
+                <input required class="form-box" type="text" placeholder="C.N.P.J." id="cnpj" name="cnpj"/>
+                <span class="invalidInput text-break-word" id="cnpjInvalido"></span>
 
-<h3>Cadastro de Fornecedor</h3>
-
-<form action="/fornecedor/cadastrar" method="post">
-    <label for="nome">Nome do Fornecedor</label>
-    <br/>
-    <input type="text" id="nome" name="nome"/>
-
-    <br/>
-
-    <label for="telefone">Telefone do Fornecedor</label>
-    <br/>
-    <input type="text" id="telefone" name="telefone"/>
-
-    <br/>
-
-    <label for="cnpj">CNPJ do Fornecedor</label>
-    <br/>
-    <input type="text" id="cnpj" name="cnpj"/>
-
-    <hr/>
-
-    <button type="submit">Cadastrar</button>
+            <div class="btns-interact">
+                <a class="btn" href="/fornecedores/visualizar" value="voltar" formnovalidate>Voltar</a>
+                <button class="btn" type="reset">Limpar</button>
+                <button class="btn" name="btnSubmit" value="cadastrar">Cadastrar</button>
+            </div>
+        </div>
+    </div>
 </form>
-</body>
-</html>
+@section Scripts {
+            <script src="~/js/fornecedor.js"></script>
+}

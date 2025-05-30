@@ -1,36 +1,47 @@
 @using ControleDeMedicamentos.ConsoleApp.Models
 
+@{
+    ViewBag.Titulo = "Visualização de Fornecedores";
+}
+
 @model VisualizarFornecedorViewModel;
+<link rel="stylesheet" href="~/css/read.css">
+<link rel="stylesheet" href="~/css/read-pages/visualizar-fornecedor.css">
 
-<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-	<meta charset="UTF-8"/>
-	<title>Visualização de Fornecedores - Controle de Medicamentos</title>
-</head>
-<body>
-<h1>Gestão de Fornecedores</h1>
+<div class="card">
+	<div class="acao-cadastro psides-30 flex-dir-row">
+		<a href="/fornecedores/cadastrar" class="botaoCadastrar">Cadastrar Novo Fornecedor</a>
+	</div>
 
-<hr/>
-
-<a href="/fornecedor">Voltar</a> /
-<a href="/fornecedor/cadastrar">Cadastrar Novo Fornecedor</a>
-
-<hr/>
-
-<h3>Visualização de Fornecedores</h3>
-
-<ul>
 	@if (Model.Registros.Count == 0)
 	{
-		<li>Nenhum fornecedor cadastrado.</li>
+		<p class="flex-center">Nenhum fornecedor cadastrado.</p>
 	}
-
-	@foreach (DataFornecedorViewModel f in Model.Registros)
+	else
 	{
-	<li>@f / <a href="/fornecedor/editar/@f.Id">Editar</a> /
-		<a href="/fornecedor/excluir/@f.Id">Excluir</a> </li>
+		<table class="lista">
+			<thead>
+				<tr>
+					<th class="nome">NOME</th>
+					<th class="telefone">TELEFONE</th>
+					<th class="cnpj">CNPJ</th>
+					<th class="acoes"></th>
+				</tr>
+			</thead>
+			<tbody>
+				@foreach (DataFornecedorViewModel f in Model.Registros)
+				{
+					<tr class="linha-fornecedor">
+						<td class="nome text-nowrap">@f.Nome</td>
+						<td class="telefone text-nowrap">@f.Telefone</td>
+						<td class="cnpj text-nowrap">@f.CNPJ</td>
+						<td class="acoes flex-dir-column">
+							<a href="/fornecedores/editar/@f.Id" class="btn-action btn-editar flex-center">Editar</a>
+							<a href="/fornecedores/excluir/@f.Id" class="btn-action btn-excluir flex-center">Excluir</a>
+						</td>
+					</tr>
+				}
+			</tbody>
+		</table>
 	}
-</ul>
-</body>
-</html>
+</div>

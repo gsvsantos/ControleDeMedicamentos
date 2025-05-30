@@ -1,45 +1,39 @@
 @using ControleDeMedicamentos.ConsoleApp.Models
 
+@{
+    ViewBag.Titulo ="Edição de Fornecedor";
+}
+
 @model EditarFornecedorViewModel;
+<link rel="stylesheet" href="~/css/update.css">
 
-<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-	<meta charset="UTF-8"/>
-	<title>Edição de Fornecedor - Controle de Medicamentos</title>
-</head>
-<body>
-<h1>Gestão de Fornecedores</h1>
+<form class="form-body flex-dir-column" action="/fornecedores/editar/@Model.Id" method="post">
+	<div class="card">
+		<div class="cabecalho">
+			<span>INFORME OS NOVOS DADOS</span>
+		</div>
 
-<hr/>
+		<div class="card-form flex-dir-column">
+				<label class="form-label" for="nome">Nome do Fornecedor</label>
+				<input required class="form-box" type="text" id="nome" name="nome" value="@Model.Nome"/>
+				<span class="invalidInput text-break-word" id="nomeInvalido"></span>
 
-<a href="/fornecedor">Voltar</a> /
-<a href="/fornecedor/visualizar">Visualizar Fornecedores</a>
+				<label class="form-label" for="telefone">Telefone do Fornecedor</label>
+				<input required class="form-box" type="text" id="telefone" name="telefone" value="@Model.Telefone"/>
+				<span class="invalidInput text-break-word" id="telefoneInvalido"></span>
 
-<hr/>
+				<label class="form-label" for="cnpj">CNPJ do Fornecedor</label>
+				<input required class="form-box" type="text" id="cnpj" name="cnpj" value="@Model.CNPJ"/>
+				<span class="invalidInput text-break-word" id="cnpjInvalido"></span>
 
-<h3>Edição de Fornecedor</h3>
-
-<form action="/fornecedor/editar/@Model.Id" method="post">
-	<label for="nome">Nome do Fornecedor</label>
-	<br/>
-	<input type="text" id="nome" name="nome" value="@Model.Nome"/>
-
-	<br/>
-
-	<label for="telefone">Telefone do Fornecedor</label>
-	<br/>
-	<input type="text" id="telefone" name="telefone" value="@Model.Telefone"/>
-
-	<br/>
-
-	<label for="cnpj">CNPJ do Fornecedor</label>
-	<br/>
-	<input type="text" id="cnpj" name="cnpj" value="@Model.CNPJ"/>
-
-	<hr/>
-
-	<button type="submit">Editar</button>
+			<div class="btns-interact">
+				<a class="btn" href="/fornecedores/visualizar" value="voltar" formnovalidate>Voltar</a>
+				<button class="btn" type="reset">Limpar</button>
+				<button class="btn" name="btnSubmit" value="editar">Editar</button>
+			</div>
+		</div>
+	</div>
 </form>
-</body>
-</html>
+@section Scripts {
+				<script src="~/js/fornecedor.js"></script>
+}
