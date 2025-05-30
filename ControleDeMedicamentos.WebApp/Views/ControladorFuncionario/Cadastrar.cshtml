@@ -1,32 +1,39 @@
 @using ControleDeMedicamentos.WebApp.Models
 
 @{
-    ViewBag.Titulo ="Cadastro de Funcionário";
+	ViewBag.Titulo = "Cadastro de Funcionário";
 }
 
 @model CadastrarFuncionarioViewModel;
 <link rel="stylesheet" href="~/css/create.css">
 
-<form class="form-body flex-dir-column" action="/funcionarios/cadastrar" method="post">
-    <div class="card">
-        <div class="cabecalho">
-            <span>INFORME OS DADOS</span>
-        </div>
-        
-        <div class="card-form flex-dir-column">
-                <label class="form-label" for="nome">Nome do Funcionário</label>
-                <input required class="form-box" type="text" placeholder="Nome" name="nome" id="nome">
+<form id="form-funcionario" class="form-body flex-dir-column" action="/funcionarios/cadastrar" method="post">
+	<div class="card">
+		<div class="cabecalho">
+			<span>INFORME OS DADOS</span>
+		</div>
 
-                <label class="form-label" for="telefone">Telefone do Funcionário</label>
-                <input required class="form-box" type="text" placeholder="Telefone" name="telefone" id="telefone">
+		<div class="card-form flex-dir-column">
+				<label class="form-label" for="nome">Nome do Funcionário</label>
+				<input required class="form-box" type="text" placeholder="Nome" name="nome" id="nome">
+				<span class="invalidInput text-break-word" id="nomeInvalidInput"></span>
 
-                <label class="form-label" for="cpf">CPF do Funcionário</label>
-                <input required class="form-box" type="text" placeholder="C.P.F." name="cpf" id="cpf">
+				<label class="form-label" for="telefone">Telefone do Funcionário</label>
+				<input required class="form-box" type="text" placeholder="Telefone" name="telefone" id="telefone">
+				<span class="invalidInput text-break-word" id="telefoneInvalidInput"></span>
 
-            <div class="btns-interact">
-                <a class="btn" href="/funcionarios/visualizar" value="voltar" formnovalidate>Voltar</a>
-                <button class="btn" name="btnSubmit" value="cadastrar">Cadastrar</button>
-            </div>
-        </div>
-    </div>
+				<label class="form-label" for="cPF">C.P.F. do Funcionário</label>
+				<input required class="form-box" type="text" placeholder="C.P.F." name="cPF" id="cPF">
+				<span class="invalidInput text-break-word" id="cPFInvalidInput"></span>
+
+			<div class="btns-interact">
+				<a class="btn" href="/funcionarios/visualizar" value="voltar" formnovalidate>Voltar</a>
+				<button class="btn" type="reset">Limpar</button>
+				<button class="btn" name="btnSubmit" value="cadastrar">Cadastrar</button>
+			</div>
+		</div>
+	</div>
 </form>
+@section Scripts {
+	<script src="~/js/funcionario.js"></script>
+}
