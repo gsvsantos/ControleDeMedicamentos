@@ -1,0 +1,90 @@
+﻿@using ControleDeMedicamentos.WebApp.Models
+
+@{
+    ViewBag.Titulo = "Cadastro de Requisição de Entrada";
+}
+@model CadastrarRequisicaoEntradaViewModel;
+<link rel="stylesheet" href="~/css/create.css">
+
+<form id="form-rentrada" class="form-body flex-dir-column" action="/requisicoes-entrada/cadastrar" method="post">
+    <input type="hidden" name="acaoAutomatica" id="acaoAutomaticaTrigger" value=""/> 
+    <div class="card">
+        <div class="cabecalho">
+            <span>INFORME OS DADOS</span>
+        </div>
+
+        <div class="card-form flex-dir-column">
+            <label class="form-label" for="funcionarioId">Funcionário Requerente:</label>
+            <select required class="text-nowrap" name="funcionarioId" id="funcionarioId">
+                <option disabled value="" @(Model.FuncionarioId == Guid.Empty ? "selected" : "")>
+                    @if (Model.FuncionariosDisponiveis.Count == 0)
+                    {
+                        @:Nenhum Funcionário Encontrado
+                    }
+                    else if (Model.FuncionarioId == Guid.Empty)
+                    {
+                        @:Selecione um Funcionário Primeiro
+                    }
+                    else if (Model.MedicamentoId == Guid.Empty)
+                    {
+                        @:Selecione um Medicamento Abaixo
+                    }
+                    else if (Model.QuantidadeMedicamento <= 0) 
+                    {
+                        @:Informe a Quantidade para Finalizar :) 
+                    }
+                    else
+                    {
+                        @:Agora é Só Finalizar :)
+                    }
+                </option>
+
+                @foreach (SelecionarFuncionarioViewModel f in Model.FuncionariosDisponiveis)
+                {
+                    <option value="@f.Id" @(f.Id == Model.FuncionarioId ? "selected" : "")>@f.Nome</option>
+                }
+            </select>
+
+            <label class="form-label" for="medicamentoId">Medicamento Requisitado</label>
+            <select required class="text-nowrap" name="medicamentoId" id="medicamentoId">
+                <option disabled value="" @(Model.MedicamentoId == Guid.Empty ? "selected" : "")>
+                    @if (Model.MedicamentosDisponiveis.Count == 0)
+                    {
+                        @:Nenhum Medicamento Encontrado
+                    }
+                    else if (Model.MedicamentoId == Guid.Empty)
+                    {
+                        @:Selecione um Medicamento
+                    }
+                    else if (Model.FuncionarioId == Guid.Empty)
+                    {
+                        @:Selecione um Funcionário Acima
+                    }
+                    else if (Model.QuantidadeMedicamento <= 0) 
+                    {
+                        @:Informe a Quantidade para Finalizar :) 
+                    }
+                    else
+                    {
+                        @:Agora é Só Finalizar :)
+                    }
+                </option>
+                @foreach (SelecionarMedicamentoViewModel m in Model.MedicamentosDisponiveis)
+                {
+                    <option value="@m.Id" @(m.Id == Model.MedicamentoId ? "selected" : "")>@m.Nome</option>
+                }
+            </select>
+            
+            <label class="form-label" for="quantidadeMedicamento">Quantidade Requisitada</label>
+            <input required class="form-box" type="number" placeholder="Quantidade" name="quantidadeMedicamento" id="quantidadeMedicamento" value="@(Model.QuantidadeMedicamento == 0 ? "" : $"{@Model.QuantidadeMedicamento}")"/>
+
+            <div class="btns-interact">
+                <button class="btn" name="btnSubmit" value="voltar" formnovalidate>Voltar</button>
+                <button class="btn" name="btnSubmit" value="cadastrar">Cadastrar</button>
+            </div>
+		</div>
+	</div>
+</form>
+@section Scripts {
+        <script src="~/js/requisicaoEntrada.js"></script>
+}

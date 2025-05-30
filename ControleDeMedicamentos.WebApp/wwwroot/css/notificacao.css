@@ -1,0 +1,41 @@
+.card{
+    animation: none;
+    margin: auto;
+    width: auto;
+    max-height: 80px;
+    min-width: 300px;
+    max-width: 1000px;
+    list-style-type: none;
+}
+
+.card:hover{
+    background-color: var(--cor-ui-fundo-secundario);
+    transform: none;
+}
+
+.notify-body{
+    gap: 20px;
+}
+
+.acao-continuar{
+    flex-wrap: wrap;
+    align-items: end;
+    padding-bottom: 10px;
+    font-weight: bold;
+    font-size: 18px;
+}
+.botaoContinuar{
+    margin-right: auto;
+    background-color: var(--cor-botao-padrao);
+    border: 1px solid var(--cor-ui-borda-padrao);
+    border-radius: 5px;
+    color: var(--cor-ui-texto-princpal);
+    font-size: 20px;
+    padding: 5px 10px;
+    transition: 0.12s;
+}
+
+.botaoContinuar:hover{
+    background-color: var(--cor-botao-padrao-hover);
+    transform: scale(1.02);
+}

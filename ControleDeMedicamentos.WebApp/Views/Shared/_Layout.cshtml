@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <link rel="stylesheet" href="~/css/style.css">
+    <link rel="stylesheet" href="~/css/utilities.css">
+    <title>@ViewBag.Titulo - Controle de Medicamentos</title>
+</head>
+<body>
+    <div class="nav">
+        <div class="nav-bar">
+            <h3 class="nav-title flex-center">Controle de Medicamentos</h3>
+            
+            <div class="checkbox">
+                <ul class="nav-list-links flex-center">
+                    <li><a class="nav-link" href="/">Página Inicial</a></li>
+                    <li><a class="nav-link" href="/fornecedores/visualizar">Fornecedores</a></li>
+                    <li><a class="nav-link" href="/funcionarios/visualizar">Funcionários</a></li>
+                    <li><a class="nav-link" href="/medicamentos/visualizar">Medicamentos</a></li>
+                    <li><a class="nav-link" href="/pacientes/visualizar">Pacientes</a></li>
+                    <li><a class="nav-link" href="/prescricoes/visualizar">Prescrições Médicas</a></li>
+                    <li><a class="nav-link" href="/requisicoes-entrada/visualizar">Requisições de Entrada</a></li>
+                    <li><a class="nav-link" href="/requisicoes-saida/visualizar">Requisições de Saída</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="page flex-dir-column">
+        <header class="main-title">
+            <h2>@ViewBag.Titulo</h2>
+        </header>
+        <main class="flex-center flex-wrap psides-20">
+            @RenderBody()
+        </main>
+    </div>
+    @RenderSection("Scripts", required:false)
+</body>
+</html>

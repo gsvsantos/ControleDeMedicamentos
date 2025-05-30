@@ -1,0 +1,120 @@
+.page{
+    gap: 20px;
+}
+
+.card{
+    animation: none;
+    margin: auto;
+    height: auto;
+    width: auto;
+}
+
+.card:hover{
+    background-color: var(--cor-ui-fundo-card);
+    transform: none;
+}
+
+.acao-cadastro{
+    flex-wrap: wrap;
+    align-items: end;
+    padding-bottom: 10px;
+    font-weight: bold;
+    font-size: 18px;
+}
+
+.botaoCadastrar{
+    margin-right: auto;
+    background-color: var(--cor-botao-primario);
+    border: 1px solid var(--cor-ui-borda-padrao);
+    border-radius: 5px;
+    color: var(--cor-ui-texto-principal);
+    font-size: 20px;
+    padding: 5px 10px;
+    transition: 0.12s;
+}
+
+.botaoCadastrar:hover{
+    background-color: var(--cor-botao-primario-hover);
+    transform: scale(1.02);
+}
+
+
+.btn-action{
+    border-radius: 4px;
+    height: 30px;
+    width: 70px;
+    transition: 0.12s;
+}
+
+.btn-editar{
+    background-color: var(--cor-ui-lista-linha);
+    border: 1px solid var(--cor-botao-editar);
+    color: var(--cor-botao-editar);
+}
+
+.btn-editar:hover{
+    background-color: var(--cor-botao-editar);
+    border: 1px solid var(--cor-botao-editar);
+    color: var(--cor-ui-texto-principal);
+}
+
+.btn-excluir{
+    background-color: var(--cor-ui-lista-linha);
+    border: 1px solid var(--cor-botao-excluir);
+    color: var(--cor-botao-excluir);
+}
+
+.btn-excluir:hover{
+    background-color: var(--cor-botao-excluir);
+    border: 1px solid var(--cor-botao-excluir);
+    color: var(--cor-ui-texto-principal);
+}
+
+.lista{
+    list-style: none;
+    padding: 0px;
+    margin: 0px;
+    width: 100%;
+    border-radius: 8px;
+    border-collapse: collapse;
+    overflow: hidden;
+}
+
+.lista thead {
+    background-color: var(--cor-ui-lista-cabecalho);
+    font-weight: bold;
+}
+
+.lista th {
+    padding: 10px;
+    text-align: left;
+    font-size: 20px;
+}
+.lista tbody tr {
+    background-color: var(--cor-ui-lista-linha);
+    border-top: 1px solid var(--cor-ui-borda-item-lista);
+}
+
+.lista tbody tr:hover{
+    background-color: var(--cor-ui-lista-linha-hover);
+}
+
+.lista td {
+    padding: 10px;
+    vertical-align: middle; 
+}
+
+.lista td.acoes{
+    font-weight: bold;
+    gap: 20px;
+}
+
+.lista th.nome,
+.lista td.nome{
+    width: 200px;
+}
+
+.lista th.telefone,
+.lista td.telefone{
+    width: 200px;
+}

@@ -1,0 +1,39 @@
+@using ControleDeMedicamentos.WebApp.Models
+
+@{
+    ViewBag.Titulo ="Edição de Fornecedor";
+}
+
+@model EditarFornecedorViewModel;
+<link rel="stylesheet" href="~/css/update.css">
+
+<form class="form-body flex-dir-column" action="/fornecedores/editar/@Model.Id" method="post">
+	<div class="card">
+		<div class="cabecalho">
+			<span>INFORME OS NOVOS DADOS</span>
+		</div>
+
+		<div class="card-form flex-dir-column">
+				<label class="form-label" for="nome">Nome do Fornecedor</label>
+				<input required class="form-box" type="text" id="nome" name="nome" value="@Model.Nome"/>
+				<span class="invalidInput text-break-word" id="nomeInvalido"></span>
+
+				<label class="form-label" for="telefone">Telefone do Fornecedor</label>
+				<input required class="form-box" type="text" id="telefone" name="telefone" value="@Model.Telefone"/>
+				<span class="invalidInput text-break-word" id="telefoneInvalido"></span>
+
+				<label class="form-label" for="cnpj">CNPJ do Fornecedor</label>
+				<input required class="form-box" type="text" id="cnpj" name="cnpj" value="@Model.CNPJ"/>
+				<span class="invalidInput text-break-word" id="cnpjInvalido"></span>
+
+			<div class="btns-interact">
+				<a class="btn" href="/fornecedores/visualizar" value="voltar" formnovalidate>Voltar</a>
+				<button class="btn" type="reset">Limpar</button>
+				<button class="btn" name="btnSubmit" value="editar">Editar</button>
+			</div>
+		</div>
+	</div>
+</form>
+@section Scripts {
+				<script src="~/js/fornecedor.js"></script>
+}

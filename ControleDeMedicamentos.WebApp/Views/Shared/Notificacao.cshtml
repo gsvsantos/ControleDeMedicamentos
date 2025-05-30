@@ -1,0 +1,20 @@
+@using ControleDeMedicamentos.WebApp.Models
+
+@{
+    ViewBag.Titulo = @Model.Titulo;
+}
+
+@model NotificacaoViewModel
+<link rel="stylesheet" href="~/css/notificacao.css">
+
+<div class="card">
+    <div class="notify-body flex-dir-column">
+        <div class="cabecalho text-nowrap">
+            <span>@Model.Mensagem</span>
+        </div>
+
+        <div class="acao-continuar">
+            <a href="/@Model.Caminho/visualizar" class="botaoContinuar">Continuar</a>
+        </div>
+    </div>
+</div>

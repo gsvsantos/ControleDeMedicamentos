@@ -1,0 +1,21 @@
+@using ControleDeMedicamentos.WebApp.Models
+
+@{
+    ViewBag.Titulo = "Exclusão de Paciente";
+}
+
+@model ExcluirPacienteViewModel;
+<link rel="stylesheet" href="~/css/delete.css">
+
+<div class="card">
+    <div class="delete-body flex-dir-column text-align">
+        <div class="delete-msg text-nowrap">
+            <span>Você realmente deseja excluir o registro '@Model.Nome'?</span>
+        </div>
+    
+        <form action="/pacientes/excluir/@Model.Id" method="post">
+            <button class="btnConfirmar" type="submit">Confirmar</button>
+            <a class="btnCancelar" type="button" href="/pacientes/visualizar">Cancelar</a>
+        </form>
+    </div>
+</div>

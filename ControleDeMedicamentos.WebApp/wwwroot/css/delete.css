@@ -1,0 +1,53 @@
+main{
+    display: flex;
+    gap: 20px;
+    flex-direction: column;
+}
+
+.card{
+    animation: none;
+    margin: auto;
+    width: auto;
+    max-height: 80px;
+    min-width: 300px;
+    max-width: 1000px;
+    list-style-type: none;
+}
+
+.card:hover{
+    background-color: var(--cor-ui-fundo-card);
+    transform: none;
+}
+
+.btnConfirmar{
+    margin-right: auto;
+    background-color: var(--cor-botao-confirmar);
+    border: 1px solid var(--cor-ui-borda-padrao);
+    border-radius: 5px;
+    color: var(--cor-ui-texto-principal);
+    font-size: 20px;
+    padding: 5px 10px;
+    cursor: pointer;
+}
+
+.btnConfirmar:hover{
+    background-color: var(--cor-botao-confirmar-hover);
+}
+
+.btnCancelar{
+    background-color: var(--cor-botao-padrao);
+    border: 1px solid var(--cor-ui-borda-padrao);
+    border-radius: 5px;
+    color: var(--cor-ui-texto-principal);
+    font-size: 15px;
+    padding: 5px 10px;
+    transition: 0.12s;
+}
+
+.btnCancelar:hover{
+    background-color: var(--cor-botao-padrao-hover);
+}
+
+.delete-body{
+    gap: 20px;
+}

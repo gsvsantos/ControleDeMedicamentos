@@ -1,0 +1,51 @@
+﻿@using ControleDeMedicamentos.WebApp.Models;
+
+@{
+	ViewBag.Titulo = "Visualização de Medicamentos";
+}
+
+@model VisualizarMedicamentosViewModel;
+<link rel="stylesheet" href="~/css/read.css">
+<link rel="stylesheet" href="~/css/read-pages/visualizar-medicamento.css">
+
+<div class="card">
+	<div class="acao-cadastro psides-30 flex-dir-row">
+		<a href="/medicamentos/cadastrar" class="botaoCadastrar">Cadastrar Novo Medicamento</a>
+	</div>
+
+	@if (Model.Registros.Count == 0)
+	{
+		<p class="flex-center">Nenhum medicamento cadastrado.</p>
+	}
+	else
+	{
+		<table class="lista">
+			<thead>
+				<tr>
+					<th class="fornecedor">FORNECEDOR</th>
+					<th class="nome">NOME</th>
+					<th class="descricao">DESCRIÇÃO</th>
+					<th class="estoque">ESTOQUE</th>
+					<th class="status">STATUS</th>
+					<th class="acoes"></th>
+				</tr>
+			</thead>
+			<tbody>
+				@foreach (DataMedicamentoViewModel m in Model.Registros)
+				{
+					<tr class="linha-medicamento">
+						<td class="fornecedor text-nowrap">@m.NomeFornecedor</td>
+						<td class="nome text-nowrap">@m.Nome</td>
+						<td class="descricao text-nowrap">@m.Descricao</td>
+						<td class="estoque text-nowrap">@m.QtdEstoque</td>
+						<td class="status text-nowrap">@m.Status</td>
+						<td class="acoes flex-dir-column">
+							<a href="/medicamentos/editar/@m.Id" class="btn-action btn-editar flex-center">Editar</a>
+							<a href="/medicamentos/excluir/@m.Id" class="btn-action btn-excluir flex-center">Excluir</a>
+						</td>
+					</tr>
+				}
+			</tbody>
+		</table>
+	}
+</div>

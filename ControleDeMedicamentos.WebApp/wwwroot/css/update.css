@@ -1,0 +1,89 @@
+.btnEditar{
+    cursor: pointer;
+    margin-top: 10px;
+    background-color: var(--cor-botao-padrao);
+    border: 1px solid var(--cor-ui-borda-padrao);
+    border-radius: 5px;
+    color: var(--cor-ui-texto-principal);
+    font-size: 20px;
+    padding: 5px 10px;
+    transition: 0.12s;
+}
+
+.btnEditar:hover{
+    background-color: var(--cor-botao-padrao-hover);
+    transform: scale(1.02);
+}
+
+.cabecalho {
+    display: flex;
+    padding: 0px 10px;
+    background-color: var(--cor-ui-fundo-card-hover);
+    font-weight: bold;
+}
+
+.cabecalho span{
+    font-size: 20px;
+}
+
+.card{
+    animation: none;
+    margin: auto;
+    height: auto;
+    min-width: 350px;
+    width: auto;
+}
+
+.card:hover {
+    background-color: var(--cor-ui-fundo-card);
+    transform: none;
+}
+
+.card-form{
+    padding: 10px 10px 0px 10px;
+    gap: 8px;
+}
+
+.form-box{
+    background-color: var(--cor-ui-fundo-input);
+    border: 1px solid var(--cor-ui-borda-input);
+    border-radius: 3px;
+    color: var(--cor-ui-texto-principal);
+    font-weight: bold;
+    padding-left: 10px;
+    height: 30px;
+    width: auto;
+}
+
+.form-box::placeholder{
+    color: var(--cor-ui-texto-principal);
+    opacity: 30%;
+}
+
+.form-body select{
+    padding: 5px 5px;
+    color: var(--cor-ui-texto-principal);
+    background-color: var(--cor-ui-fundo-input);
+    font-weight: bold;
+    font-size: 15px;
+}
+
+.form-body select option{
+    padding: 5px 5px;
+    color: var(--cor-ui-texto-principal);
+    background-color: var(--cor-ui-fundo-input);
+    font-weight: bold;
+}
+
+.form-body input::-webkit-inner-spin-button, input::-webkit-outer-spin-button{
+    appearance: none;
+}
+
+.form-body select:invalid{
+    padding-left: 5px;
+    color: rgb(80, 87, 103);
+}
+
+.form-body select option[disabled]{
+    cursor: not-allowed;
+}

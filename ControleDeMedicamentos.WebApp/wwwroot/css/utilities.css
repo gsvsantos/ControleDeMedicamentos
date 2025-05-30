@@ -1,0 +1,44 @@
+/* ============ FLEX ============ */
+.flex-dir-column{
+    display: flex;
+    flex-direction: column;
+}
+.flex-dir-row{
+    display: flex;
+    flex-direction: row;
+}
+.flex-wrap{
+    display: flex;
+    flex-wrap: wrap;
+}
+.flex-center{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* ============ PADDING ============ */
+.p-0{
+    padding: 0px;
+}
+.pends-10{
+    padding: 10px 0px;
+}
+.psides-20{
+    padding: 0px 20px;
+}
+.psides-30{
+    padding: 0px 30px;
+}
+
+/* ============ TEXT ============ */
+.text-nowrap{
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.text-break-word {
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    word-break: break-word;
+}

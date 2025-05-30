@@ -1,0 +1,27 @@
+@using ControleDeMedicamentos.WebApp.Models
+
+@{
+    ViewBag.Titulo = "Edição de Paciente";
+}
+
+@model EditarPacienteViewModel;
+<link rel="stylesheet" href="~/css/read.css">
+<link rel="stylesheet" href="~/css/update.css">
+
+<form class="form-body flex-dir-column" action="/pacientes/editar/@Model.Id" method="post">
+    <div class="card">
+        <div class="cabecalho">
+            <span>INFORME OS NOVOS DADOS</span>
+        </div>
+
+        <div class="card-form flex-dir-column">
+                <label class="form-label" for="nome">Nome do Paciente</label>
+                <input class="form-box" type="text" id="nome" name="nome" value="@Model.Nome"/>
+                <label class="form-label" for="telefone">Telefone do Paciente</label>
+                <input class="form-box" type="text" id="telefone" name="telefone" value="@Model.Telefone"/>
+                <label class="form-label" for="cartaoSus">CartãoSUS do Paciente</label>
+                <input class="form-box" type="text" id="cartaoSus" name="cartaoSus" value="@Model.CartaoSus"/>
+                <button class="btnEditar" type="submit">Editar</button>
+        </div>
+    </div>
+</form>

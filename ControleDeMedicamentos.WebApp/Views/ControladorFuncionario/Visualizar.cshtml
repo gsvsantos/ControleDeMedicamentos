@@ -1,0 +1,47 @@
+@using ControleDeMedicamentos.WebApp.Models
+
+@{
+    ViewBag.Titulo = "Visualização de Funcionários";
+}
+
+@model VisualizarFuncionarioViewModel;
+<link rel="stylesheet" href="~/css/read.css">
+<link rel="stylesheet" href="~/css/read-pages/visualizar-funcionario.css">
+
+<div class="card">
+    <div class="acao-cadastro psides-30 flex-dir-row">
+        <a href="/funcionarios/cadastrar" class="botaoCadastrar">Cadastrar Novo Funcionário</a>
+    </div>
+
+    @if (Model.Registros.Count == 0)
+    {
+        <p class="flex-center">Nenhum funcionário cadastrado.</p>
+    }
+    else
+    {
+        <table class="lista">
+            <thead>
+                    <tr>
+                        <th class="nome">NOME</th>
+                        <th class="telefone">TELEFONE</th>
+                        <th class="cpf">CPF</th>
+                        <th class="acoes"></th>
+                    </tr>
+            </thead>
+            <tbody>
+                @foreach (DataFuncionarioViewModel f in Model.Registros)
+                {
+                    <tr class="linha-funcionario">
+                        <td class="nome text-nowrap">@f.Nome</td>
+                        <td class="telefone text-nowrap">@f.Telefone</td>
+                        <td class="cpf text-nowrap">@f.CPF</td>
+                        <td class="acoes flex-dir-column">
+                            <a href="/funcionarios/editar/@f.Id" class="btn-action btn-editar flex-center">Editar</a>
+                            <a href="/funcionarios/excluir/@f.Id" class="btn-action btn-excluir flex-center">Excluir</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+</div>

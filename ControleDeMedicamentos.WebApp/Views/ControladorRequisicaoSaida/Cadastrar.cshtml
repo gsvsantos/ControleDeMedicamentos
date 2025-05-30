@@ -1,0 +1,81 @@
+﻿@using ControleDeMedicamentos.WebApp.Models
+
+@{
+    ViewBag.Titulo = "Cadastro de Requisição de Saída";
+}
+@model CadastrarRequisicaoSaidaViewModel;
+<link rel="stylesheet" href="~/css/create.css">
+
+<form id="form-rsaida" class="form-body flex-dir-column" action="/requisicoes-saida/cadastrar" method="post">
+    <input type="hidden" name="acaoAutomatica" id="acaoAutomaticaTrigger" value=""/> 
+
+    <div class="card">
+        <div class="cabecalho">
+            <span>INFORME OS DADOS</span>
+        </div>
+
+        <div class="card-form flex-dir-column">
+            <label class="form-label" for="pacienteId">Paciente:</label>
+            <select required class="text-nowrap" name="pacienteId" id="pacienteId">
+                <option disabled value="" @(Model.PrescricaoMedicaId == Guid.Empty ? "selected" : "")>
+                    @if (Model.PacientesDisponiveis.Count == 0)
+                    {
+                        @:Nenhum Paciente Encontrado
+                    }
+                    else @if (Model.PacienteId == Guid.Empty)
+                    {
+                        @:Selecione um Paciente Primeiro
+                    }
+                    else @if (Model.PrescricaoMedicaId == Guid.Empty)
+                    {
+                        @:Selecione uma Prescrição Abaixo
+                    }
+                    else
+                    {
+                        @:Agora é Só Finalizar :)
+                    }
+                </option>
+                @foreach (SelecionarPacienteViewModel f in Model.PacientesDisponiveis)
+                {
+                    <option value="@f.Id" @(f.Id == Model.PacienteId ? "selected" : "a")>@f.Nome</option>
+                }
+            </select>
+
+            <!-- <button class="btn" name="btnSubmit" value="carregarPrescricoes">Carregar Prescrições</button> opção sem JS-->
+
+            <label class="form-label" for="prescricaoMedicaId">Prescrição Requisitada</label>
+            <select required class="text-nowrap" name="prescricaoMedicaId" id="prescricaoMedicaId">
+                <option disabled value="" @(Model.PrescricaoMedicaId == Guid.Empty ? "selected" : "")>
+                    @if (Model.PrescricoesDisponiveis.Count == 0)
+                    {
+                        @:Nenhuma Prescrição Encontrada
+                    }
+                    else @if (Model.PrescricaoMedicaId == Guid.Empty)
+                    {
+                        @:Selecione uma Prescrição
+                    }
+                    else if (Model.PacienteId == Guid.Empty)
+                    {
+                        @:Selecione um Paciente Acima 
+                    }
+                    else
+                    {
+                        @:Agora é Só Finalizar :)
+                    }
+                </option>
+                @foreach (SelecionarPrescricaoMedicaViewModel pM in Model.PrescricoesDisponiveis)
+                {
+                    <option value="@pM.Id" @(pM.Id == Model.PrescricaoMedicaId ? "selected" : "")>@pM.Descricao</option>
+                }
+            </select>
+
+            <div class="btns-interact">
+                <button class="btn" name="btnSubmit" value="voltar" formnovalidate>Voltar</button>
+                <button class="btn" name="btnSubmit" value="cadastrar">Cadastrar</button>
+            </div>
+        </div>
+	</div>
+</form>
+@section Scripts{
+    <script src="~/js/requisicaoSaida.js"></script>
+}

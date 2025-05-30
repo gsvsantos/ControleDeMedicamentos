@@ -1,0 +1,20 @@
+.lista th.fornecedor,
+.lista td.fornecedor{
+    width: 200px;
+}
+
+.lista th.nome,
+.lista td.nome{
+    max-width: 200px;
+}
+
+.lista th.estoque,
+.lista td.estoque{
+    width: 120px;
+}
+
+.lista th.descricao,
+.lista td.descricao{
+    width: 200px;
+    max-width: 350px;
+}
