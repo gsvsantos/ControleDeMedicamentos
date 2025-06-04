@@ -27,18 +27,25 @@ public class ControladorFuncionario : Controller
     }
 
     [HttpPost("cadastrar")]
-    public IActionResult Cadastrar(CadastrarFuncionarioViewModel cadastrarVM)
+    public IActionResult Cadastrar(CadastrarFuncionarioViewModel cadastrarVM, string btnSubmit)
     {
-        Funcionario novoFuncionario = cadastrarVM.ParaEntidade();
+        if (btnSubmit == "voltar")
+        {
+            return RedirectToAction("Visualizar");
+        }
+        else
+        {
+            Funcionario novoFuncionario = cadastrarVM.ParaEntidade();
 
-        repositorioFuncionario.CadastrarRegistro(novoFuncionario);
+            repositorioFuncionario.CadastrarRegistro(novoFuncionario);
 
-        NotificacaoViewModel notificacaoVM = new NotificacaoViewModel(
-            "Gestão de Funcionários",
-            "funcionarios",
-            $"O registro \"{novoFuncionario.Nome}\" foi cadastrado com sucesso!");
+            NotificacaoViewModel notificacaoVM = new NotificacaoViewModel(
+                "Gestão de Funcionários",
+                "funcionarios",
+                $"O registro \"{novoFuncionario.Nome}\" foi cadastrado com sucesso!");
 
-        return View("Notificacao", notificacaoVM);
+            return View("Notificacao", notificacaoVM);
+        }
     }
 
     [HttpGet("visualizar")]
@@ -64,18 +71,25 @@ public class ControladorFuncionario : Controller
     }
 
     [HttpPost("editar/{id:Guid}")]
-    public IActionResult Editar(Guid id, EditarFuncionarioViewModel editarVM)
+    public IActionResult Editar(Guid id, EditarFuncionarioViewModel editarVM, string btnSubmit)
     {
-        Funcionario funcionarioAtualizado = editarVM.ParaEntidade();
+        if (btnSubmit == "cancelar")
+        {
+            return RedirectToAction("Visualizar");
+        }
+        else
+        {
+            Funcionario funcionarioAtualizado = editarVM.ParaEntidade();
 
-        repositorioFuncionario.EditarRegistro(id, funcionarioAtualizado);
+            repositorioFuncionario.EditarRegistro(id, funcionarioAtualizado);
 
-        NotificacaoViewModel notificacaoVM = new NotificacaoViewModel(
-            "Gestão de Funcionários",
-            "funcionarios",
-            $"O registro \"{funcionarioAtualizado.Nome}\" foi editado com sucesso!");
+            NotificacaoViewModel notificacaoVM = new NotificacaoViewModel(
+                "Gestão de Funcionários",
+                "funcionarios",
+                $"O registro \"{funcionarioAtualizado.Nome}\" foi editado com sucesso!");
 
-        return View("Notificacao", notificacaoVM);
+            return View("Notificacao", notificacaoVM);
+        }
     }
 
     [HttpGet("excluir/{id:Guid}")]

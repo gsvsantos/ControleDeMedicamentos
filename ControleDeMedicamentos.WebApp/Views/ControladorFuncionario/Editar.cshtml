@@ -15,21 +15,20 @@
 
 		<div class="card-form flex-dir-column">
 				<label class="form-label" for="nome">Nome do Funcionário</label>
-				<input required class="form-box" type="text" id="nome" name="nome" value="@Model.Nome"/>
+				<input required class="form-box" type="text" placeholder="Nome" id="nome" name="nome" value="@Model.Nome"/>
 				<span class="invalidInput text-break-word" id="nomeInvalidInput"></span>
 
 				<label class="form-label" for="telefone">Telefone do Funcionário</label>
-				<input required class="form-box" type="text" id="telefone" name="telefone" value="@Model.Telefone"/>
+				<input required class="form-box" type="text" placeholder="Telefone" id="telefone" name="telefone" value="@Model.Telefone"/>
 				<span class="invalidInput text-break-word" id="telefoneInvalidInput"></span>
 
 				<label class="form-label" for="cPF">C.P.F. do Funcionário</label>
-				<input required class="form-box" type="text" id="cPF" name="cPF" value="@Model.CPF"/>
+				<input required class="form-box" type="text" placeholder="C.P.F." id="cPF" name="cPF" value="@Model.CPF"/>
 				<span class="invalidInput text-break-word" id="cPFInvalidInput"></span>
 
 			<div class="btns-interact">
-				<a class="btn" href="/funcionarios/visualizar" value="voltar" formnovalidate>Voltar</a>
-				<button class="btn" type="reset">Limpar</button>
-				<button class="btn" name="btnSubmit" value="editar">Editar</button>
+				<button class="btn" name="btnSubmit" value="cancelar" formnovalidate>Cancelar</button>
+				<button class="btn" type="submit" name="btnSubmit" value="editar">Editar</button>
 			</div>
 		</div>
 	</div>
