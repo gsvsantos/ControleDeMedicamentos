@@ -5,7 +5,6 @@
 }
 
 @model EditarMedicamentoViewModel;
-<link rel="stylesheet" href="~/css/read.css">
 <link rel="stylesheet" href="~/css/update.css">
 
 <form class="form-body flex-dir-column" id="form-medicamento" action="/medicamentos/editar/@Model.Id" method="post">
@@ -32,13 +31,13 @@
                 <option id="optionInterativa" disabled value="@(Model.FornecedorId == Guid.Empty ? "selected" : "")"></option>
                     @foreach (SelecionarFornecedorViewModel f in Model.FornecedoresDisponiveis)
                     {
-                        <option value="@f.Id" @(f.Id == Model.FornecedorId ? "selected" : "")>@f.Nome</option>
+                        <option value="@f.Id" @(f.Id == Model.FornecedorId ? "selected" : "")>@(f.Nome!.Length > 27 ? f.Nome.Substring(0, 27) + "..." : f.Nome)</option>
                     }
-                </select
+                </select    
 
             <div class="btns-interact">
                 <button class="btn" name="btnSubmit" value="cancelar" formnovalidate>Cancelar</button>
-                <button class="btn" name="btnSubmit" value="editar">Editar</button>
+                <button class="btn" type="submit" name="btnSubmit" value="editar">Editar</button>
             </div>
         </div>
     </div>

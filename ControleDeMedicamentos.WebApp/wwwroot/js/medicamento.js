@@ -134,6 +134,7 @@ if (fornecedorId) {
 }
 
 const btnLimpar = document.querySelector('button[type="reset"]');
+
 function limparMensagensErro() {
     nomeInvalidInput.textContent = '';
     qtdEstoqueInvalidInput.textContent = '';

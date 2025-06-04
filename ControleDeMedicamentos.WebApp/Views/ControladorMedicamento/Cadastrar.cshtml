@@ -31,7 +31,7 @@
                 <option id="optionInterativa" disabled value="" @(Model.FornecedorId == Guid.Empty ? "selected" : "")></option>
                     @foreach (SelecionarFornecedorViewModel f in Model.FornecedoresDisponiveis)
                     {
-                       <option value="@f.Id" @(f.Id == Model.FornecedorId ? "selected" : "")>@f.Nome</option>
+                           <option class="text-nowrap" value="@f.Id" @(f.Id == Model.FornecedorId ? "selected" : "")>@(f.Nome!.Length > 27 ? f.Nome.Substring(0, 27) + "..." : f.Nome)</option>
                     }
                 </select>
 
