@@ -64,9 +64,8 @@ public class ControladorPrescricaoMedica : Controller
     }
 
     [HttpPost("cadastrar")]
-    public IActionResult Cadastrar(CadastrarPrescricaoMedicaViewModel cadastrarVM, string btnSubmit, string acaoAutomatica)
+    public IActionResult Cadastrar(CadastrarPrescricaoMedicaViewModel cadastrarVM, string btnSubmit)
     {
-        string[] submitTypes = ["informarCRM", "selecionarPaciente", "selecionarMedicamento", "informarDosagem", "informarPeriodo", "informarQuantidade"];
         List<Paciente> pacientes = repositorioPaciente.SelecionarRegistros();
         List<Medicamento> medicamentos = repositorioMedicamento.SelecionarRegistros();
 
@@ -97,12 +96,11 @@ public class ControladorPrescricaoMedica : Controller
 
             cadastrarVM.MedicamentosPrescritos.Add(prescricaoMedicamentoVM);
 
-            TempData["Prescricao"] = JsonSerializer.Serialize(cadastrarVM);
+            cadastrarVM.MedicamentoId = Guid.Empty;
+            cadastrarVM.DosagemMedicamento = null;
+            cadastrarVM.PeriodoMedicamento = null;
+            cadastrarVM.QuantidadeMedicamento = 0;
 
-            return RedirectToAction("Cadastrar", new { recuperardados = true });
-        }
-        else if (submitTypes.Contains(acaoAutomatica))
-        {
             TempData["Prescricao"] = JsonSerializer.Serialize(cadastrarVM);
 
             return RedirectToAction("Cadastrar", new { recuperardados = true });
