@@ -27,18 +27,25 @@ public class ControladorFornecedor : Controller
     }
 
     [HttpPost("cadastrar")]
-    public IActionResult Cadastrar(CadastrarFornecedorViewModel cadastrarVM)
+    public IActionResult Cadastrar(CadastrarFornecedorViewModel cadastrarVM, string btnSubmit)
     {
-        Fornecedor novoFornecedor = cadastrarVM.ParaEntidade();
+        if (btnSubmit == "voltar")
+        {
+            return RedirectToAction("Visualizar");
+        }
+        else
+        {
+            Fornecedor novoFornecedor = cadastrarVM.ParaEntidade();
 
-        repositorioFornecedor.CadastrarRegistro(novoFornecedor);
+            repositorioFornecedor.CadastrarRegistro(novoFornecedor);
 
-        NotificacaoViewModel notificacaoVM = new NotificacaoViewModel(
-            "Gestão de Fornecedores",
-            "fornecedores",
-            $"O registro \"{novoFornecedor.Nome}\" foi cadastrado com sucesso!");
+            NotificacaoViewModel notificacaoVM = new NotificacaoViewModel(
+                "Gestão de Fornecedores",
+                "fornecedores",
+                $"O registro \"{novoFornecedor.Nome}\" foi cadastrado com sucesso!");
 
-        return View("Notificacao", notificacaoVM);
+            return View("Notificacao", notificacaoVM);
+        }
     }
 
     [HttpGet("visualizar")]
@@ -64,18 +71,25 @@ public class ControladorFornecedor : Controller
     }
 
     [HttpPost("editar/{id:Guid}")]
-    public IActionResult Editar([FromRoute] Guid id, EditarFornecedorViewModel editarVM) // exemplo com [FromRoute], nao precisa pois refere ao id da rota "{excluir/id:Guid}"
+    public IActionResult Editar([FromRoute] Guid id, EditarFornecedorViewModel editarVM, string btnSubmit) // exemplo com [FromRoute], nao precisa pois refere ao id da rota "{excluir/id:Guid}"
     {
-        Fornecedor fornecedorAtualizado = editarVM.ParaEntidade();
+        if (btnSubmit == "cancelar")
+        {
+            return RedirectToAction("Visualizar");
+        }
+        else
+        {
+            Fornecedor fornecedorAtualizado = editarVM.ParaEntidade();
 
-        repositorioFornecedor.EditarRegistro(id, fornecedorAtualizado);
+            repositorioFornecedor.EditarRegistro(id, fornecedorAtualizado);
 
-        NotificacaoViewModel notificacaoVM = new NotificacaoViewModel(
-            "Gestão de Fornecedores",
-            "fornecedores",
-            $"O registro \"{fornecedorAtualizado.Nome}\" foi editado com sucesso!");
+            NotificacaoViewModel notificacaoVM = new NotificacaoViewModel(
+                "Gestão de Fornecedores",
+                "fornecedores",
+                $"O registro \"{fornecedorAtualizado.Nome}\" foi editado com sucesso!");
 
-        return View("Notificacao", notificacaoVM);
+            return View("Notificacao", notificacaoVM);
+        }
     }
 
     [HttpGet("excluir/{id:Guid}")]
