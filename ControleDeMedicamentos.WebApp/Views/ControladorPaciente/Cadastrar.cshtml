@@ -1,13 +1,13 @@
 @using ControleDeMedicamentos.WebApp.Models
 
 @{
-    ViewBag.Titulo ="Cadastro de Paciente";
+    ViewBag.Titulo = "Cadastro de Paciente";
 }
 
 @model CadastrarPacienteViewModel;
 <link rel="stylesheet" href="~/css/create.css">
 
-<form class="form-body flex-dir-column" action="/pacientes/cadastrar" method="post">
+<form class="form-body flex-dir-column" id="form-paciente" action="/pacientes/cadastrar" method="post">
     <div class="card">
         <div class="cabecalho">
             <span>INFORME OS DADOS</span>
@@ -15,18 +15,25 @@
 
         <div class="card-form flex-dir-column">
                 <label class="form-label" for="nome">Nome do Paciente</label>
-                <input required class="form-box" type="text" placeholder="Nome" id="nome" name="nome""/>
+                <input required class="form-box" type="text" placeholder="Nome" id="nome" name="nome"/>
+                <span class="invalidInput text-break-word" id="nomeInvalidInput"></span>
 
                 <label class="form-label" for="telefone">Telefone do Paciente</label>
                 <input required class="form-box" type="text" placeholder="Telefone" id="telefone" name="telefone"/>
+                <span class="invalidInput text-break-word" id="telefoneInvalidInput"></span>
 
-                <label class="form-label" for="cartaoSus">Cartão S.U.S. do Paciente</label>
-                <input required class="form-box" type="text" placeholder="Cartão S.U.S." id="cartaoSus" name="cartaoSus"/>
+                <label class="form-label" for="cartaoSUS">Cartão S.U.S. do Paciente</label>
+                <input required class="form-box" type="text" placeholder="Cartão S.U.S." id="cartaoSUS" name="cartaoSUS"/>
+                <span class="invalidInput text-break-word" id="cartaoSUSInvalidInput"></span>
 
             <div class="btns-interact">
-                <a class="btn" href="/pacientes/visualizar" value="voltar" formnovalidate>Voltar</a>
-                <button class="btn" name="btnSubmit" value="cadastrar">Cadastrar</button>
+                <button class="btn" type="submit" name="btnSubmit" value="voltar" formnovalidate>Voltar</button>
+                <button class="btn" type="reset">Limpar</button>
+                <button class="btn" type="submit" name="btnSubmit" value="cadastrar">Cadastrar</button>
             </div>
         </div>
     </div>
 </form>
+@section Scripts {
+    <script src="~/js/paciente.js"></script>
+}

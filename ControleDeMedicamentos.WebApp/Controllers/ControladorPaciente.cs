@@ -27,18 +27,25 @@ public class ControladorPaciente : Controller
     }
 
     [HttpPost("cadastrar")]
-    public IActionResult Cadastrar(CadastrarPacienteViewModel cadastrarVM)
+    public IActionResult Cadastrar(CadastrarPacienteViewModel cadastrarVM, string btnSubmit)
     {
-        Paciente novoPaciente = cadastrarVM.ParaEntidade();
+        if (btnSubmit == "voltar")
+        {
+            return RedirectToAction("Visualizar");
+        }
+        else
+        {
+            Paciente novoPaciente = cadastrarVM.ParaEntidade();
 
-        repositorioPaciente.CadastrarRegistro(novoPaciente);
+            repositorioPaciente.CadastrarRegistro(novoPaciente);
 
-        NotificacaoViewModel notificacaoVM = new(
-            "Gestão de Pacientes",
-            "pacientes",
-            $"O registro \"{novoPaciente.Nome}\" foi cadastrado com sucesso!");
+            NotificacaoViewModel notificacaoVM = new(
+                "Gestão de Pacientes",
+                "pacientes",
+                $"O registro \"{novoPaciente.Nome}\" foi cadastrado com sucesso!");
 
-        return View("Notificacao", notificacaoVM);
+            return View("Notificacao", notificacaoVM);
+        }
     }
 
     [HttpGet("visualizar")]
@@ -58,24 +65,31 @@ public class ControladorPaciente : Controller
 
         EditarPacienteViewModel editarVM = new(
             id, pacienteSelecionado.Nome!, pacienteSelecionado.Telefone!,
-            pacienteSelecionado.CartaoSus!);
+            pacienteSelecionado.CartaoSUS!);
 
         return View(editarVM);
     }
 
     [HttpPost("editar/{id:Guid}")]
-    public IActionResult Editar(Guid id, EditarPacienteViewModel editarVM)
+    public IActionResult Editar(Guid id, EditarPacienteViewModel editarVM, string btnSubmit)
     {
-        Paciente pacienteAtualizado = editarVM.ParaEntidade();
+        if (btnSubmit == "cancelar")
+        {
+            return RedirectToAction("Visualizar");
+        }
+        else
+        {
+            Paciente pacienteAtualizado = editarVM.ParaEntidade();
 
-        repositorioPaciente.EditarRegistro(id, pacienteAtualizado);
+            repositorioPaciente.EditarRegistro(id, pacienteAtualizado);
 
-        NotificacaoViewModel notificacaoVM = new(
-            "Gestão de Pacientes",
-            "pacientes",
-            $"O registro \"{pacienteAtualizado.Nome}\" foi editado com sucesso!");
+            NotificacaoViewModel notificacaoVM = new(
+                "Gestão de Pacientes",
+                "pacientes",
+                $"O registro \"{pacienteAtualizado.Nome}\" foi editado com sucesso!");
 
-        return View("Notificacao", notificacaoVM);
+            return View("Notificacao", notificacaoVM);
+        }
     }
 
     [HttpGet("excluir/{id:Guid}")]

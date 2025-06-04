@@ -1,27 +1,38 @@
 @using ControleDeMedicamentos.WebApp.Models
 
 @{
-    ViewBag.Titulo = "Edição de Paciente";
+	ViewBag.Titulo = "Edição de Paciente";
 }
 
 @model EditarPacienteViewModel;
-<link rel="stylesheet" href="~/css/read.css">
 <link rel="stylesheet" href="~/css/update.css">
 
-<form class="form-body flex-dir-column" action="/pacientes/editar/@Model.Id" method="post">
-    <div class="card">
-        <div class="cabecalho">
-            <span>INFORME OS NOVOS DADOS</span>
-        </div>
+<form class="form-body flex-dir-column" id="form-paciente" action="/pacientes/editar/@Model.Id" method="post">
+	<div class="card">
+		<div class="cabecalho">
+			<span>INFORME OS NOVOS DADOS</span>
+		</div>
 
-        <div class="card-form flex-dir-column">
-                <label class="form-label" for="nome">Nome do Paciente</label>
-                <input class="form-box" type="text" id="nome" name="nome" value="@Model.Nome"/>
-                <label class="form-label" for="telefone">Telefone do Paciente</label>
-                <input class="form-box" type="text" id="telefone" name="telefone" value="@Model.Telefone"/>
-                <label class="form-label" for="cartaoSus">CartãoSUS do Paciente</label>
-                <input class="form-box" type="text" id="cartaoSus" name="cartaoSus" value="@Model.CartaoSus"/>
-                <button class="btnEditar" type="submit">Editar</button>
-        </div>
-    </div>
+		<div class="card-form flex-dir-column">
+				<label class="form-label" for="nome">Nome do Paciente</label>
+				<input required class="form-box" type="text" placeholder="Nome" id="nome" name="nome" value="@Model.Nome"/>
+				<span class="invalidInput text-break-word" id="nomeInvalidInput"></span>
+
+				<label class="form-label" for="telefone">Telefone do Paciente</label>
+				<input required class="form-box" type="text" placeholder="Telefone" id="telefone" name="telefone" value="@Model.Telefone"/>
+				<span class="invalidInput text-break-word" id="telefoneInvalidInput"></span>
+
+				<label class="form-label" for="cartaoSUS">CartãoSUS do Paciente</label>
+				<input required class="form-box" type="text" placeholder="Cartão S.U.S." id="cartaoSUS" name="cartaoSUS" value="@Model.CartaoSUS"/>
+				<span class="invalidInput text-break-word" id="cartaoSUSInvalidInput"></span>
+
+			<div class="btns-interact">
+				<button class="btn" name="btnSubmit" value="cancelar" formnovalidate>Cancelar</button>
+				<button class="btn" type="submit" name="btnSubmit" value="editar">Editar</button>
+			</div>
+		</div>
+	</div>
 </form>
+@section Scripts {
+	<script src="~/js/paciente.js"></script>
+}
