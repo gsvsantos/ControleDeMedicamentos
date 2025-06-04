@@ -10,25 +10,25 @@ public class Paciente : EntidadeBase<Paciente>
 {
     public string? Nome { get; set; }
     public string? Telefone { get; set; }
-    public string? CartaoSus { get; set; }
+    public string? CartaoSUS { get; set; }
     public List<PrescricaoMedica> Prescricoes { get; set; } = [];
     public List<RequisicaoSaida> RequisicoesSaida { get; set; } = [];
 
     [ExcludeFromCodeCoverage]
     public Paciente() { }
 
-    public Paciente(string nome, string telefone, string cartaoSus)
+    public Paciente(string nome, string telefone, string cartaoSUS)
     {
         Nome = nome;
         Telefone = telefone;
-        CartaoSus = cartaoSus;
+        CartaoSUS = cartaoSUS;
     }
 
     public override void AtualizarRegistro(Paciente pacienteEditado)
     {
         Nome = pacienteEditado.Nome;
         Telefone = pacienteEditado.Telefone;
-        CartaoSus = pacienteEditado.CartaoSus;
+        CartaoSUS = pacienteEditado.CartaoSUS;
     }
 
     public override string Validar()
@@ -59,13 +59,13 @@ public class Paciente : EntidadeBase<Paciente>
             }
         }
 
-        if (string.IsNullOrWhiteSpace(CartaoSus))
+        if (string.IsNullOrWhiteSpace(CartaoSUS))
         {
             erros += "O campo CartaoSUS eh obrigatorio.\n";
         }
         else
         {
-            if (CartaoSus.Length != 15)
+            if (CartaoSUS.Length != 15)
             {
                 erros += "O campo CartaoSUS deve conter 15 caracteres.\n";
             }

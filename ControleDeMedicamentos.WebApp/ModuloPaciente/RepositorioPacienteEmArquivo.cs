@@ -16,9 +16,9 @@ public class RepositorioPacienteEmArquivo : RepositorioBaseEmArquivo<Paciente>, 
 
     public bool VerificarCartaoSUSInserirRegistro(Paciente paciente)
     {
-        return registros.Any(p => p != null && p.CartaoSus == paciente.CartaoSus);
+        return registros.Any(p => p != null && p.CartaoSUS == paciente.CartaoSUS);
     }
-    
+
     public bool VerificarCartaoSUSEditarRegistro(Paciente pacienteExistente, Paciente pacienteEditado)
     {
         foreach (Paciente paciente in registros)
@@ -26,7 +26,7 @@ public class RepositorioPacienteEmArquivo : RepositorioBaseEmArquivo<Paciente>, 
             if (paciente == null)
                 continue;
 
-            if (pacienteEditado.CartaoSus == paciente.CartaoSus && pacienteExistente.Id != pacienteEditado.Id)
+            if (pacienteEditado.CartaoSUS == paciente.CartaoSUS && pacienteExistente.Id != pacienteEditado.Id)
                 return true;
         }
         return false;
@@ -34,6 +34,6 @@ public class RepositorioPacienteEmArquivo : RepositorioBaseEmArquivo<Paciente>, 
 
     protected override List<Paciente> ObterRegistros()
     {
-        return contexto.Pacientes; 
+        return contexto.Pacientes;
     }
 }
