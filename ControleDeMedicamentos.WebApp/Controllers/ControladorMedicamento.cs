@@ -34,7 +34,7 @@ public class ControladorMedicamento : Controller
         {
             var dadosArmazenados = TempData.Peek("Medicamento");
 
-            if (dadosArmazenados is null && dadosArmazenados is not string)
+            if (dadosArmazenados is null || dadosArmazenados is not string)
             {
                 NotificacaoViewModel notificacaoVM = new(
                     "Erro",
@@ -59,9 +59,8 @@ public class ControladorMedicamento : Controller
     }
 
     [HttpPost("cadastrar")]
-    public IActionResult Cadastrar(CadastrarMedicamentoViewModel cadastrarVM, string btnSubmit, string acaoAutomatica)
+    public IActionResult Cadastrar(CadastrarMedicamentoViewModel cadastrarVM, string btnSubmit)
     {
-        string[] submitTypes = ["informarNome", "informarQuantidade", "informarDescricao", "selecionarFornecedor"];
         List<Fornecedor> fornecedores = repositorioFornecedor.SelecionarRegistros();
 
         if (TempData.TryGetValue("Medicamento", out var value) && value is string jsonString)
@@ -76,13 +75,7 @@ public class ControladorMedicamento : Controller
             cadastrarVM = vmAnterior;
         }
 
-        if (submitTypes.Contains(acaoAutomatica))
-        {
-            TempData["Medicamento"] = JsonSerializer.Serialize(cadastrarVM);
-
-            return RedirectToAction("Cadastrar", new { recuperardados = true });
-        }
-        else if (btnSubmit == "voltar")
+        if (btnSubmit == "voltar")
         {
             TempData.Remove("Medicamento");
 
@@ -158,10 +151,10 @@ public class ControladorMedicamento : Controller
     }
 
     [HttpPost("editar/{id:Guid}")]
-    public IActionResult Editar(Guid id, EditarMedicamentoViewModel editarVM, string btnSubmit, string acaoAutomatica)
+    public IActionResult Editar(Guid id, EditarMedicamentoViewModel editarVM, string btnSubmit)
     {
-        string[] submitTypes = ["informarNome", "informarQuantidade", "informarDescricao", "selecionarFornecedor"];
         List<Fornecedor> fornecedores = repositorioFornecedor.SelecionarRegistros();
+
         if (TempData.TryGetValue("MedicamentoEditar", out var value) && value is string jsonString)
         {
             var vmAnterior = JsonSerializer.Deserialize<EditarMedicamentoViewModel>(jsonString);
@@ -174,13 +167,7 @@ public class ControladorMedicamento : Controller
             editarVM = vmAnterior;
         }
 
-        if (submitTypes.Contains(acaoAutomatica))
-        {
-            TempData["MedicamentoEditar"] = JsonSerializer.Serialize(editarVM);
-
-            return RedirectToAction("Editar", new { recuperardados = true });
-        }
-        else if (btnSubmit == "cancelar")
+        if (btnSubmit == "cancelar")
         {
             TempData.Remove("MedicamentoEditar");
 

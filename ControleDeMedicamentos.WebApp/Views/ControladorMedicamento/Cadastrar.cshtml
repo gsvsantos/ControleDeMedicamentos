@@ -1,15 +1,13 @@
 ﻿@using ControleDeMedicamentos.WebApp.Models
 
 @{
-    ViewBag.Titulo ="Cadastro de Medicamento";
+    ViewBag.Titulo = "Cadastro de Medicamento";
 }
 
 @model CadastrarMedicamentoViewModel;
 <link rel="stylesheet" href="~/css/create.css">
 
-<form id="form-medicamento" class="form-body flex-dir-column" action="/medicamentos/cadastrar" method="post">
-    <input type="hidden" name="acaoAutomatica" id="acaoAutomaticaTrigger" value=""/> 
-
+<form class="form-body flex-dir-column" id="form-medicamento" action="/medicamentos/cadastrar" method="post">
     <div class="card">
         <div class="cabecalho">
             <span>INFORME OS DADOS</span>
@@ -18,41 +16,19 @@
         <div class="card-form flex-dir-column">
             <label class="form-label" for="nome">Nome do Medicamento:</label>
             <input required class="form-box" type="text" placeholder="Nome" name="nome" id="nome" value="@(string.IsNullOrWhiteSpace(Model.Nome) ? "" : $"{@Model.Nome}")"/>
+            <span class="invalidInput text-break-word" id="nomeInvalidInput"></span>
 
-            <label class="form-label" for="qtdestoque">Quantidade em Estoque:</label>
-            <input required class="form-box" type="text" placeholder="Quantidade" name="qtdestoque" id="qtdestoque" value="@(Model.QtdEstoque == 0 ? "" : $"{@Model.QtdEstoque}")"/>
+            <label class="form-label" for="qtdEstoque">Quantidade em Estoque:</label>
+            <input required class="form-box" type="number" placeholder="Quantidade" name="qtdEstoque" id="qtdEstoque" value="@(Model.QtdEstoque == 0 ? "" : $"{@Model.QtdEstoque}")"/>
+            <span class="invalidInput text-break-word" id="qtdEstoqueInvalidInput"></span>
 
             <label class="form-label" for="descricao">Descrição:</label>
             <input required class="form-box" type="text" placeholder="Descrição" name="descricao" id="descricao" value="@(string.IsNullOrWhiteSpace(Model.Descricao) ? "" : $"{@Model.Descricao}")"/>
+            <span class="invalidInput text-break-word" id="descricaoInvalidInput"></span>
 
             <label class="form-label" for="fornecedorId">Fornecedor do Medicamento:</label>
             <select required class="text-nowrap" name="fornecedorId" id="fornecedorId">
-                <option disabled value="" @(Model.FornecedorId == Guid.Empty ? "selected" : "")>
-                    @if (Model.FornecedoresDisponiveis.Count == 0)
-                    {
-                        @:Nenhum Fornecedor Encontrado
-                    }
-                    else if (string.IsNullOrWhiteSpace(Model.Nome))
-                    {
-                        @:Digite o Nome do Medicamento Acima
-                    }
-                    else if (Model.QtdEstoque == 0)
-                    {
-                        @:Insira a Quantidade em Estoque Inicial Acima
-                    }
-                    else if (string.IsNullOrWhiteSpace(Model.Descricao))
-                    {
-                        @:Digite a Descrição do Medicamento Acima
-                    }
-                    else if(Model.FornecedorId == Guid.Empty)
-                    {
-                        @:Selecione um Fornecedor
-                    }
-                    else
-                    {
-                        @:Agora é Só Finalizar :)
-                    }
-                    </option>
+                <option id="optionInterativa" disabled value="" @(Model.FornecedorId == Guid.Empty ? "selected" : "")></option>
                     @foreach (SelecionarFornecedorViewModel f in Model.FornecedoresDisponiveis)
                     {
                        <option value="@f.Id" @(f.Id == Model.FornecedorId ? "selected" : "")>@f.Nome</option>
@@ -60,8 +36,9 @@
                 </select>
 
             <div class="btns-interact">
-                <button class="btn" name="btnSubmit" value="voltar" formnovalidate>Voltar</button>
-                <button class="btn" name="btnSubmit" value="cadastrar">Cadastrar</button>
+                <button class="btn" type="submit" name="btnSubmit" value="voltar" formnovalidate>Voltar</button>
+                <button class="btn" type="reset" >Limpar</button>
+                <button class="btn" type="submit" name="btnSubmit" value="cadastrar">Cadastrar</button>
             </div>
         </div>
     </div>
