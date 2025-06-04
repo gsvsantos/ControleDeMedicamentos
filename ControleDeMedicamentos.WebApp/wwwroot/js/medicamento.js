@@ -50,7 +50,7 @@ function isQtdEstoqueValid() {
     return isValid;
 }
 
-function isDescricaoValid() {;
+function isDescricaoValid() {
     let isValid = true;
 
     if (descricao.value.trim() === "") {
@@ -78,27 +78,36 @@ function isValorEmpty(valor) {
     return isEmpty;
 }
 
+function hasChild() {
+    let hasChild = false;
+
+    for (let item of fornecedorId.children) {
+        if (item.value != '' && !item.hasAttribute('disabled'))
+            hasChild = true;
+    }
+
+    return hasChild;
+}
+
 function atualizarValorOption() {
     let mensagemErro = '';
 
-    if (isValorEmpty(nome) || !isNomeMedicamentoValid())
-    {
+    if (!hasChild()) {
+        mensagemErro = 'Nenhum Fornecedor Encontrado';
+    }
+    else if (isValorEmpty(nome) || !isNomeMedicamentoValid()) {
         mensagemErro = 'Digite o Nome do Medicamento Acima';
     }
-    else if ((qtdEstoque.value == '' || qtdEstoque.value == '0') || !isQtdEstoqueValid())
-    {
+    else if (isValorEmpty(qtdEstoque) || qtdEstoque.value == '0' || !isQtdEstoqueValid()) {
         mensagemErro = 'Digite a Quantidade a Adicionar Acima';
     }
-    else if (isValorEmpty(descricao) || !isDescricaoValid())
-    {
+    else if (isValorEmpty(descricao) || !isDescricaoValid()) {
         mensagemErro = 'Digite a Descrição do Medicamento Acima';
     }
-    else if (fornecedorId.value == '')
-    {
+    else if (fornecedorId.value == '') {
         mensagemErro = 'Selecione um Fornecedor';
     }
-    else
-    {
+    else {
         mensagemErro = 'Agora é Só Finalizar :)';
     }
 
