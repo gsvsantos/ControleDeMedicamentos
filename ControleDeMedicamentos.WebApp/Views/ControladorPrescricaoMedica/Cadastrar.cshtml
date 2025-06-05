@@ -41,27 +41,29 @@
                     }
                     else
                     {
-                    <table class="lista">
-                        <thead>
-                            <tr>
-                                <th class="medicamento">Medicamento</th>
-                                <th class="dosagem">Dosagem</th>
-                                <th class="periodo">Período</th>
-                                <th class="quantidade">Quantidade</th>
-                            </tr>
-                        </thead>
-                        <tbody>
+                    <div>
+                        <table class="lista">
+                            <thead>
+                                <tr>
+                                    <th class="medicamento">Medicamento</th>
+                                    <th class="dosagem">Dosagem</th>
+                                    <th class="periodo">Período</th>
+                                    <th class="quantidade">Quantidade</th>
+                                </tr>
+                            </thead>
+                            <tbody>
                                 @foreach (var medicamento in Model.MedicamentosPrescritos)
                                 {
-                                    <tr>
-                                        <td class="medicamento text-nowrap">@medicamento.Medicamento</td>
-                                        <td class="dosagem">@medicamento.Dosagem</td>
-                                        <td class="periodo">@medicamento.Periodo</td>
-                                        <td class="quantidade">@medicamento.Quantidade</td>
-                                    </tr>
+                                            <tr>
+                                                <td class="medicamento">@medicamento.Medicamento</td>
+                                                <td class="dosagem">@medicamento.Dosagem</td>
+                                                <td class="periodo">@medicamento.Periodo</td>
+                                                <td class="quantidade">@medicamento.Quantidade</td>
+                                            </tr>
                                 }
-                        </tbody>
-                    </table>
+                            </tbody>
+                        </table>
+                    </div>
                     }
         
                     <div class="btns-interact">
@@ -72,7 +74,7 @@
             </div>
         </div>
     </form>
-    <form id="form-medicamento" class="form-body flex-dir-column" method="post">
+    <form id="form-medicamento" class="form-body flex-dir-column" action="/prescricoes/cadastrar" method="post">
         <div class="card card-medicamentos flex-dir-column">
             <div class="cabecalho">
                 <span>ADICIONAR MEDICAMENTOS</span>
@@ -97,7 +99,7 @@
             <input class="form-box" type="number" placeholder="Quantidade" name="quantidadeMedicamento" id="quantidadeMedicamento" value="@(Model.QuantidadeMedicamento == 0 ? "" : $"{@Model.QuantidadeMedicamento}")"/>
             <span class="invalidInput text-break-word" id="quantidadeInvalidInput"></span>
 
-            <button class="btn" name="btnSubmit" value="adicionarMedicamento">Adicionar Medicamento</button>
+            <button type="submit" class="btn" name="btnSubmit" value="adicionarMedicamento">Adicionar Medicamento</button>
         </div>
     </form>
 </div>
