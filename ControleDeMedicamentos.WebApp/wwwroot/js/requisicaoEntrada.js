@@ -125,10 +125,7 @@ if (quantidadeMedicamento) {
 const btnLimpar = document.querySelector('button[type="reset"]');
 
 function limparMensagensErro() {
-    nomeInvalidInput.textContent = '';
-    qtdEstoqueInvalidInput.textContent = '';
-    descricaoInvalidInput.textContent = '';
-    optionInterativa.textContent = 'Digite o Nome do Medicamento Acima';
+    quantidadeInvalidInput.textContent = '';
 }
 
 if (btnLimpar) {
@@ -154,7 +151,6 @@ if (form) {
         }
     })
 }
-
 
 document.addEventListener('DOMContentLoaded', () => {
     atualizarValorOptionFuncionario();
