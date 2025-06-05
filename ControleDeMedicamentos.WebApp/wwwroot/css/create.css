@@ -28,15 +28,16 @@
     gap: 8px;
 }
 
-.form-body select{
+.form-body select {
     padding: 5px 5px;
     color: var(--cor-ui-texto-principal);
     background-color: var(--cor-ui-fundo-input);
     font-weight: bold;
     font-size: 15px;
+    max-width: 330px;
 }
 
-.form-body select option{
+.form-body select option {
     padding: 5px 5px;
     color: var(--cor-ui-texto-principal);
     background-color: var(--cor-ui-fundo-input);
@@ -48,8 +49,9 @@
     color: rgb(80, 87, 103);
 }
 
-.form-body select option[disabled]{
+.form-body select option[disabled] {
     cursor: not-allowed;
+    color: #505767;
 }
 
 .form-box{  

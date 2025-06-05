@@ -6,7 +6,6 @@
 
 @model VisualizarFornecedorViewModel;
 <link rel="stylesheet" href="~/css/read.css">
-<link rel="stylesheet" href="~/css/read-pages/visualizar-fornecedor.css">
 
 <div class="card">
 	<div class="acao-cadastro psides-30 flex-dir-row">
@@ -32,9 +31,9 @@
 				@foreach (DataFornecedorViewModel f in Model.Registros)
 				{
 					<tr class="linha-fornecedor">
-						<td class="nome text-nowrap">@f.Nome</td>
-						<td class="telefone text-nowrap">@f.Telefone</td>
-						<td class="cnpj text-nowrap">@f.CNPJ</td>
+							<td class="nome mw200 text-nowrap">@f.Nome</td>
+						<td class="telefone mw200 text-nowrap">@f.Telefone</td>
+						<td class="cnpj mw200 text-nowrap">@f.CNPJ</td>
 						<td class="acoes flex-dir-column">
 							<a href="/fornecedores/editar/@f.Id" class="btn-action btn-editar flex-center">Editar</a>
 							<a href="/fornecedores/excluir/@f.Id" class="btn-action btn-excluir flex-center">Excluir</a>

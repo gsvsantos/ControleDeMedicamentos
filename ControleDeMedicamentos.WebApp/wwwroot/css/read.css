@@ -1,20 +1,20 @@
-.page{
+.page {
     gap: 20px;
 }
 
-.card{
+.card {
     animation: none;
     margin: auto;
     height: auto;
     width: auto;
 }
 
-.card:hover{
+.card:hover {
     background-color: var(--cor-ui-fundo-card);
     transform: none;
 }
 
-.acao-cadastro{
+.acao-cadastro {
     flex-wrap: wrap;
     align-items: end;
     padding-bottom: 10px;
@@ -22,7 +22,7 @@
     font-size: 18px;
 }
 
-.botaoCadastrar{
+.botaoCadastrar {
     margin-right: auto;
     background-color: var(--cor-botao-primario);
     border: 1px solid var(--cor-ui-borda-padrao);
@@ -33,44 +33,47 @@
     transition: 0.12s;
 }
 
-.botaoCadastrar:hover{
+.botaoCadastrar:hover {
     background-color: var(--cor-botao-primario-hover);
     transform: scale(1.02);
 }
 
 
-.btn-action{
+.btn-action {
     border-radius: 4px;
     height: 30px;
     width: 70px;
     transition: 0.12s;
 }
 
-.btn-editar{
+.btn-editar {
     background-color: var(--cor-ui-lista-linha);
-    border: 1px solid var(--cor-botao-editar);
+    border: 2px solid var(--cor-botao-editar);
     color: var(--cor-botao-editar);
+    font-weight: bold;
 }
 
-.btn-editar:hover{
+.btn-editar:hover {
     background-color: var(--cor-botao-editar);
-    border: 1px solid var(--cor-botao-editar);
+    border: 2px solid var(--cor-botao-editar);
     color: var(--cor-ui-texto-principal);
 }
 
-.btn-excluir{
+.btn-excluir {
     background-color: var(--cor-ui-lista-linha);
-    border: 1px solid var(--cor-botao-excluir);
+    border: 2px solid var(--cor-botao-excluir);
     color: var(--cor-botao-excluir);
+    font-weight: bold;
 }
 
-.btn-excluir:hover{
+.btn-excluir:hover {
     background-color: var(--cor-botao-excluir);
-    border: 1px solid var(--cor-botao-excluir);
+    border: 2px solid var(--cor-botao-excluir);
     color: var(--cor-ui-texto-principal);
 }
 
-.lista{
+.lista {
+    display: block;
     list-style: none;
     padding: 0px;
     margin: 0px;
@@ -78,6 +81,8 @@
     border-radius: 8px;
     border-collapse: collapse;
     overflow: hidden;
+    overflow-x: auto;
+    white-space: nowrap;
 }
 
 .lista thead {
@@ -87,34 +92,65 @@
 
 .lista th {
     padding: 10px;
-    text-align: left;
     font-size: 20px;
 }
+
 .lista tbody tr {
     background-color: var(--cor-ui-lista-linha);
     border-top: 1px solid var(--cor-ui-borda-item-lista);
 }
 
-.lista tbody tr:hover{
+.lista tbody tr:hover {
     background-color: var(--cor-ui-lista-linha-hover);
 }
 
 .lista td {
     padding: 10px;
-    vertical-align: middle; 
+    max-width: 200px;
 }
 
-.lista td.acoes{
-    font-weight: bold;
-    gap: 20px;
+.lista td.acoes {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
 }
 
+.lista th.fornecedor,
+.lista td.fornecedor,
+.lista th.paciente,
+.lista td.paciente,
+.lista th.funcionario,
+.lista td.funcionario,
 .lista th.nome,
-.lista td.nome{
-    width: 200px;
+.lista td.nome,
+.lista th.crmMedico,
+.lista td.crmMedico,
+.lista th.medicamento,
+.lista td.medicamento,
+.lista th.telefone,
+.lista td.telefone,
+.lista th.descricao,
+.lista td.descricao,
+.lista th.cnpj,
+.lista td.cnpj,
+.lista th.cpf,
+.lista td.cpf,
+.lista th.cartaoSUS,
+.lista td.cartaoSUS {
+    text-align: left;
 }
 
-.lista th.telefone,
-.lista td.telefone{
-    width: 200px;
+.lista th.estoque,
+.lista td.estoque,
+.lista th.quantidade,
+.lista td.quantidade,
+.lista th.status,
+.lista td.status,
+.lista th.data,
+.lista td.data,
+.lista th.acoes,
+.lista td.acoes {
+    text-align: center;
 }

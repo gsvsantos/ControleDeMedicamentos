@@ -6,7 +6,6 @@
 
 @model VisualizarPacienteViewModel;
 <link rel="stylesheet" href="~/css/read.css">
-<link rel="stylesheet" href="~/css/read-pages/visualizar-paciente.css">
 
 <div class="card">
     <div class="acao-cadastro psides-30 flex-dir-row">
@@ -34,7 +33,7 @@
                     <tr class="linha-paciente">
                         <td class="nome text-nowrap">@p.Nome</td>
                         <td class="telefone text-nowrap">@p.Telefone</td>
-                        <td class="cartaoSUS text-nowrap">@p.CartaoSus</td>
+                        <td class="cartaoSUS text-nowrap">@p.CartaoSUS</td>
                         <td class="acoes flex-dir-column">
                             <a href="/pacientes/editar/@p.Id" class="btn-action btn-editar flex-center">Editar</a>
                             <a href="/pacientes/excluir/@p.Id" class="btn-action btn-excluir flex-center">Excluir</a>

@@ -2,17 +2,6 @@
     gap: 20px;
 }
 
-.card-form{
-    padding-top: 8px;
-    gap: 8px;
-}
-
-.card-form span{
-    padding-top: 10px;
-    font-weight: bold;
-    font-size: 22px;
-}
-
 .card-medicamentos{
     gap: 8px;
 }
@@ -43,4 +32,8 @@
 
 .card-medicamentos select option[disabled]{
     cursor: not-allowed;
+}
+
+.card-prescricao{
+    gap: 8px;
 }
