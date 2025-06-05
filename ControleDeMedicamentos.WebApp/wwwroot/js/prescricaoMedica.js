@@ -9,6 +9,7 @@ const cRMMedicoInvalidInput = document.getElementById('cRMMedicoInvalidInput');
 const dosagemInvalidInput = document.getElementById('dosagemInvalidInput');
 const periodoInvalidInput = document.getElementById('periodoInvalidInput');
 const quantidadeInvalidInput = document.getElementById('quantidadeInvalidInput');
+const temMedicamentos = form.dataset.temMedicamentos === "true";
 
 function isSiglaCRMValid() {
     const siglasValidas = [
@@ -144,8 +145,11 @@ function atualizarValorOptionPaciente() {
     else if (isValorEmpty(pacienteId)) {
         mensagemErro = 'Selecione um Paciente';
     }
+    else if (temMedicamentos) {
+        mensagemErro = 'Adicione Mais Medicamentos ou Finalize :)';
+    }
     else if (isValorEmpty(medicamentoId)) {
-        mensagemErro = 'Adicione um Medicamento ao Lado';
+        mensagemErro = 'Selecione um Medicamento ao Lado';
     }
     else if (isValorEmpty(dosagemMedicamento) || !isDosagemValid()) {
         mensagemErro = 'Digite a Dosagem ao Lado';
@@ -155,9 +159,6 @@ function atualizarValorOptionPaciente() {
     }
     else if (isValorEmpty(quantidadeMedicamento) || !isQtdMedicamentoValid()) {
         mensagemErro = 'Informe a Quantidade ao Lado :)';
-    }
-    else if (!isValorEmpty(medicamentoId)) {
-        mensagemErro = 'Adicione Mais Medicamentos ou Finalize :)';
     }
     else if (isDosagemValid() && isPeriodoValid() && isQtdMedicamentoValid()) {
         mensagemErro = 'Agora é Só Adicionar :)';
@@ -203,6 +204,7 @@ if (cRMMedico) {
 if (pacienteId) {
     pacienteId.addEventListener('blur', () => {
         atualizarValorOptionPaciente();
+        atualizarValorOptionMedicamento();
     });
 }
 

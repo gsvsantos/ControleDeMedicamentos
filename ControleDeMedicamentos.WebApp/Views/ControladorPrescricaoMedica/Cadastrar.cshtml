@@ -1,102 +1,103 @@
 @using ControleDeMedicamentos.WebApp.Models
 
 @{
-    ViewBag.Titulo ="Cadastro de Prescrição Médica";
+	ViewBag.Titulo = "Cadastro de Prescrição Médica";
 }
 
 @model CadastrarPrescricaoMedicaViewModel;
 <link rel="stylesheet" href="~/css/create.css">
 <link rel="stylesheet" href="~/css/create-pages/cadastrar-prescricao.css">
 <link rel="stylesheet" href="~/css/read.css">
-<form id="form-prescricao" class="form-body flex-dir-column" action="/prescricoes/cadastrar" method="post">
-    <div class="body-prescricao flex-dir-row">
-        <div class="card card-prescricao">
-            <div class="cabecalho">
-                <span>INFORME OS DADOS</span>
-            </div>
-        
-            <div class="card-form flex-dir-column">
-                    <label class="form-label" for="cRMMedico">C.R.M. do Médico</label>
-                    <input required class="form-box" type="text" placeholder="C.R.M." name="cRMMedico" id="cRMMedico" value="@(string.IsNullOrWhiteSpace(Model.CRMMedico) ? "" : $"{@Model.CRMMedico}")">
-                    <span class="invalidInput text-break-word" id="cRMMedicoInvalidInput"></span>
+<form id="form-prescricao" class="form-body flex-dir-column" action="/prescricoes/cadastrar" method="post"
+data-tem-medicamentos="@Model.MedicamentosPrescritos.Any().ToString().ToLower()">
+	<div class="body-prescricao flex-dir-row">
+		<div class="card card-prescricao">
+			<div class="cabecalho">
+				<span>INFORME OS DADOS</span>
+			</div>
 
-                    <label class="form-label" for="pacienteId">Paciente:</label>
-                    <select required class="text-nowrap" name="pacienteId" id="pacienteId">
-                        <option id="optionPacienteInterativa" disabled value="" @(Model.PacienteId == Guid.Empty ? "selected" : "")></option>
-                        @foreach(SelecionarPacienteViewModel p in Model.PacientesDisponiveis)
-                        {
-                                <option value="@p.Id" @(p.Id == Model.PacienteId ? "selected" : "")>@(p.Nome!.Length > 27 ? p.Nome.Substring(0, 27) + "..." : p.Nome)</option>
-                        }
-                    </select>
+			<div class="card-form flex-dir-column">
+					<label class="form-label" for="cRMMedico">C.R.M. do Médico</label>
+					<input required class="form-box" type="text" placeholder="C.R.M." name="cRMMedico" id="cRMMedico" value="@(string.IsNullOrWhiteSpace(Model.CRMMedico) ? "" : $"{@Model.CRMMedico}")">
+					<span class="invalidInput text-break-word" id="cRMMedicoInvalidInput"></span>
 
-                    <span>Medicamentos Prescritos:</span>
-        
-                    @if (!Model.MedicamentosPrescritos.Any())
-                    {
-                            <p class="fw-semibold" style="color: #FF5151;">Adicione um Medicamento a Lista</p>
-                    }
-                    else
-                    {
-                    <table class="lista">
-                        <thead>
-                            <tr>
-                                <th class="medicamento">Medicamento</th>
-                                <th class="dosagem">Dosagem</th>
-                                <th class="periodo">Período</th>
-                                <th class="quantidade">Quantidade</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                                @foreach (var medicamento in Model.MedicamentosPrescritos)
-                                {
-                                    <tr>
-                                        <td class="medicamento text-nowrap">@medicamento.Medicamento</td>
-                                        <td class="dosagem">@medicamento.Dosagem</td>
-                                        <td class="periodo">@medicamento.Periodo</td>
-                                        <td class="quantidade">@medicamento.Quantidade</td>
-                                    </tr>
-                                }
-                        </tbody>
-                    </table>
-                    }
-        
-                    <div class="btns-interact">
-                        <button class="btn" name="btnSubmit" value="voltar" formnovalidate>Voltar</button>
-                        <button class="btn" name="btnSubmit" value="limpar" formnovalidate>Limpar</button>
-                        <button class="btn" name="btnSubmit" value="cadastrar">Cadastrar</button>
-                    </div>
-            </div>
-        </div>
-        <form>
-            <div class="card card-medicamentos flex-dir-column">
-                <div class="cabecalho">
-                    <span>ADICIONAR MEDICAMENTOS</span>
-                </div>
-                <select required class="text-nowrap" name="medicamentoId" id="medicamentoId">
-                    <option id="optionMedicamentoInterativa" disabled value="" @(Model.MedicamentoId == Guid.Empty ? "selected" : "")></option>
-                    @foreach (SelecionarMedicamentoViewModel m in Model.MedicamentosDisponiveis)
-                    {
-                            <option value="@m.Id" @(m.Id == Model.MedicamentoId ? "selected" : "")>@(m.Nome!.Length > 27 ? m.Nome.Substring(0, 27) + "..." : m.Nome)</option>
-                    }
-                </select>
+					<label class="form-label" for="pacienteId">Paciente:</label>
+					<select required class="text-nowrap" name="pacienteId" id="pacienteId">
+						<option id="optionPacienteInterativa" disabled value="" @(Model.PacienteId == Guid.Empty ? "selected" : "")></option>
+					@foreach (SelecionarPacienteViewModel p in Model.PacientesDisponiveis)
+					{
+						<option value="@p.Id" @(p.Id == Model.PacienteId ? "selected" : "")>@(p.Nome!.Length > 27 ? p.Nome.Substring(0, 27) + "..." : p.Nome)</option>
+					}
+					</select>
 
-                <label class="form-label" for="dosagemMedicamento">Dosagem:</label>
-                <input required class="form-box" type="text" placeholder="Dosagem" name="dosagemMedicamento" id="dosagemMedicamento" value="@(string.IsNullOrWhiteSpace(Model.DosagemMedicamento) ? "" : $"{@Model.DosagemMedicamento}")"/>
-                <span class="invalidInput text-break-word" id="dosagemInvalidInput"></span>
+					<span>Medicamentos Prescritos:</span>
 
-                <label class="form-label" for="periodoMedicamento">Período:</label>
-                <input required class="form-box" type="text" placeholder="Período" name="periodoMedicamento" id="periodoMedicamento" value="@(string.IsNullOrWhiteSpace(Model.PeriodoMedicamento) ? "" : $"{@Model.PeriodoMedicamento}")"/>
-                <span class="invalidInput text-break-word" id="periodoInvalidInput"></span>
+					@if (!Model.MedicamentosPrescritos.Any())
+					{
+						<p class="fw-semibold" style="color: #FF5151;">Adicione um Medicamento a Lista</p>
+					}
+					else
+					{
+						<table class="lista">
+							<thead>
+								<tr>
+									<th class="medicamento">Medicamento</th>
+									<th class="dosagem">Dosagem</th>
+									<th class="periodo">Período</th>
+									<th class="quantidade">Quantidade</th>
+								</tr>
+							</thead>
+							<tbody>
+							@foreach (var medicamento in Model.MedicamentosPrescritos)
+							{
+											<tr>
+												<td class="medicamento text-nowrap">@medicamento.Medicamento</td>
+												<td class="dosagem">@medicamento.Dosagem</td>
+												<td class="periodo">@medicamento.Periodo</td>
+												<td class="quantidade">@medicamento.Quantidade</td>
+											</tr>
+							}
+							</tbody>
+						</table>
+					}
 
-                <label class="form-label" for="quantidadeMedicamento">Quantidade (Caixas/Frascos):</label>
-                <input required class="form-box" type="number" placeholder="Quantidade" name="quantidadeMedicamento" id="quantidadeMedicamento" value="@(Model.QuantidadeMedicamento == 0 ? "" : $"{@Model.QuantidadeMedicamento}")"/>
-                <span class="invalidInput text-break-word" id="quantidadeInvalidInput"></span>
+					<div class="btns-interact">
+						<button class="btn" name="btnSubmit" value="voltar" formnovalidate>Voltar</button>
+						<button class="btn" name="btnSubmit" value="limpar" formnovalidate>Limpar</button>
+						<button class="btn" name="btnSubmit" value="cadastrar">Cadastrar</button>
+					</div>
+			</div>
+		</div>
+		<form>
+			<div class="card card-medicamentos flex-dir-column">
+				<div class="cabecalho">
+					<span>ADICIONAR MEDICAMENTOS</span>
+				</div>
+				<select required class="text-nowrap" name="medicamentoId" id="medicamentoId">
+					<option id="optionMedicamentoInterativa" disabled value="" @(Model.MedicamentoId == Guid.Empty ? "selected" : "")></option>
+					@foreach (SelecionarMedicamentoViewModel m in Model.MedicamentosDisponiveis)
+					{
+						<option value="@m.Id" @(m.Id == Model.MedicamentoId ? "selected" : "")>@(m.Nome!.Length > 27 ? m.Nome.Substring(0, 27) + "..." : m.Nome)</option>
+					}
+				</select>
 
-                <button class="btn" name="btnSubmit" value="adicionarMedicamento">Adicionar Medicamento</button>
-            </div>
-        </form>
-    </div>
+				<label class="form-label" for="dosagemMedicamento">Dosagem:</label>
+				<input required class="form-box" type="text" placeholder="Dosagem" name="dosagemMedicamento" id="dosagemMedicamento" value="@(string.IsNullOrWhiteSpace(Model.DosagemMedicamento) ? "" : $"{@Model.DosagemMedicamento}")"/>
+				<span class="invalidInput text-break-word" id="dosagemInvalidInput"></span>
+
+				<label class="form-label" for="periodoMedicamento">Período:</label>
+				<input required class="form-box" type="text" placeholder="Período" name="periodoMedicamento" id="periodoMedicamento" value="@(string.IsNullOrWhiteSpace(Model.PeriodoMedicamento) ? "" : $"{@Model.PeriodoMedicamento}")"/>
+				<span class="invalidInput text-break-word" id="periodoInvalidInput"></span>
+
+				<label class="form-label" for="quantidadeMedicamento">Quantidade (Caixas/Frascos):</label>
+				<input required class="form-box" type="number" placeholder="Quantidade" name="quantidadeMedicamento" id="quantidadeMedicamento" value="@(Model.QuantidadeMedicamento == 0 ? "" : $"{@Model.QuantidadeMedicamento}")"/>
+				<span class="invalidInput text-break-word" id="quantidadeInvalidInput"></span>
+
+				<button class="btn" name="btnSubmit" value="adicionarMedicamento">Adicionar Medicamento</button>
+			</div>
+		</form>
+	</div>
 </form>
-@section Scripts{
-    <script src="~/js/prescricaoMedica.js"></script>
+@section Scripts {
+		<script src="~/js/prescricaoMedica.js"></script>
 }
