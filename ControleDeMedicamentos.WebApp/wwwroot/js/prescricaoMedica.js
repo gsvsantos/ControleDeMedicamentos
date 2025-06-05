@@ -1,4 +1,5 @@
-﻿const form = document.getElementById('form-prescricao')
+﻿const formPrescricao = document.getElementById('form-prescricao')
+const formMedicamento = document.getElementById('form-medicamento')
 const cRMMedico = document.getElementById('cRMMedico');
 const pacienteId = document.getElementById('pacienteId');
 const medicamentoId = document.getElementById('medicamentoId');
@@ -9,6 +10,7 @@ const cRMMedicoInvalidInput = document.getElementById('cRMMedicoInvalidInput');
 const dosagemInvalidInput = document.getElementById('dosagemInvalidInput');
 const periodoInvalidInput = document.getElementById('periodoInvalidInput');
 const quantidadeInvalidInput = document.getElementById('quantidadeInvalidInput');
+const temMedicamentos = formPrescricao.dataset.temMedicamentos === "true";
 
 function isSiglaCRMValid() {
     const siglasValidas = [
@@ -51,7 +53,7 @@ function isDosagemValid() {
         dosagemInvalidInput.textContent = 'Dosagem é obrigatório';
         isValid = false;
     }
-    else if (dosagemMedicamento.Length < 10 || dosagemMedicamento.Length > 50) {
+    else if (dosagemMedicamento.value.length < 10 || dosagemMedicamento.value.length > 50) {
         dosagemInvalidInput.textContent = 'Dosagem deve ter entre 10 e 50 caracteres';
         isValid = false;
     }
@@ -70,7 +72,7 @@ function isPeriodoValid() {
         periodoInvalidInput.textContent = 'Período é obrigatório';
         isValid = false;
     }
-    else if (periodoMedicamento.Length < 10 || periodoMedicamento.Length > 50) {
+    else if (periodoMedicamento.value.length < 10 || periodoMedicamento.value.length > 50) {
         periodoInvalidInput.textContent = 'Período deve ter entre 10 e 100 carateres';
         isValid = false;
     }
@@ -144,8 +146,11 @@ function atualizarValorOptionPaciente() {
     else if (isValorEmpty(pacienteId)) {
         mensagemErro = 'Selecione um Paciente';
     }
+    else if (temMedicamentos) {
+        mensagemErro = 'Adicione Mais Medicamentos ou Finalize :)';
+    }
     else if (isValorEmpty(medicamentoId)) {
-        mensagemErro = 'Adicione um Medicamento ao Lado';
+        mensagemErro = 'Selecione um Medicamento ao Lado';
     }
     else if (isValorEmpty(dosagemMedicamento) || !isDosagemValid()) {
         mensagemErro = 'Digite a Dosagem ao Lado';
@@ -155,9 +160,6 @@ function atualizarValorOptionPaciente() {
     }
     else if (isValorEmpty(quantidadeMedicamento) || !isQtdMedicamentoValid()) {
         mensagemErro = 'Informe a Quantidade ao Lado :)';
-    }
-    else if (!isValorEmpty(medicamentoId)) {
-        mensagemErro = 'Adicione Mais Medicamentos ou Finalize :)';
     }
     else if (isDosagemValid() && isPeriodoValid() && isQtdMedicamentoValid()) {
         mensagemErro = 'Agora é Só Adicionar :)';
@@ -197,12 +199,14 @@ if (cRMMedico) {
     cRMMedico.addEventListener('blur', () => {
         isCRMMedicoValid();
         atualizarValorOptionPaciente();
+        atualizarValorOptionMedicamento();
     });
 }
 
 if (pacienteId) {
     pacienteId.addEventListener('blur', () => {
         atualizarValorOptionPaciente();
+        atualizarValorOptionMedicamento();
     });
 }
 
@@ -235,6 +239,47 @@ if (quantidadeMedicamento) {
         atualizarValorOptionPaciente();
         atualizarValorOptionMedicamento();
     })
+}
+
+const btnLimpar = document.querySelector('button[type="reset"]');
+
+function limparMensagensErro() {
+    cRMMedicoInvalidInput.textContent = '';
+    dosagemInvalidInput.textContent = '';
+    periodoInvalidInput.textContent = '';
+    quantidadeInvalidInput.textContent = '';
+}
+
+if (btnLimpar) {
+    btnLimpar.addEventListener('click', limparMensagensErro);
+}
+
+if (formPrescricao) {
+    formPrescricao.addEventListener('submit', (e) => {
+        const button = e.submitter;
+        if (button && button.getAttribute('formnovalidate') !== null) return;
+
+        if (button.value === 'cadastrar') {
+            if (!(temMedicamentos && isSiglaCRMValid() && isCRMMedicoValid())) {
+                e.preventDefault();
+                alert("Cadastro falhou. Por favor, verifique os campos.");
+            }
+        }
+    });
+}
+
+if (formMedicamento) {
+    formMedicamento.addEventListener('submit', (e) => {
+        const button = e.submitter;
+        if (button && button.getAttribute('formnovalidate') !== null) return;
+
+        if (button.value === 'adicionarMedicamento') {
+            if (!(isDosagemValid() && isPeriodoValid() && isQtdMedicamentoValid())) {
+                e.preventDefault();
+                alert("Medicamento inválido. Por favor, verifique os campos.");
+            }
+        }
+    });
 }
 
 document.addEventListener('DOMContentLoaded', () => {

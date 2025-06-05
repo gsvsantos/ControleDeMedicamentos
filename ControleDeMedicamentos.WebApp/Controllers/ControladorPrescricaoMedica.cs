@@ -96,7 +96,6 @@ public class ControladorPrescricaoMedica : Controller
 
             cadastrarVM.MedicamentosPrescritos.Add(prescricaoMedicamentoVM);
 
-            cadastrarVM.MedicamentoId = Guid.Empty;
             cadastrarVM.DosagemMedicamento = null;
             cadastrarVM.PeriodoMedicamento = null;
             cadastrarVM.QuantidadeMedicamento = 0;
