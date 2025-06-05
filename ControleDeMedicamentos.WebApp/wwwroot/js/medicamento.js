@@ -19,10 +19,6 @@ function isNomeMedicamentoValid() {
         nomeInvalidInput.textContent = 'Nome deve conter entre 3 e 100 caracteres';
         isValid = false;
     }
-    else if (nome.value.match(/[^a-zA-ZÀ-ÿ\s]/)) {
-        nomeInvalidInput.textContent = 'O nome não pode conter números ou caracters especiais'
-        isValid = false;
-    }
     else {
         nomeInvalidInput.textContent = '';
         isValid = true
