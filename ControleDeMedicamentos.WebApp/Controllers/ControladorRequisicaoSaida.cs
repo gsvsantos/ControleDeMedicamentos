@@ -95,6 +95,12 @@ public class ControladorRequisicaoSaida : Controller
 
             return RedirectToAction("Cadastrar", new { recuperardados = true });
         }
+        else if (btnSubmit == "limpar")
+        {
+            TempData.Remove("Prescricao");
+
+            return RedirectToAction("Cadastrar");
+        }
         else if (btnSubmit == "voltar")
         {
             TempData.Remove("Prescricao");
