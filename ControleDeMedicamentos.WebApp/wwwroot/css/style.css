@@ -1,8 +1,7 @@
 :root {
     /* ============ CORES BASE & PALETA NEUTRA ============ */
-    --cor-base-branco: aliceblue; 
-    --cor-base-preto: #000000; 
-
+    --cor-base-branco: aliceblue;
+    --cor-base-preto: #000000;
     --cor-neutra-100: rgb(226, 232, 240);
     --cor-neutra-200: rgb(203, 213, 225);
     --cor-neutra-300: rgb(148, 163, 184);
@@ -12,12 +11,10 @@
     --cor-neutra-700: rgb(30, 41, 59);
     --cor-neutra-800: rgb(51, 66, 90);
     --cor-neutra-900: rgb(15, 23, 42);
-
     /* ============ CORES AÇÃO/STATUS ============ */
     --cor-acao-info: rgb(23, 162, 184);
     --cor-acao-erro: rgb(214, 57, 57);
     --cor-acao-sucesso: #28a745;
-
     /* ============ CORES UI ============ */
     --cor-ui-fundo-pagina: var(--cor-neutra-900);
     --cor-ui-fundo-secundario: var(--cor-neutra-700);
@@ -26,36 +23,29 @@
     --cor-ui-fundo-card-hover: var(--cor-neutra-800);
     --cor-ui-fundo-cabecalho: var(--cor-neutra-800);
     --cor-ui-fundo-input: var(--cor-neutra-900);
-
     --cor-ui-texto-principal: var(--cor-base-branco);
     --cor-ui-texto-secundario: var(--cor-neutra-300);
     --cor-ui-texto-secundario-hover: var(--cor-neutra-200);
     --cor-ui-texto-titulo: var(--cor-neutra-100);
-
     --cor-ui-borda-padrao: var(--cor-neutra-500);
     --cor-ui-borda-item-lista: var(--cor-neutra-400);
     --cor-ui-borda-input: var(--cor-base-branco);
-
     --cor-ui-lista-linha: var(--cor-neutra-600);
     --cor-ui-lista-linha-hover: var(--cor-neutra-800);
     --cor-ui-lista-cabecalho: var(--cor-neutra-800);
-
     /* ============ CORES BOTÕES ============ */
     --cor-botao-padrao: rgb(27, 37, 56);
     --cor-botao-padrao-hover: rgb(60, 78, 104);
-
     --cor-botao-primario: var(--cor-botao-padrao);
     --cor-botao-primario-hover: rgb(45, 58, 83);
     --cor-botao-texto: var(--cor-ui-texto-principal);
-
     --cor-botao-confirmar: rgb(37, 50, 73);
     --cor-botao-confirmar-hover: rgb(60, 78, 104);
     --cor-botao-editar: var(--cor-acao-info);
     --cor-botao-excluir: var(--cor-acao-erro);
-
     /* ============ CORES WEBKIT ============ */
-    --cor-scrollbar: rgb(85, 131, 172);
-    --cor-scrollbar-hover: rgb(120, 167, 207);
+    --cor-scrollbar: var(--cor-neutra-200);
+    --cor-scrollbar-hover: var(--cor-neutra-500);
 }
 
 body{
@@ -64,8 +54,11 @@ body{
     font-size: 18px;
     margin: 0px;
 }
-main{
+main {
+    display: flex;
+    flex-direction: column;
     gap: 20px;
+    padding: 20px;
 }
 
 main a{
@@ -127,12 +120,13 @@ main a{
     transform: scale(1.02);
 }
 
-.btn{
+.btn {
     cursor: pointer;
     margin-top: 10px;
     background-color: var(--cor-botao-padrao);
     border: 1px solid var(--cor-botao-padrao-hover);
     border-radius: 5px;
+    box-shadow: 0 4px 3px rgba(0, 0, 0, 0.2);
     color: var(--cor-ui-texto-principal);
     font-size: 20px;
     padding: 5px 10px;
@@ -154,12 +148,12 @@ main a{
 }
 
 ::-webkit-scrollbar-thumb {
-  background: var(--scrollbar);
+  background: var(--cor-scrollbar);
   border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--scrollbar-hover);
+    background: var(--cor-scrollbar-hover);
 }
 
 @keyframes fadeIn {

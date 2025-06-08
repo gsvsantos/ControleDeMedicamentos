@@ -9,7 +9,9 @@
 
 <div class="card">
     <div class="acao-cadastro psides-30 flex-dir-row">
-        <a href="/funcionarios/cadastrar" class="botaoCadastrar">Cadastrar Novo Funcionário</a>
+        <a href="/funcionarios/cadastrar" class="btn botaoCadastrar">Cadastrar Novo Funcionário</a>
+        <button class="btn btnSelecaoMultipla" id="btnSelecaoMultipla" type="button">Seleção Multipla</button>
+        <button class="btn botaoExcluirSelecionados" id="btnExcluirSelecionados" style="display:none;">Excluir Selecionados</button>
     </div>
 
     @if (Model.Registros.Count == 0)
@@ -18,29 +20,49 @@
     }
     else
     {
-        <table class="lista">
-            <thead>
+        <div class="table-responsive">
+            <table class="lista">
+                <thead>
                     <tr>
+                        <th class="checkbox-table" style="display: none;"><input class="cb-select-all" id="cb-select-all" type="checkbox" style="display: none;"></th>
                         <th class="nome">NOME</th>
                         <th class="telefone">TELEFONE</th>
                         <th class="cpf">CPF</th>
                         <th class="acoes"></th>
                     </tr>
-            </thead>
-            <tbody>
-                @foreach (DataFuncionarioViewModel f in Model.Registros)
-                {
-                    <tr class="linha-funcionario">
-                        <td class="nome text-nowrap">@f.Nome</td>
-                        <td class="telefone text-nowrap">@f.Telefone</td>
-                        <td class="cpf text-nowrap">@f.CPF</td>
-                        <td class="acoes flex-dir-column">
-                            <a href="/funcionarios/editar/@f.Id" class="btn-action btn-editar flex-center">Editar</a>
-                            <a href="/funcionarios/excluir/@f.Id" class="btn-action btn-excluir flex-center">Excluir</a>
-                        </td>
-                    </tr>
-                }
-            </tbody>
-        </table>
+                </thead>
+                <tbody>
+                    @foreach (DataFuncionarioViewModel f in Model.Registros)
+                    {
+                        <tr class="linha-funcionario">
+                            <td class="checkbox-table" style="display: none;"><input class="item-checkbox" id="item-checkbox" type="checkbox" style="display: none;" data-id="@f.Id"></td>
+                            <td class="nome mw200 text-nowrap">@f.Nome</td>
+                            <td class="telefone mw200 text-nowrap">@f.Telefone</td>
+                            <td class="cpf mw200 text-nowrap">@f.CPF</td>
+                            <td class="acoes flex-dir-column">
+                                <a href="/funcionarios/editar/@f.Id" class="btn-action btn-editar flex-center">Editar</a>
+                                <a href="/funcionarios/excluir/@f.Id" class="btn-action btn-excluir flex-center">Excluir</a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+		</div>
     }
 </div>
+<div class="modal" id="modal-confirmacao" style="display: none;">
+    <form class="modal-content">
+        <span class="btnFecharModal" id="btnFecharModal">&times;</span>
+        <div class="container">
+            <h1>Exclusão de Funcionários</h1>
+            <p>Deseja excluir os registros selecionados?</p>
+            <div class="clearfix"></div>
+                <button type="button" class="btnCancelar" id="btnCancelar">Cancelar</button>
+                <button type="button" class="btnConfirmar" id="btnConfirmar">Confirmar</button>
+            </div>
+        </div>
+    </form>
+</div>
+@section Scripts {
+    <script src="~/js/excluirMultiplo.js"></script>
+}

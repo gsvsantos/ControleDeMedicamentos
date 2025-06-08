@@ -8,8 +8,10 @@
 <link rel="stylesheet" href="~/css/read.css">
 
 <div class="card">
-	<div class="acao-cadastro psides-30 flex-flex-dir-row">
-		<a href="/requisicoes-saida/cadastrar" class="botaoCadastrar">Realizar Nova Requisição de Saída</a>
+	<div class="acao-cadastro psides-30 flex-dir-row">
+		<a href="/requisicoes-saida/cadastrar" class="btn botaoCadastrar">Realizar Nova Requisição de Saída</a>
+		<button class="btn btnSelecaoMultipla" id="btnSelecaoMultipla" type="button">Seleção Multipla</button>
+		<button class="btn botaoExcluirSelecionados" id="btnExcluirSelecionados" style="display:none;">Excluir Selecionados</button>
 	</div>
 
 	@if (Model.Registros.Count == 0)
@@ -18,26 +20,46 @@
 	}
 	else
 	{
-		<table class="lista">
-			<thead>
-				<tr>
-					<th class="paciente">PACIENTE</th>
-					<th class="data">DATA DA REQUISIÇÃO</th>
-					<th class="acoes"></th>
-				</tr>
-			</thead>
-			<tbody>
-				@foreach (DataRequisicaoSaidaViewModel rE in Model.Registros)
-				{
+		<div class="table-responsive">
+			<table class="lista">
+				<thead>
 					<tr>
-							<td class="paciente text-nowrap">@rE.NomePaciente</td>
-						<td class="data text-nowrap">@rE.Data.ToShortDateString()</td>
-						<td class="acoes flex-dir-column">
-							<a href="/requisicoes-saida/excluir/@rE.Id" class="btn-action btn-excluir flex-center">Excluir</a>
-						</td>
+						<th class="checkbox-table" style="display: none;"><input class="cb-select-all" id="cb-select-all" type="checkbox" style="display: none;"></th>
+						<th class="paciente">PACIENTE</th>
+						<th class="data">DATA DA REQUISIÇÃO</th>
+						<th class="acoes"></th>
 					</tr>
-				}
-			</tbody>
-		</table>
+				</thead>
+				<tbody>
+					@foreach (DataRequisicaoSaidaViewModel rE in Model.Registros)
+					{
+						<tr>
+							<td class="checkbox-table" style="display: none;"><input class="item-checkbox" id="item-checkbox" type="checkbox" style="display: none;" data-id="@rE.Id"></td>
+							<td class="paciente text-nowrap">@rE.NomePaciente</td>
+							<td class="data text-nowrap">@rE.Data.ToShortDateString()</td>
+							<td class="acoes flex-dir-column">
+								<a href="/requisicoes-saida/excluir/@rE.Id" class="btn-action btn-excluir flex-center">Excluir</a>
+							</td>
+						</tr>
+					}
+				</tbody>
+			</table>
+		</div>
 	}
 </div>
+<div class="modal" id="modal-confirmacao" style="display: none;">
+	<form class="modal-content">
+		<span class="btnFecharModal" id="btnFecharModal">&times;</span>
+		<div class="container">
+			<h1>Exclusão de Fornecedores</h1>
+			<p>Deseja excluir os registros selecionados?</p>
+			<div class="clearfix"></div>
+				<button type="button" class="btnCancelar" id="btnCancelar">Cancelar</button>
+				<button type="button" class="btnConfirmar" id="btnConfirmar">Confirmar</button>
+			</div>
+		</div>
+	</form>
+</div>
+@section Scripts {
+	<script src="~/js/excluirMultiplo.js"></script>
+}

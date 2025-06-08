@@ -7,6 +7,7 @@
     margin: auto;
     height: auto;
     width: auto;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
 }
 
 .card:hover {
@@ -15,29 +16,33 @@
 }
 
 .acao-cadastro {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
     flex-wrap: wrap;
-    align-items: end;
+    padding-right: 10px;
     padding-bottom: 10px;
     font-weight: bold;
     font-size: 18px;
+    gap: 0px 5px;
 }
 
 .botaoCadastrar {
-    margin-right: auto;
-    background-color: var(--cor-botao-primario);
-    border: 1px solid var(--cor-ui-borda-padrao);
-    border-radius: 5px;
-    color: var(--cor-ui-texto-principal);
-    font-size: 20px;
-    padding: 5px 10px;
-    transition: 0.12s;
+    box-shadow: 0 4px 3px rgba(0, 0, 0, 0.2);
 }
 
 .botaoCadastrar:hover {
     background-color: var(--cor-botao-primario-hover);
     transform: scale(1.02);
+    box-shadow: 0 6px 6px rgba(0, 0, 0, 0.3);
+    border-color: var(--cor-botao-primario-hover);
 }
 
+.botaoCadastrar:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    background-color: var(--cor-botao-primario);
+}
 
 .btn-action {
     border-radius: 4px;
@@ -73,16 +78,12 @@
 }
 
 .lista {
-    display: block;
     list-style: none;
     padding: 0px;
     margin: 0px;
     width: 100%;
-    border-radius: 8px;
-    border-collapse: collapse;
-    overflow: hidden;
     overflow-x: auto;
-    white-space: nowrap;
+    border-collapse: collapse;
 }
 
 .lista thead {
@@ -91,8 +92,10 @@
 }
 
 .lista th {
-    padding: 10px;
-    font-size: 20px;
+    padding: 12px 10px;
+    font-size: 18px;
+    text-align: left;
+    white-space: nowrap;
 }
 
 .lista tbody tr {
@@ -105,8 +108,10 @@
 }
 
 .lista td {
-    padding: 10px;
+    padding: 12px 10px;
+    font-size: 16px;
     max-width: 200px;
+    border-right: 1px solid var(--cor-ui-borda-padrao);
 }
 
 .lista td.acoes {
@@ -115,6 +120,7 @@
     align-items: center;
     justify-content: center;
     gap: 6px;
+    min-width: 80px;
 }
 
 .lista th.fornecedor,
@@ -151,6 +157,123 @@
 .lista th.data,
 .lista td.data,
 .lista th.acoes,
-.lista td.acoes {
+.lista td.acoes,
+.lista th.checkbox-table,
+.lista td.checkbox-table {
     text-align: center;
+}
+
+.table-responsive {
+    max-height: 350px;
+    overflow-y: auto;
+    position: relative;
+}
+
+.table-responsive .lista th {
+    position: sticky;
+    top: 0;
+    z-index: 2;
+    background: var(--cor-ui-lista-cabecalho);
+    border: -5px solid var(--cor-ui-borda-item-lista);
+    background-clip: padding-box;
+}
+
+.table-responsive .lista thead th {
+    top: 0;
+    z-index: 2;
+}
+
+.table-responsive .lista th:last-child {
+    border-right: none;
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.4);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    background-color: var(--cor-ui-fundo-card);
+    margin: auto;
+    padding: 20px;
+    border: 1px solid var(--cor-ui-borda-padrao);
+    width: 80%;
+    max-width: 500px; 
+    border-radius: 8px;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+    position: relative; 
+}
+
+.btnFecharModal {
+    color: var(--cor-ui-texto-principal);
+    font-size: 28px;
+    font-weight: bold;
+    position: absolute;
+    right: 15px;
+    top: 5px;
+    cursor: pointer;
+}
+
+.btnFecharModal:hover,
+.btnFecharModal:focus {
+    color: var(--cor-botao-excluir);
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.btnCancelar, .btnConfirmar {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: 0.2s;
+    float: left;
+    margin-right: 10px; 
+}
+
+.btnCancelar {
+    background-color: var(--cor-botao-padrao);
+    color: var(--cor-ui-texto-principal);
+}
+
+.btnCancelar:hover {
+    background-color: var(--cor-botao-padrao-hover);
+}
+
+.btnConfirmar {
+    background-color: var(--cor-botao-excluir);
+    color: var(--cor-ui-texto-principal);
+}
+
+.clearfix::after {
+    content: "";
+    clear: both;
+    display: table;
+}
+
+.modal-content h1 {
+    font-size: 24px;
+    color: var(--cor-ui-texto-principal);
+    margin-bottom: 15px;
+}
+
+.modal-content p {
+    font-size: 16px;
+    color: var(--cor-ui-texto-secundario);
+    margin-bottom: 20px;
+}
+
+.modal-content .container {
+    padding: 16px;
 }

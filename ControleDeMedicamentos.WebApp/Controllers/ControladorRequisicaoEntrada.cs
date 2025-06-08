@@ -147,4 +147,15 @@ public class ControladorRequisicaoEntrada : Controller
 
         return View("Notificacao", notificacaoVM);
     }
+
+    [HttpPost("excluirmultiplo")]
+    public IActionResult ExcluirMultiplo([FromBody] List<Guid> idsSelecionados)
+    {
+        foreach (Guid id in idsSelecionados)
+        {
+            repositorioRequisicaoEntrada.ExcluirRegistro(id);
+        }
+
+        return RedirectToAction("Visualizar");
+    }
 }

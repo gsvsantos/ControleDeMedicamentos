@@ -9,7 +9,9 @@
 
 <div class="card">
 	<div class="acao-cadastro psides-30 flex-dir-row">
-		<a href="/fornecedores/cadastrar" class="botaoCadastrar">Cadastrar Novo Fornecedor</a>
+		<a href="/fornecedores/cadastrar" class="btn botaoCadastrar">Cadastrar Novo Fornecedor</a>
+		<button class="btn btnSelecaoMultipla" id="btnSelecaoMultipla" type="button">Seleção Multipla</button>
+		<button class="btn btnExcluirSelecionados" id="btnExcluirSelecionados" style="display:none;">Excluir Selecionados</button>
 	</div>
 
 	@if (Model.Registros.Count == 0)
@@ -18,29 +20,49 @@
 	}
 	else
 	{
-		<table class="lista">
-			<thead>
-				<tr>
-					<th class="nome">NOME</th>
-					<th class="telefone">TELEFONE</th>
-					<th class="cnpj">CNPJ</th>
-					<th class="acoes"></th>
-				</tr>
-			</thead>
-			<tbody>
-				@foreach (DataFornecedorViewModel f in Model.Registros)
-				{
-					<tr class="linha-fornecedor">
-							<td class="nome mw200 text-nowrap">@f.Nome</td>
-						<td class="telefone mw200 text-nowrap">@f.Telefone</td>
-						<td class="cnpj mw200 text-nowrap">@f.CNPJ</td>
-						<td class="acoes flex-dir-column">
-							<a href="/fornecedores/editar/@f.Id" class="btn-action btn-editar flex-center">Editar</a>
-							<a href="/fornecedores/excluir/@f.Id" class="btn-action btn-excluir flex-center">Excluir</a>
-						</td>
+		<div class="table-responsive">
+			<table class="lista">
+				<thead>
+					<tr>
+						<th class="checkbox-table" style="display: none;"><input class="cb-select-all" id="cb-select-all" type="checkbox" style="display: none;"></th>
+						<th class="nome">NOME</th>
+						<th class="telefone">TELEFONE</th>
+						<th class="cnpj">CNPJ</th>
+						<th class="acoes"></th>
 					</tr>
-				}
-			</tbody>
-		</table>
+				</thead>
+				<tbody>
+					@foreach (DataFornecedorViewModel f in Model.Registros)
+					{
+						<tr class="linha-fornecedor">
+							<td class="checkbox-table" style="display: none;"><input class="item-checkbox" id="item-checkbox" type="checkbox" style="display: none;" data-id="@f.Id"></td>
+							<td class="nome mw200 text-nowrap">@f.Nome</td>
+							<td class="telefone mw200 text-nowrap">@f.Telefone</td>
+							<td class="cnpj mw200 text-nowrap">@f.CNPJ</td>
+							<td class="acoes flex-dir-column">
+								<a href="/fornecedores/editar/@f.Id" class="btn-action btn-editar flex-center">Editar</a>
+								<a href="/fornecedores/excluir/@f.Id" class="btn-action btn-excluir flex-center">Excluir</a>
+							</td>
+						</tr>
+					}
+				</tbody>
+			</table>
+		</div>
 	}
 </div>
+<div class="modal" id="modal-confirmacao" style="display: none;">
+	<form class="modal-content">
+		<span class="btnFecharModal" id="btnFecharModal">&times;</span>
+		<div class="container">
+			<h1>Exclusão de Fornecedores</h1>
+			<p>Deseja excluir os registros selecionados?</p>
+			<div class="clearfix"></div>
+				<button type="button" class="btnCancelar" id="btnCancelar">Cancelar</button>
+				<button type="button" class="btnConfirmar" id="btnConfirmar">Confirmar</button>
+			</div>
+		</div>
+	</form>
+</div>
+@section Scripts {
+	<script src="~/js/excluirMultiplo.js"></script>
+}

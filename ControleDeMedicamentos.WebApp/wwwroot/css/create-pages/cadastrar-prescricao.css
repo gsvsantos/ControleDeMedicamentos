@@ -37,3 +37,7 @@
 .card-prescricao{
     gap: 8px;
 }
+
+.lista td{
+    text-align: center;
+}

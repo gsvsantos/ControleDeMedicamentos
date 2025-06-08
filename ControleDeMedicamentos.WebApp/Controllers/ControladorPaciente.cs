@@ -115,4 +115,15 @@ public class ControladorPaciente : Controller
 
         return View("Notificacao", notificacaoVM);
     }
+
+    [HttpPost("excluirmultiplo")]
+    public IActionResult ExcluirMultiplo([FromBody] List<Guid> idsSelecionados)
+    {
+        foreach (Guid id in idsSelecionados)
+        {
+            repositorioPaciente.ExcluirRegistro(id);
+        }
+
+        return RedirectToAction("Visualizar");
+    }
 }

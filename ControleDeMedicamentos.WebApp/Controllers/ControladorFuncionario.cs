@@ -115,4 +115,15 @@ public class ControladorFuncionario : Controller
 
         return View("Notificacao", notificacaoVM);
     }
+
+    [HttpPost("excluirmultiplo")]
+    public IActionResult ExcluirMultiplo([FromBody] List<Guid> idsSelecionados)
+    {
+        foreach (Guid id in idsSelecionados)
+        {
+            repositorioFuncionario.ExcluirRegistro(id);
+        }
+
+        return RedirectToAction("Visualizar");
+    }
 }
