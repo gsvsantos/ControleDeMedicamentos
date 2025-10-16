@@ -2,6 +2,10 @@
 
 ![](https://hs.toledoprudente.edu.br/hs-fs/hubfs/contador%20profissional%20presidente%20prudente.gif?width=480&name=contador%20profissional%20presidente%20prudente.gif)
 
+[![wakatime](https://wakatime.com/badge/user/d66fe803-196c-4729-b330-f8a026db44ec/project/27c383e7-c97a-4fee-8052-4a650062d238.svg)](https://wakatime.com/badge/user/d66fe803-196c-4729-b330-f8a026db44ec/project/27c383e7-c97a-4fee-8052-4a650062d238)
+
+---
+
 ## Introdução
 Este projeto consiste em um sistema completo de controle de medicamentos, desenvolvido para gerenciar o fluxo de entrada e saída de remédios em uma unidade de saúde. O programa foi criado com o objetivo de oferecer um ambiente funcional para registrar, controlar e consultar dados essenciais relacionados a fornecedores, pacientes, medicamentos, funcionários, prescrições médicas e requisições.
 
