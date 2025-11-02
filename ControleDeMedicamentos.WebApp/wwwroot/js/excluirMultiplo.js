@@ -117,7 +117,7 @@ function submitar(){
     if (idsSelecionados.length === 0) {
         alert('Por favor, selecione ao menos um fornecedor para excluir.');
         esconderModal();
-        return; 
+        return;
     }
 
     const hrefAtual = window.location.pathname.split('/')[1];

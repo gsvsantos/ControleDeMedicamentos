@@ -167,7 +167,26 @@ public class ControladorPrescricaoMedica : Controller
         return View("Notificacao", notificacaoVM);
     }
 
+    [HttpGet("excluirmultiplo")]
+    public IActionResult ExcluirMultiplo([FromBody] List<Guid> ids)
+    {
+        ExcluirMultiploViewModel excluirMultiploVM = new(ids);
+
+        return View(excluirMultiploVM);
+    }
+
     [HttpPost("excluirmultiplo")]
+    public IActionResult ExcluirMultiplo(ExcluirMultiploViewModel excluirMultiploVM)
+    {
+        foreach (Guid id in excluirMultiploVM.Ids)
+        {
+            repositorioPrescricaoMedica.ExcluirRegistro(id);
+        }
+
+        return RedirectToAction("Visualizar");
+    }
+
+    /*[HttpPost("excluirmultiplo")]
     public IActionResult ExcluirMultiplo([FromBody] List<Guid> idsSelecionados)
     {
         foreach (Guid id in idsSelecionados)
@@ -176,5 +195,5 @@ public class ControladorPrescricaoMedica : Controller
         }
 
         return RedirectToAction("Visualizar");
-    }
+    }*/
 }

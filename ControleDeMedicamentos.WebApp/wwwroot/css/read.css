@@ -178,11 +178,6 @@
     background-clip: padding-box;
 }
 
-.table-responsive .lista thead th {
-    top: 0;
-    z-index: 2;
-}
-
 .table-responsive .lista th:last-child {
     border-right: none;
 }
